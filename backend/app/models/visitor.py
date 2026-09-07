@@ -27,13 +27,13 @@ class Visitor(Base):
     )
 
     first_visit_at = Column(
-        DateTime,
-        server_default=func.now()
+    DateTime(timezone=True),
+    server_default=func.now()
     )
 
     last_visit_at = Column(
-        DateTime,
-        server_default=func.now()
+    DateTime(timezone=True),
+    server_default=func.now()
     )
 
     visit_count = Column(
@@ -85,12 +85,12 @@ class Visitor(Base):
     )
 
     created_at = Column(
-        DateTime,
-        server_default=func.now()
+    DateTime(timezone=True),
+    server_default=func.now()
     )
 
     updated_at = Column(
-        DateTime,
-        server_default=func.now(),
-        onupdate=func.now()
+    DateTime(timezone=True),
+    server_default=func.now(),
+    onupdate=func.now()
     )
