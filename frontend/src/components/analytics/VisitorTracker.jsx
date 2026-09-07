@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { env } from "../../config/env";
 
 import {
   initializeVisitor,
@@ -140,8 +141,7 @@ export default function VisitorTracker() {
        * so use sendBeacon where possible.
        */
       const apiBaseUrl =
-        import.meta.env.VITE_API_BASE_URL ||
-        "http://127.0.0.1:8000/api";
+        env.apiBaseUrl;
 
       const url =
         `${apiBaseUrl}/page-visits/` +
