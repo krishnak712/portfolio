@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID
-from pydantic import BaseModel, Field
-from pydantic import BaseModel, ConfigDict
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class VisitorCreate(BaseModel):
@@ -41,6 +41,8 @@ class VisitorResponse(BaseModel):
 
     visit_count: int
 
+    ip_address: str | None
+
     country: str | None
     city: str | None
 
@@ -56,6 +58,7 @@ class VisitorResponse(BaseModel):
     model_config = ConfigDict(
         from_attributes=True
     )
+
 
 class VisitorLocationUpdate(BaseModel):
     visitor_id: UUID

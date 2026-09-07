@@ -4,58 +4,123 @@ from fastapi import (
     APIRouter,
     Depends,
     HTTPException,
-    status
+    Request,
+    status,
 )
+
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.visitor import Visitor
+
 from app.schemas.visitor import (
     VisitorCreate,
     VisitorUpdate,
     VisitorResponse,
+    VisitorLocationUpdate,
 )
+
 from geopy.geocoders import Nominatim
-from app.schemas.visitor import VisitorLocationUpdate
+
 
 router = APIRouter(
     prefix="/api/visitors",
-    tags=["Visitors"]
+    tags=["Visitors"],
 )
 
 
 @router.post(
     "",
     response_model=VisitorResponse,
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED,
 )
 def create_visitor(
     visitor_data: VisitorCreate,
-    db: Session = Depends(get_db)
+    request: Request,
+    db: Session = Depends(get_db),
 ):
+    # -----------------------------------------
+    # Get visitor IP address
+    # -----------------------------------------
 
-    if visitor_data.visitor_id:
+    forwarded_for = request.headers.get("x-forwarded-for")
 
+    if forwarded_for:
+        ip_address = forwarded_for.split(",")[0].strip()
+    else:
+        ip_address = (
+            request.client.host
+            if request.client
+            else None
+        )
+
+    # -----------------------------------------
+    # Check existing visitor BY IP
+    # -----------------------------------------
+
+    existing_visitor = None
+
+    if ip_address:
         existing_visitor = (
             db.query(Visitor)
             .filter(
-                Visitor.visitor_id
-                == visitor_data.visitor_id
+                Visitor.ip_address == ip_address
             )
             .first()
         )
 
-        if existing_visitor:
+    # -----------------------------------------
+    # Existing IP → update existing visitor
+    # -----------------------------------------
 
-            existing_visitor.visit_count += 1
-            existing_visitor.last_visit_at = (
-                datetime.now(timezone.utc)
+    if existing_visitor:
+
+        existing_visitor.visit_count += 1
+
+        existing_visitor.last_visit_at = (
+            datetime.now(timezone.utc)
+        )
+
+        # Update visitor information when available
+
+        if visitor_data.country:
+            existing_visitor.country = (
+                visitor_data.country
             )
 
-            db.commit()
-            db.refresh(existing_visitor)
+        if visitor_data.city:
+            existing_visitor.city = (
+                visitor_data.city
+            )
 
-            return existing_visitor
+        if visitor_data.device_type:
+            existing_visitor.device_type = (
+                visitor_data.device_type
+            )
+
+        if visitor_data.browser:
+            existing_visitor.browser = (
+                visitor_data.browser
+            )
+
+        if visitor_data.operating_system:
+            existing_visitor.operating_system = (
+                visitor_data.operating_system
+            )
+
+        if visitor_data.referrer:
+            existing_visitor.referrer = (
+                visitor_data.referrer
+            )
+
+        db.commit()
+        db.refresh(existing_visitor)
+
+        return existing_visitor
+
+    # -----------------------------------------
+    # New IP → create new visitor
+    # -----------------------------------------
 
     visitor = Visitor(
         **visitor_data.model_dump(
@@ -64,7 +129,11 @@ def create_visitor(
     )
 
     if visitor_data.visitor_id:
-        visitor.visitor_id = visitor_data.visitor_id
+        visitor.visitor_id = (
+            visitor_data.visitor_id
+        )
+
+    visitor.ip_address = ip_address
 
     db.add(visitor)
     db.commit()
@@ -75,12 +144,11 @@ def create_visitor(
 
 @router.get(
     "",
-    response_model=list[VisitorResponse]
+    response_model=list[VisitorResponse],
 )
 def get_visitors(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
-
     return (
         db.query(Visitor)
         .order_by(
@@ -92,11 +160,11 @@ def get_visitors(
 
 @router.get(
     "/{visitor_id}",
-    response_model=VisitorResponse
+    response_model=VisitorResponse,
 )
 def get_visitor(
     visitor_id: str,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
 
     visitor = (
@@ -110,7 +178,7 @@ def get_visitor(
     if not visitor:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Visitor not found"
+            detail="Visitor not found",
         )
 
     return visitor
@@ -118,12 +186,12 @@ def get_visitor(
 
 @router.put(
     "/{visitor_id}",
-    response_model=VisitorResponse
+    response_model=VisitorResponse,
 )
 def update_visitor(
     visitor_id: str,
     visitor_data: VisitorUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
 
     visitor = (
@@ -137,7 +205,7 @@ def update_visitor(
     if not visitor:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Visitor not found"
+            detail="Visitor not found",
         )
 
     update_data = visitor_data.model_dump(
@@ -156,6 +224,7 @@ def update_visitor(
 
     return visitor
 
+
 @router.patch("/location")
 def update_visitor_location(
     location_data: VisitorLocationUpdate,
@@ -164,7 +233,8 @@ def update_visitor_location(
     visitor = (
         db.query(Visitor)
         .filter(
-            Visitor.visitor_id == location_data.visitor_id
+            Visitor.visitor_id
+            == location_data.visitor_id
         )
         .first()
     )
@@ -190,9 +260,10 @@ def update_visitor_location(
         )
 
         if location and location.raw:
+
             address = location.raw.get(
                 "address",
-                {}
+                {},
             )
 
             visitor.country = address.get(
@@ -210,6 +281,7 @@ def update_visitor_location(
             db.refresh(visitor)
 
     except Exception as error:
+
         db.rollback()
 
         raise HTTPException(

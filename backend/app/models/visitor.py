@@ -67,6 +67,13 @@ class Visitor(Base):
         nullable=True
     )
 
+    ip_address = Column(
+        String(45),
+        nullable=True,
+        unique=True,
+        index=True
+    )
+
     operating_system = Column(
         String(100),
         nullable=True
