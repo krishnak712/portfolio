@@ -1,0 +1,286 @@
+/* =========================================================
+   OPENING ANIMATION — premium intro overlay
+   - Plays once per browser session (sessionStorage)
+   - Respects prefers-reduced-motion
+   - Fixed overlay, unmounts + disposes scene after exit
+   ========================================================= */
+
+.opening-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      120% 90% at 50% 42%,
+      rgba(84, 216, 230, 0.07) 0%,
+      rgba(10, 14, 23, 0) 55%
+    ),
+    radial-gradient(
+      90% 70% at 50% 110%,
+      rgba(45, 212, 191, 0.05) 0%,
+      rgba(10, 14, 23, 0) 60%
+    ),
+    #0a0e17;
+  color: #eef4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.opening-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(148, 184, 192, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 184, 192, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    75% 65% at 50% 45%,
+    rgba(0, 0, 0, 0.9) 0%,
+    transparent 100%
+  );
+}
+
+.opening-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 120% at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.opening-canvas-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.opening-canvas-layer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- center stack ---------- */
+
+.opening-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  margin-top: -7vh;
+  pointer-events: none;
+}
+
+.opening-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #54d8e6;
+  opacity: 0.9;
+}
+
+.opening-eyebrow::before,
+.opening-eyebrow::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(84, 216, 230, 0.7)
+  );
+}
+
+.opening-eyebrow::after {
+  background: linear-gradient(
+    90deg,
+    rgba(84, 216, 230, 0.7),
+    transparent
+  );
+}
+
+.opening-name {
+  margin: 18px 0 0;
+  font-family: Geist, Inter, sans-serif;
+  font-weight: 650;
+  font-size: clamp(30px, 5.4vw, 58px);
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  color: #f2f7f7;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+}
+
+.opening-role {
+  margin: 12px 0 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(10px, 1.6vw, 13px);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #9fb3b5;
+  padding-left: 0.42em;
+}
+
+.opening-rule {
+  margin-top: 22px;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(84, 216, 230, 0.65),
+    transparent
+  );
+}
+
+/* ---------- bottom progress ---------- */
+
+.opening-bottom {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: max(34px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  pointer-events: none;
+}
+
+.opening-status {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(159, 179, 181, 0.85);
+}
+
+.opening-status strong {
+  color: #54d8e6;
+  font-weight: 500;
+}
+
+.opening-progress {
+  width: min(280px, 62vw);
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+
+.opening-progress-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(84, 216, 230, 0.55),
+    #54d8e6
+  );
+  box-shadow: 0 0 12px rgba(84, 216, 230, 0.55);
+  transform-origin: left center;
+}
+
+/* ---------- skip ---------- */
+
+.opening-skip {
+  position: absolute;
+  z-index: 3;
+  top: max(20px, env(safe-area-inset-top));
+  right: 22px;
+  pointer-events: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9fb3b5;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  padding: 9px 18px;
+  backdrop-filter: blur(8px);
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.opening-skip:hover {
+  color: #eef4f4;
+  border-color: rgba(84, 216, 230, 0.5);
+  background: rgba(84, 216, 230, 0.08);
+}
+
+.opening-skip:focus-visible {
+  outline: 2px solid #54d8e6;
+  outline-offset: 3px;
+}
+
+/* ---------- corner meta (engineering feel) ---------- */
+
+.opening-meta {
+  position: absolute;
+  z-index: 2;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(159, 179, 181, 0.5);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.opening-meta-tl {
+  top: max(24px, env(safe-area-inset-top));
+  left: 26px;
+}
+
+.opening-meta-bl {
+  bottom: max(36px, env(safe-area-inset-bottom));
+  left: 26px;
+}
+
+.opening-meta-br {
+  bottom: max(36px, env(safe-area-inset-bottom));
+  right: 26px;
+}
+
+@media (max-width: 700px) {
+  .opening-meta-bl,
+  .opening-meta-br {
+    display: none;
+  }
+
+  .opening-center {
+    margin-top: -9vh;
+  }
+
+  .opening-skip {
+    right: 14px;
+  }
+
+  .opening-meta-tl {
+    left: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-overlay {
+    display: none;
+  }
+}

@@ -1,0 +1,60 @@
+/* =========================================================
+   PAGE SCROLL ANIMATION (Dribbble-style, subtle)
+   ---------------------------------------------------------
+   - Applied automatically by PageScrollAnimation.jsx via
+     `main section` observation. No existing markup/CSS touched.
+   - Uses the independent `translate` + `opacity` properties
+     (NOT `transform`) so existing hover / tilt / keyframe
+     transforms keep working untouched.
+   - Gentle fade + slight upward drift + staggered children.
+   ========================================================= */
+
+/* ---------- Section shell: fade + rise ---------- */
+
+.psa-reveal {
+  opacity: 0;
+  translate: 0 28px;
+  transition:
+    opacity 0.7s ease,
+    translate 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, translate;
+}
+
+.psa-reveal.psa-inview {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ---------- Staggered children ---------- */
+
+.psa-reveal .psa-item {
+  opacity: 0;
+  translate: 0 22px;
+  transition:
+    opacity 0.65s ease,
+    translate 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, translate;
+}
+
+.psa-reveal.psa-inview .psa-item {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ---------- Settle: release compositor hints ---------- */
+
+.psa-reveal.psa-settled,
+.psa-reveal.psa-settled .psa-item {
+  will-change: auto;
+}
+
+/* ---------- Reduced motion: show everything instantly ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .psa-reveal,
+  .psa-reveal .psa-item {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+}

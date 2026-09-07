@@ -1,0 +1,19 @@
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasis);
+  will-change: transform;
+}
+
+.tilt-card-hover {
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(84, 216, 230, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+}

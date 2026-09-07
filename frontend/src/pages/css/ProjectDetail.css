@@ -1,0 +1,1760 @@
+/* =====================================================
+   PROJECT DETAIL PAGE
+===================================================== */
+
+.project-detail-page {
+  min-height: 100vh;
+  background: #0e1212;
+  color: #eef4f4;
+}
+
+
+/* =====================================================
+   COMMON CONTAINER
+===================================================== */
+
+.project-detail-container {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   LOADING / 404
+===================================================== */
+
+.project-not-found {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+
+  padding: 140px 24px 80px;
+
+  background: #0e1212;
+  color: #eef4f4;
+}
+
+.project-not-found > div {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.project-not-found span {
+  color: #54d8e6;
+
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.project-not-found h1 {
+  margin: 20px 0 0;
+
+  font-size: clamp(48px, 7vw, 90px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.project-not-found p {
+  max-width: 600px;
+
+  margin: 25px 0 0;
+
+  color: #7f8c8c;
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.project-not-found a {
+  display: inline-flex;
+
+  margin-top: 30px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 180ms ease;
+}
+
+.project-not-found a:hover {
+  color: #8be6ef;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.project-detail-hero {
+  position: relative;
+
+  padding: 150px 0 100px;
+
+  border-bottom: 1px solid #293333;
+
+  overflow: hidden;
+}
+
+.project-detail-hero::before {
+  content: "";
+
+  position: absolute;
+
+  top: -260px;
+  right: -170px;
+
+  width: 560px;
+  height: 560px;
+
+  border: 1px solid rgba(84, 216, 230, 0.06);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.project-detail-hero::after {
+  content: "";
+
+  position: absolute;
+
+  top: -170px;
+  right: -80px;
+
+  width: 370px;
+  height: 370px;
+
+  border: 1px solid rgba(84, 216, 230, 0.04);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   BACK LINK
+===================================================== */
+
+.project-back-link {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+
+  color: #687575;
+
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.project-back-link:hover {
+  color: #54d8e6;
+
+  transform: translateX(-4px);
+}
+
+
+/* =====================================================
+   PROJECT META
+===================================================== */
+
+.project-detail-meta {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 55px;
+
+  color: #687575;
+
+  font-family: monospace;
+  font-size: 9px;
+
+  letter-spacing: 0.1em;
+}
+
+.project-detail-meta span:first-child {
+  color: #54d8e6;
+}
+
+.project-detail-meta .project-status {
+  padding: 6px 9px;
+
+  border: 1px solid rgba(84, 216, 230, 0.28);
+
+  color: #54d8e6;
+
+  background: rgba(84, 216, 230, 0.03);
+}
+
+
+/* =====================================================
+   HERO HEADING
+===================================================== */
+
+.project-detail-heading {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.25fr)
+    minmax(280px, 0.75fr);
+
+  gap: 70px;
+
+  margin-top: 35px;
+
+  align-items: end;
+}
+
+.project-eyebrow {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.project-detail-heading h1 {
+  max-width: 950px;
+
+  margin: 0;
+
+  color: #eef4f4;
+
+  font-size: clamp(48px, 7vw, 88px);
+
+  line-height: 0.96;
+
+  letter-spacing: -0.065em;
+
+  font-weight: 700;
+}
+
+.project-detail-heading h1 span {
+  color: #54d8e6;
+}
+
+.project-detail-heading h2 {
+  margin: 24px 0 0;
+
+  color: #899696;
+
+  font-family: monospace;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.project-detail-heading > p {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: #899696;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+}
+
+
+/* =====================================================
+   TECHNOLOGIES
+===================================================== */
+
+.project-technologies {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 65px;
+
+  padding-top: 28px;
+
+  border-top: 1px solid #293333;
+}
+
+.technology-label {
+  display: block;
+
+  margin-bottom: 15px;
+
+  color: #687575;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.technology-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.technology-list span {
+  padding: 7px 10px;
+
+  border: 1px solid #293333;
+
+  border-radius: 3px;
+
+  background: #111616;
+
+  color: #7f8c8c;
+
+  font-family: monospace;
+
+  font-size: 8px;
+
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.technology-list span:hover {
+  border-color: rgba(84, 216, 230, 0.4);
+
+  color: #54d8e6;
+
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   COMMON SECTION HEADING
+===================================================== */
+
+.project-section-heading {
+  max-width: 850px;
+
+  margin-bottom: 55px;
+}
+
+.project-section-heading > span {
+  display: block;
+
+  margin-bottom: 17px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+}
+
+.project-section-heading h2 {
+  margin: 0;
+
+  color: #eef4f4;
+
+  font-size: clamp(38px, 5vw, 65px);
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 650;
+}
+
+.project-section-heading h2 strong {
+  color: #54d8e6;
+
+  font-weight: inherit;
+}
+
+.project-section-heading > p {
+  max-width: 700px;
+
+  margin: 25px 0 0;
+
+  color: #7f8c8c;
+
+  font-size: 13px;
+
+  line-height: 1.85;
+}
+
+
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
+.project-overview {
+  padding: 115px 0;
+}
+
+.project-overview-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(300px, 0.9fr);
+
+  gap: 90px;
+
+  align-items: start;
+}
+
+.project-overview-copy {
+  max-width: 700px;
+}
+
+.project-overview-copy p {
+  margin: 0 0 25px;
+
+  color: #899696;
+
+  font-size: 14px;
+
+  line-height: 1.95;
+}
+
+.project-overview-copy p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =====================================================
+   CORE WORKFLOW
+===================================================== */
+
+.project-flow {
+  padding-left: 35px;
+
+  border-left: 1px solid #293333;
+}
+
+.flow-label {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: #687575;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.flow-list {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.flow-list button {
+  display: grid;
+
+  grid-template-columns: 38px minmax(0, 1fr);
+
+  gap: 15px;
+
+  width: 100%;
+
+  padding: 14px 0;
+
+  border: 0;
+  border-bottom: 1px solid #202828;
+
+  background: transparent;
+
+  color: #899696;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    padding-left 180ms ease;
+}
+
+.flow-list button:hover {
+  color: #54d8e6;
+
+  padding-left: 5px;
+}
+
+.flow-list button span {
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+}
+
+
+/* =====================================================
+   SYSTEM DESIGN
+===================================================== */
+
+.project-architecture {
+  padding: 115px 0;
+
+  border-top: 1px solid #293333;
+
+  border-bottom: 1px solid #293333;
+}
+
+
+/* =====================================================
+   8-CARD GRID
+===================================================== */
+
+.architecture-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+/* =====================================================
+   ARCHITECTURE CARD
+===================================================== */
+
+.architecture-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 200px;
+
+  padding: 18px;
+
+  border: 1px solid #293333;
+
+  background: #101616;
+
+  color: #eef4f4;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.architecture-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(84, 216, 230, 0.4);
+
+  background: #111818;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.architecture-card-active {
+  border-color: #54d8e6;
+
+  background: #121a1a;
+
+  box-shadow:
+    0 0 0 1px rgba(84, 216, 230, 0.08);
+}
+
+
+/* =====================================================
+   ARCHITECTURE NUMBER
+===================================================== */
+
+.architecture-number {
+  display: block;
+
+  margin-bottom: 45px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =====================================================
+   ARCHITECTURE TITLE
+===================================================== */
+
+.architecture-card h3 {
+  margin: 0;
+
+  color: #eef4f4;
+
+  font-size: 21px;
+
+  line-height: 1.25;
+
+  letter-spacing: -0.025em;
+
+  transition: color 180ms ease;
+}
+
+.architecture-card:hover h3,
+.architecture-card-active h3 {
+  color: #54d8e6;
+}
+
+
+/* =====================================================
+   ARCHITECTURE EXPLANATION
+===================================================== */
+
+.architecture-card > p {
+  max-width: 520px;
+
+  margin: 18px 0 0;
+
+  color: #789090;
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   CARD ACTION
+===================================================== */
+
+.architecture-card-action {
+  display: block;
+
+  margin-top: auto;
+
+  padding-top: 25px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+
+/* =====================================================
+   SELECTED WORKFLOW DETAIL PANEL
+===================================================== */
+
+.workflow-detail-panel {
+  margin-top: 12px;
+
+  padding: 42px;
+
+  border: 1px solid rgba(84, 216, 230, 0.32);
+
+  background: #101616;
+
+  animation: workflowDetailIn 220ms ease;
+}
+
+@keyframes workflowDetailIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   WORKFLOW DETAIL HEADER
+===================================================== */
+
+.workflow-detail-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 30px;
+
+  padding-bottom: 28px;
+
+  border-bottom: 1px solid #293333;
+}
+
+.workflow-detail-header span {
+  display: block;
+
+  margin-bottom: 13px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.workflow-detail-header h3 {
+  margin: 0;
+
+  color: #eef4f4;
+
+  font-size: clamp(28px, 4vw, 46px);
+
+  line-height: 1.05;
+
+  letter-spacing: -0.04em;
+}
+
+.workflow-detail-header > button {
+  flex-shrink: 0;
+
+  padding: 9px 13px;
+
+  border: 1px solid #293333;
+
+  background: transparent;
+
+  color: #687575;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.workflow-detail-header > button:hover {
+  color: #54d8e6;
+
+  border-color: #54d8e6;
+}
+
+
+/* =====================================================
+   WORKFLOW DESCRIPTION
+===================================================== */
+
+.workflow-detail-description {
+  max-width: 850px;
+
+  margin: 30px 0 0;
+
+  color: #899696;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+}
+
+
+/* =====================================================
+   WORKFLOW ITEMS
+===================================================== */
+
+.workflow-detail-items {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1px;
+
+  margin-top: 35px;
+
+  border: 1px solid #293333;
+
+  background: #293333;
+}
+
+.workflow-detail-item {
+  display: grid;
+
+  grid-template-columns: 42px minmax(0, 1fr);
+
+  gap: 18px;
+
+  padding: 26px;
+
+  background: #0e1212;
+
+  transition: background 180ms ease;
+}
+
+.workflow-detail-item:hover {
+  background: #111717;
+}
+
+.workflow-detail-item-number {
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+.workflow-detail-item h4 {
+  margin: 0;
+
+  color: #eef4f4;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+.workflow-detail-item p {
+  margin: 9px 0 0;
+
+  color: #718181;
+
+  font-size: 11px;
+
+  line-height: 1.75;
+}
+
+
+/* =====================================================
+   EMPTY WORKFLOW
+===================================================== */
+
+.workflow-detail-empty {
+  margin-top: 30px;
+
+  padding: 25px;
+
+  border: 1px solid #293333;
+
+  background: #0e1212;
+}
+
+.workflow-detail-empty p {
+  margin: 0;
+
+  color: #687575;
+
+  font-family: monospace;
+
+  font-size: 10px;
+}
+
+
+/* =====================================================
+   ROLE-BASED ACCESS CONTROL
+===================================================== */
+
+.project-roles {
+  padding: 115px 0;
+}
+
+
+.project-roles .project-section-heading {
+  max-width: 850px;
+}
+
+
+.project-roles .project-section-heading > p {
+  max-width: 700px;
+
+  margin-top: 25px;
+
+  color: #7f8c8c;
+
+  font-size: 13px;
+
+  line-height: 1.85;
+}
+
+
+/* =====================================================
+   ROLES GRID
+===================================================== */
+
+.roles-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+/* =====================================================
+   ROLE CARD
+===================================================== */
+
+.role-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 220px;
+
+  padding: 25px;
+
+  border: 1px solid #293333;
+
+  background: #101616;
+
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+
+.role-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(84, 216, 230, 0.4);
+
+  background: #111818;
+}
+
+
+/* =====================================================
+   ROLE CARD TOP
+===================================================== */
+
+.role-card-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+.role-number {
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+.role-scope {
+  color: #687575;
+
+  font-family: monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+
+/* =====================================================
+   ROLE TITLE
+===================================================== */
+
+.role-card h3 {
+  margin: 42px 0 0;
+
+  color: #eef4f4;
+
+  font-size: 20px;
+
+  line-height: 1.25;
+
+  letter-spacing: -0.025em;
+
+  transition: color 180ms ease;
+}
+
+
+.role-card:hover h3 {
+  color: #54d8e6;
+}
+
+
+/* =====================================================
+   ROLE EXPLANATION
+===================================================== */
+
+.role-card p {
+  margin: 14px 0 0;
+
+  color: #748282;
+
+  font-size: 11px;
+
+  line-height: 1.75;
+}
+
+
+/* =====================================================
+   RBAC RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .roles-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .project-roles {
+    padding: 80px 0;
+  }
+
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .role-card {
+    min-height: 190px;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .role-card,
+  .role-card h3 {
+    transition: none;
+  }
+
+}
+
+/* =====================================================
+   HOSPITAL WORKFLOW
+===================================================== */
+
+.project-hospital-workflow {
+  padding: 115px 0;
+
+  border-top: 1px solid #293333;
+  border-bottom: 1px solid #293333;
+}
+
+
+/* =====================================================
+   HOSPITAL WORKFLOW PANEL
+===================================================== */
+
+.hospital-workflow-panel {
+  max-width: 950px;
+
+  padding: 35px;
+
+  border: 1px solid #293333;
+
+  background: #101616;
+}
+
+
+/* =====================================================
+   WORKFLOW STEP
+===================================================== */
+
+.hospital-workflow-step {
+  display: grid;
+
+  grid-template-columns: 55px minmax(0, 1fr);
+
+  gap: 22px;
+
+  align-items: start;
+
+  padding: 5px 0;
+}
+
+
+/* =====================================================
+   STEP NUMBER
+===================================================== */
+
+.hospital-workflow-step > span {
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+}
+
+
+/* =====================================================
+   STEP TITLE
+===================================================== */
+
+.hospital-workflow-step strong {
+  display: block;
+
+  color: #eef4f4;
+
+  font-size: 17px;
+
+  line-height: 1.4;
+
+  letter-spacing: -0.015em;
+}
+
+
+/* =====================================================
+   STEP EXPLANATION
+===================================================== */
+
+.hospital-workflow-step p {
+  max-width: 720px;
+
+  margin: 10px 0 0;
+
+  color: #748282;
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   STEP ARROW
+===================================================== */
+
+.hospital-workflow-arrow {
+  margin: 18px 0 18px 4px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 13px;
+
+  line-height: 1;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.hospital-workflow-step {
+  transition: transform 180ms ease;
+}
+
+.hospital-workflow-step:hover {
+  transform: translateX(4px);
+}
+
+.hospital-workflow-step:hover strong {
+  color: #54d8e6;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .project-hospital-workflow {
+    padding: 80px 0;
+  }
+
+  .hospital-workflow-panel {
+    padding: 23px;
+  }
+
+  .hospital-workflow-step {
+    grid-template-columns:
+      38px minmax(0, 1fr);
+
+    gap: 14px;
+  }
+
+  .hospital-workflow-step strong {
+    font-size: 15px;
+  }
+
+  .hospital-workflow-step p {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hospital-workflow-step {
+    transition: none;
+  }
+
+}
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+.project-security {
+  padding: 115px 0;
+}
+
+.security-panel {
+  padding: 50px;
+
+  border: 1px solid #293333;
+
+  background: #101616;
+}
+
+.security-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #293333;
+}
+
+.security-header span {
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.security-header strong {
+  color: #687575;
+
+  font-family: monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.08em;
+}
+
+.security-panel h2 {
+  max-width: 800px;
+
+  margin: 38px 0 0;
+
+  color: #eef4f4;
+
+  font-size: clamp(34px, 5vw, 58px);
+
+  line-height: 1;
+
+  letter-spacing: -0.05em;
+}
+
+.security-panel h2 span {
+  color: #54d8e6;
+}
+
+.security-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 1px;
+
+  margin-top: 45px;
+
+  border: 1px solid #293333;
+
+  background: #293333;
+}
+
+.security-grid > div {
+  min-height: 190px;
+
+  padding: 25px;
+
+  background: #0e1212;
+}
+
+.security-grid strong {
+  display: block;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+}
+
+.security-grid p {
+  margin: 18px 0 0;
+
+  color: #748282;
+
+  font-size: 11px;
+
+  line-height: 1.75;
+}
+
+
+/* =====================================================
+   PROJECT STATUS / BOTTOM
+===================================================== */
+
+.project-detail-bottom {
+  padding: 90px 0 130px;
+
+  border-top: 1px solid #293333;
+}
+
+.project-next {
+  max-width: 850px;
+
+  margin-top: 75px;
+}
+
+.project-next > span {
+  display: block;
+
+  margin-bottom: 17px;
+
+  color: #54d8e6;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.project-next h2 {
+  margin: 0;
+
+  color: #eef4f4;
+
+  font-size: clamp(38px, 5vw, 68px);
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+}
+
+.project-next p {
+  max-width: 700px;
+
+  margin: 25px 0 0;
+
+  color: #7f8c8c;
+
+  font-size: 13px;
+
+  line-height: 1.85;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .project-detail-heading {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+  .project-overview-grid {
+    grid-template-columns: 1fr;
+
+    gap: 55px;
+  }
+
+  .project-flow {
+    padding-left: 0;
+
+    padding-top: 30px;
+
+    border-left: 0;
+
+    border-top: 1px solid #293333;
+  }
+
+  .roles-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .security-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .project-detail-container {
+    width: calc(100% - 36px);
+  }
+
+
+  .project-detail-hero {
+    padding: 115px 0 75px;
+  }
+
+
+  .project-detail-meta {
+    margin-top: 45px;
+
+    gap: 10px;
+  }
+
+
+  .project-detail-heading {
+    margin-top: 28px;
+
+    gap: 30px;
+  }
+
+
+  .project-detail-heading h1 {
+    font-size: clamp(42px, 12vw, 68px);
+  }
+
+
+  .project-detail-heading h2 {
+    font-size: 9px;
+  }
+
+
+  .project-detail-heading > p {
+    font-size: 13px;
+  }
+
+
+  .project-technologies {
+    margin-top: 45px;
+  }
+
+
+  .project-overview,
+  .project-architecture,
+  .project-roles,
+  .project-hospital-workflow,
+  .project-security {
+    padding: 80px 0;
+  }
+
+
+  .project-section-heading {
+    margin-bottom: 40px;
+  }
+
+
+  .project-section-heading h2 {
+    font-size: clamp(34px, 10vw, 52px);
+  }
+
+
+  .architecture-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .architecture-card {
+    min-height: 250px;
+
+    padding: 25px;
+  }
+
+
+  .architecture-number {
+    margin-bottom: 38px;
+  }
+
+
+  .workflow-detail-panel {
+    padding: 25px;
+  }
+
+
+  .workflow-detail-header {
+    flex-direction: column;
+  }
+
+
+  .workflow-detail-header > button {
+    align-self: flex-start;
+  }
+
+
+  .workflow-detail-items {
+    grid-template-columns: 1fr;
+  }
+
+
+  .workflow-detail-item {
+    padding: 20px;
+  }
+
+
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .role-card {
+    min-height: 190px;
+  }
+
+
+  .hospital-workflow-panel {
+    padding: 22px;
+  }
+
+
+  .hospital-workflow-step {
+    grid-template-columns: 38px minmax(0, 1fr);
+
+    gap: 14px;
+  }
+
+
+  .security-panel {
+    padding: 28px;
+  }
+
+
+  .security-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .security-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .security-grid > div {
+    min-height: auto;
+  }
+
+
+  .project-detail-bottom {
+    padding: 70px 0 90px;
+  }
+
+
+  .project-next {
+    margin-top: 55px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .project-detail-container {
+    width: calc(100% - 32px);
+  }
+
+
+  .project-detail-hero {
+    padding-top: 105px;
+  }
+
+
+  .project-detail-heading h1 {
+    font-size: 43px;
+  }
+
+
+  .technology-list span {
+    font-size: 7px;
+
+    padding: 6px 8px;
+  }
+
+
+  .project-overview-copy p {
+    font-size: 13px;
+  }
+
+
+  .architecture-card {
+    min-height: 235px;
+
+    padding: 22px;
+  }
+
+
+  .architecture-card h3 {
+    font-size: 19px;
+  }
+
+
+  .architecture-card > p {
+    font-size: 11px;
+  }
+
+
+  .workflow-detail-header h3 {
+    font-size: 28px;
+  }
+
+
+  .security-panel {
+    padding: 22px;
+  }
+
+
+  .security-panel h2 {
+    font-size: 34px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-back-link,
+  .project-not-found a,
+  .technology-list span,
+  .flow-list button,
+  .architecture-card,
+  .architecture-card h3,
+  .role-card,
+  .workflow-detail-header > button,
+  .workflow-detail-item {
+    transition: none;
+  }
+
+
+  .workflow-detail-panel {
+    animation: none;
+  }
+
+}

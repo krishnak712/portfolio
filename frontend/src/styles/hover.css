@@ -1,0 +1,991 @@
+/* =========================================================
+   PREMIUM HOVER SYSTEM
+   ---------------------------------------------------------
+   - Hover-only. No automatic, repeating, or scroll-triggered
+     animations are added here.
+   - Additive layer: no layout, content, color palette,
+     typography, or spacing changes.
+   - transform + opacity + border/background/shadow/color
+     only. No width/height/layout animation.
+   - Timing: 180–260ms, cubic-bezier(0.2, 0.7, 0.2, 1).
+   - Guarded for touch (hover: none) and reduced motion.
+   ---------------------------------------------------------
+   NOTE on Framer Motion: hover feedback is fully covered by
+   CSS transitions (cheaper, no re-renders, GPU-friendly), so
+   no JS-driven hover was added. Framer Motion remains in use
+   for the opening intro overlay transitions.
+   ========================================================= */
+
+:root {
+  --hover-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --hover-fast: 180ms;
+  --hover-base: 220ms;
+  --hover-slow: 260ms;
+  --hover-accent: #54d8e6;
+  --hover-accent-soft: rgba(84, 216, 230, 0.4);
+}
+
+
+/* =========================================================
+   1. NAVBAR
+   ========================================================= */
+
+/* Links transition to the accent color; indicator slides in
+   from the left instead of growing from the center. */
+
+.nav-link {
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.nav-link::after {
+  transform-origin: left center;
+  transition: transform var(--hover-base) var(--hover-ease);
+}
+
+.nav-link:hover {
+  color: var(--hover-accent);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--hover-accent);
+  outline-offset: 3px;
+}
+
+/* Resume button: lift + border highlight + faint shadow. */
+
+.navbar-resume:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* Hire Me: lift + smooth shadow. */
+
+.navbar-hire:hover {
+  box-shadow: 0 10px 26px rgba(84, 216, 230, 0.18);
+}
+
+.navbar-hire:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Logo: quiet accent response. */
+
+.navbar-logo .logo-mark {
+  transition:
+    background var(--hover-fast) var(--hover-ease),
+    color var(--hover-fast) var(--hover-ease);
+}
+
+.navbar-logo:hover .logo-mark {
+  background: rgba(84, 216, 230, 0.08);
+}
+
+/* Mobile menu items: subtle horizontal slide + arrow reveal. */
+
+.mobile-nav-link {
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.mobile-nav-link:hover {
+  color: #e5eeee;
+  transform: translateX(4px);
+}
+
+.mobile-nav-link:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   2. HERO
+   ========================================================= */
+
+/* Primary CTA: lift + slight scale + refined shadow. */
+
+.hero-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(84, 216, 230, 0.22);
+}
+
+/* Secondary CTA: accent border + lift (base lift comes from
+   .hero-btn:hover; this deepens the border response). */
+
+.hero-btn-secondary:hover {
+  border-color: rgba(84, 216, 230, 0.45);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+
+/* Resume button: subtle lift (border/bg handled by base). */
+
+.hero-btn-resume:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* Social links: icon drifts slightly up/right on hover. */
+
+.hero-social .social-icon {
+  display: inline-flex;
+  transition: transform var(--hover-fast) var(--hover-ease);
+}
+
+.hero-social:hover .social-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Profile image: restrained scale + smooth ring/glow shift. */
+
+.hero-profile-ring {
+  transition:
+    border-color var(--hover-slow) var(--hover-ease),
+    box-shadow var(--hover-slow) var(--hover-ease);
+}
+
+.hero-profile-wrapper:hover .hero-profile-ring {
+  border-color: rgba(84, 216, 230, 0.6);
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(84, 216, 230, 0.14);
+}
+
+/* Status / tech badges: lift-free highlight (their float is a
+   pre-existing ambient animation, so transform is untouched;
+   border + shadow respond instead). */
+
+.hero-status-badge,
+.hero-tech-badge {
+  transition:
+    border-color var(--hover-base) var(--hover-ease),
+    background var(--hover-base) var(--hover-ease),
+    box-shadow var(--hover-base) var(--hover-ease);
+}
+
+.hero-status-badge:hover,
+.hero-tech-badge:hover {
+  border-color: var(--hover-accent-soft);
+  background: rgba(24, 33, 33, 0.96);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================================
+   3. ABOUT
+   ========================================================= */
+
+/* Card keeps its existing behavior; the index number gets a
+   small refined nudge. */
+
+.about-card-number {
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.about-card:hover .about-card-number {
+  transform: translateX(3px);
+}
+
+/* Meta strip items: quiet background response only (they sit
+   in a shared bordered strip, so no lift). */
+
+.about-meta-item {
+  transition: background var(--hover-fast) var(--hover-ease);
+}
+
+.about-meta-item:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+
+/* =========================================================
+   4. SKILLS
+   ========================================================= */
+
+/* Lift 5px + scale 1.02. Transform-only, so cards stay
+   aligned — no layout shift. */
+
+.skill-card {
+  transition:
+    transform var(--hover-base) var(--hover-ease),
+    border-color var(--hover-base) var(--hover-ease),
+    background var(--hover-base) var(--hover-ease),
+    box-shadow var(--hover-base) var(--hover-ease);
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Icon: tiny rotation + lift on card hover. */
+
+.skill-symbol {
+  transition:
+    transform var(--hover-base) var(--hover-ease),
+    background var(--hover-base) var(--hover-ease),
+    border-color var(--hover-base) var(--hover-ease);
+}
+
+.skill-card:hover .skill-symbol {
+  transform: translateY(-3px);
+  background: rgba(84, 216, 230, 0.12);
+}
+
+/* Individual pill hover (pills are non-interactive spans, so
+   this is a quiet tint only). */
+
+.skill-pill {
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    border-color var(--hover-fast) var(--hover-ease),
+    background var(--hover-fast) var(--hover-ease);
+}
+
+.skill-pill:hover {
+  color: #d6e2e0;
+  border-color: var(--hover-accent-soft);
+}
+
+
+/* =========================================================
+   5. FEATURED PROJECT
+   ========================================================= */
+
+/* Container: existing lift kept; border gains a faint accent
+   edge on hover. */
+
+.featured-case-card {
+  transition:
+    transform var(--hover-base) var(--hover-ease),
+    box-shadow var(--hover-base) var(--hover-ease),
+    border-color var(--hover-base) var(--hover-ease);
+}
+
+.featured-case-card:hover {
+  border-color: rgba(238, 244, 244, 0.2);
+}
+
+/* Visual panel: rings breathe very slightly; artwork stays
+   clipped inside the card (overflow: hidden is on the card). */
+
+.featured-case-visual::before,
+.featured-case-visual::after {
+  transition: transform var(--hover-slow) var(--hover-ease);
+}
+
+.featured-case-card:hover .featured-case-visual::before {
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.featured-case-card:hover .featured-case-visual::after {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.featured-case-number {
+  transition: color var(--hover-base) var(--hover-ease);
+}
+
+.featured-case-card:hover .featured-case-number {
+  color: rgba(238, 244, 244, 0.2);
+}
+
+/* Technology pills: smooth individual response. */
+
+.featured-case-tech span {
+  transition:
+    border-color var(--hover-fast) var(--hover-ease),
+    background var(--hover-fast) var(--hover-ease),
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.featured-case-tech span:hover {
+  border-color: var(--hover-accent-soft);
+  background: rgba(84, 216, 230, 0.06);
+  color: #eef4f4;
+  transform: translateY(-2px);
+}
+
+/* Buttons: existing lift kept; shadow refined. */
+
+.featured-case-button:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.featured-case-secondary:hover {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   6. PROJECT CARDS
+   ========================================================= */
+
+/* Lift 7px + deeper shadow + more visible border. */
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.015);
+  border-color: rgba(84, 216, 230, 0.45);
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.3);
+}
+
+/* Visual lifts very slightly, clipped by card overflow. */
+
+.project-card:hover .project-code-window {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Tech pills: quiet individual response. */
+
+.project-tech span {
+  transition:
+    border-color var(--hover-fast) var(--hover-ease),
+    color var(--hover-fast) var(--hover-ease),
+    background var(--hover-fast) var(--hover-ease);
+}
+
+.project-tech span:hover {
+  border-color: var(--hover-accent-soft);
+  color: #b9c6c4;
+}
+
+/* "View Project →": arrow glides right on card or link hover. */
+
+.project-link span:last-child {
+  display: inline-block;
+  transition: transform var(--hover-fast) var(--hover-ease);
+}
+
+.project-card:hover .project-link span:last-child,
+.project-link:hover span:last-child {
+  transform: translateX(4px);
+}
+
+/* Footer link arrow nudge. */
+
+.projects-footer a {
+  display: inline-block;
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.projects-footer a:hover {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   7. EXPERIENCE
+   ========================================================= */
+
+/* Card: existing lift kept; shadow + border deepened. */
+
+.experience-card:hover {
+  border-color: rgba(84, 216, 230, 0.35);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Timeline indicator: small scale transition on item hover.
+   Company/role text is untouched and stays stable. */
+
+.experience-dot {
+  transition:
+    transform var(--hover-base) var(--hover-ease),
+    box-shadow var(--hover-base) var(--hover-ease);
+}
+
+.experience-item:hover .experience-dot {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 7px rgba(84, 216, 230, 0.1);
+}
+
+
+/* =========================================================
+   8. ACHIEVEMENTS / GITHUB
+   ========================================================= */
+
+/* Achievement cards: existing slide kept; focus support + a
+   touch more shadow for parity with other cards. */
+
+.achievement-card:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
+.achievement-card:focus-within {
+  border-color: var(--hover-accent-soft);
+}
+
+/* Achievement arrow motion is in base CSS; add keyboard parity. */
+
+.achievement-arrow {
+  display: inline-block;
+}
+
+a.achievement-arrow:hover {
+  transform: translateX(4px);
+}
+
+/* GitHub profile link: lift + accent (base has color/border). */
+
+.github-link {
+  display: inline-block;
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    border-color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.github-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Recent repository rows: these elements have no base card
+   styling, so a restrained row style + hover is defined here
+   to read as quiet cards consistent with the panel. */
+
+.github-repositories-header {
+  margin: 20px 0 10px;
+  color: #647171;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.github-repository {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid #263030;
+  border-radius: 4px;
+  background: #0e1313;
+  color: #cbd4d4;
+  text-decoration: none;
+  transition:
+    border-color var(--hover-fast) var(--hover-ease),
+    background var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease),
+    box-shadow var(--hover-fast) var(--hover-ease);
+}
+
+.github-repository + .github-repository {
+  margin-top: 8px;
+}
+
+.github-repository strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.github-repository span {
+  display: block;
+  margin-top: 4px;
+  color: #718080;
+  font-family: monospace;
+  font-size: 9px;
+}
+
+.github-repository-arrow {
+  flex-shrink: 0;
+  color: #566363;
+  font-size: 14px;
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.github-repository:hover {
+  border-color: var(--hover-accent-soft);
+  background: #111818;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.github-repository:hover .github-repository-arrow {
+  color: var(--hover-accent);
+  transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   9. CONTACT
+   ========================================================= */
+
+/* Inputs: existing border transition kept; add a soft focus
+   ring for clarity. No animation on the form itself. */
+
+.form-field input:focus,
+.form-field textarea:focus {
+  box-shadow: 0 0 0 3px rgba(84, 216, 230, 0.1);
+}
+
+/* Submit: existing lift kept; shadow refined. */
+
+.contact-submit:hover:not(:disabled) {
+  box-shadow: 0 12px 30px rgba(84, 216, 230, 0.16);
+}
+
+/* Info + social links: small icon drift on hover. */
+
+.contact-info-block a {
+  display: inline-block;
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.contact-info-block a:hover {
+  transform: translateX(2px);
+}
+
+.contact-socials a {
+  display: inline-flex;
+  align-items: center;
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.contact-socials a:hover {
+  color: var(--hover-accent);
+  transform: translateY(-2px);
+}
+
+.success-done-button:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   10. RESUME PAGE
+   ========================================================= */
+
+/* Download: subtle lift + shadow (base handles color/border). */
+
+.resume-download {
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    border-color var(--hover-fast) var(--hover-ease),
+    background var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease),
+    box-shadow var(--hover-fast) var(--hover-ease);
+}
+
+.resume-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+/* Back to Portfolio: whole-link glide carries the arrow. */
+
+.resume-back {
+  transition:
+    color var(--hover-fast) var(--hover-ease),
+    border-color var(--hover-fast) var(--hover-ease),
+    background var(--hover-fast) var(--hover-ease),
+    transform var(--hover-fast) var(--hover-ease);
+}
+
+.resume-back:hover {
+  transform: translateX(-3px);
+}
+
+/* Section cards: very subtle border response only. */
+
+.resume-project,
+.resume-certification,
+.resume-skill-group {
+  transition: border-color var(--hover-base) var(--hover-ease);
+}
+
+.resume-project:hover,
+.resume-certification:hover {
+  border-color: rgba(84, 216, 230, 0.3);
+}
+
+
+/* =========================================================
+   11. PROJECT CASE STUDY PAGE
+   ========================================================= */
+
+/* Architecture / role cards: lift exists in base; add keyboard
+   parity + shadow depth. Cursor already signals clickability. */
+
+.architecture-card:focus-visible,
+.role-card:focus-visible {
+  outline: 2px solid var(--hover-accent);
+  outline-offset: 3px;
+}
+
+.architecture-card:hover {
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.22);
+}
+
+.role-card:hover {
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+}
+
+/* Workflow detail rows: subtle elevation (no positional shift
+   inside the grid, so cells never jitter). */
+
+.workflow-detail-item:hover {
+  box-shadow: inset 0 0 0 1px rgba(84, 216, 230, 0.12);
+}
+
+/* Back / nav links: existing glide kept; also cover keyboard. */
+
+.project-back-link:focus-visible,
+.projects-page-back:focus-visible,
+.projects-page-link:focus-visible {
+  outline: 2px solid var(--hover-accent);
+  outline-offset: 3px;
+}
+
+/* Case-study link arrow nudge (gap animation exists in base;
+   this adds transform parity for keyboard focus). */
+
+.projects-page-link:hover {
+  transform: translateX(2px);
+}
+
+/* Hospital workflow rows: existing nudge kept; title tint is
+   in base CSS. */
+
+
+/* =========================================================
+   GLOBAL SAFETY
+   ========================================================= */
+
+/* Interactive elements only carry pointer cursors; cards that
+   are plain articles/rows keep the default cursor. */
+
+.project-card,
+.skill-card,
+.about-card,
+.achievement-card,
+.experience-card,
+.workflow-detail-item {
+  cursor: default;
+}
+
+a,
+button,
+.architecture-card,
+.flow-list button {
+  cursor: pointer;
+}
+
+/* Touch devices: no persistent/lift hover states. Color-only
+   feedback is harmless; transforms are neutralized. */
+
+@media (hover: none) {
+  .nav-link:hover,
+  .mobile-nav-link:hover,
+  .hero-btn-primary:hover,
+  .skill-card:hover,
+  .project-card:hover,
+  .project-card:hover .project-code-window,
+  .experience-item:hover .experience-dot,
+  .github-repository:hover,
+  .resume-download:hover,
+  .resume-back:hover,
+  .featured-case-card:hover .featured-case-visual::before,
+  .featured-case-card:hover .featured-case-visual::after,
+  .hero-social:hover .social-icon,
+  .skill-card:hover .skill-symbol,
+  .project-card:hover .project-link span:last-child,
+  .project-link:hover span:last-child,
+  .about-card:hover .about-card-number {
+    transform: none;
+  }
+
+  .featured-case-card:hover,
+  .project-card:hover,
+  .skill-card:hover,
+  .experience-card:hover,
+  .achievement-card:hover {
+    box-shadow: none;
+  }
+}
+
+/* Reduced motion: hover becomes an instant state change. */
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link,
+  .nav-link::after,
+  .navbar-resume,
+  .navbar-hire,
+  .navbar-logo .logo-mark,
+  .mobile-nav-link,
+  .mobile-nav-link::after,
+  .hero-btn-primary,
+  .hero-btn-secondary,
+  .hero-btn-resume,
+  .hero-social,
+  .hero-social .social-icon,
+  .hero-profile-ring,
+  .hero-status-badge,
+  .hero-tech-badge,
+  .about-card-number,
+  .about-meta-item,
+  .skill-card,
+  .skill-symbol,
+  .skill-pill,
+  .featured-case-card,
+  .featured-case-visual::before,
+  .featured-case-visual::after,
+  .featured-case-number,
+  .featured-case-tech span,
+  .featured-case-button,
+  .featured-case-secondary,
+  .project-card,
+  .project-code-window,
+  .project-tech span,
+  .project-link span:last-child,
+  .projects-footer a,
+  .experience-card,
+  .experience-dot,
+  .achievement-card,
+  .achievement-arrow,
+  .github-link,
+  .github-repository,
+  .github-repository-arrow,
+  .form-field input,
+  .form-field textarea,
+  .contact-submit,
+  .contact-info-block a,
+  .contact-socials a,
+  .success-done-button,
+  .resume-download,
+  .resume-back,
+  .resume-project,
+  .resume-certification,
+  .resume-skill-group,
+  .architecture-card,
+  .role-card,
+  .workflow-detail-item,
+  .project-back-link,
+  .projects-page-back,
+  .projects-page-link {
+    transition: none;
+  }
+
+  .nav-link:hover,
+  .nav-link:hover::after,
+  .mobile-nav-link:hover,
+  .hero-btn-primary:hover,
+  .hero-btn-secondary:hover,
+  .hero-social:hover,
+  .hero-social:hover .social-icon,
+  .skill-card:hover,
+  .skill-card:hover .skill-symbol,
+  .project-card:hover,
+  .project-card:hover .project-code-window,
+  .project-card:hover .project-link span:last-child,
+  .experience-card:hover,
+  .experience-item:hover .experience-dot,
+  .achievement-card:hover,
+  .github-link:hover,
+  .github-repository:hover,
+  .contact-submit:hover:not(:disabled),
+  .contact-socials a:hover,
+  .resume-download:hover,
+  .resume-back:hover,
+  .architecture-card:hover,
+  .role-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+
+/* =========================================================
+   PRESS / TACTILE FEEDBACK  (section 5-7, 9)
+   ---------------------------------------------------------
+   Normal → Hover → Press → Release. Brief 0.96-0.98 scale,
+   ~140ms, transform-only. Navigation is never delayed;
+   routing behavior is untouched.
+   ========================================================= */
+
+button.hero-btn:active,
+a.hero-btn-resume:active,
+a.navbar-resume:active,
+.featured-case-button:active,
+.featured-case-secondary:active,
+.resume-download:active,
+.project-link:active,
+.projects-page-link:active,
+.hero-social:active,
+.contact-socials a:active,
+.github-link:active,
+.github-repository:active,
+.success-done-button:active {
+  transform: translateY(-1px) scale(0.98);
+  transition-duration: 140ms;
+}
+
+.navbar-hire:active,
+.contact-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 140ms;
+}
+
+.resume-back:active,
+.project-back-link:active,
+.projects-page-back:active {
+  transform: translateX(-2px) scale(0.98);
+  transition-duration: 140ms;
+}
+
+.nav-link:active {
+  transform: scale(0.95);
+  transition-duration: 140ms;
+}
+
+.mobile-nav-link:active {
+  transform: translateX(4px) scale(0.98);
+  transition-duration: 140ms;
+}
+
+.mobile-menu-button:active,
+.footer-logo:active,
+.footer-copy button:active {
+  transform: scale(0.95);
+  transition-duration: 140ms;
+}
+
+.architecture-card:active {
+  transform: translateY(-2px) scale(0.98);
+  transition-duration: 140ms;
+}
+
+.flow-list button:active,
+.footer-links a:active,
+.projects-footer a:active,
+.resume-contact a:active {
+  transform: scale(0.98);
+  transition-duration: 140ms;
+}
+
+.contact-submit:active:not(:disabled) {
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   ICON MICRO-MOTION  (section 8)
+   ---------------------------------------------------------
+   All under 300ms, transform-only.
+   ========================================================= */
+
+/* Download arrows drift downward on hover. */
+
+.resume-download span,
+.hero-btn-resume span:last-child {
+  display: inline-block;
+  transition: transform var(--hover-fast) var(--hover-ease);
+}
+
+.resume-download:hover span,
+.hero-btn-resume:hover span:last-child {
+  transform: translateY(2px);
+}
+
+/* Social icons: GitHub drifts up/right, LinkedIn rises,
+   Email scales subtly. */
+
+.hero-social[href*="github"]:hover .social-icon {
+  transform: translate(2px, -2px);
+}
+
+.hero-social[href*="linkedin"]:hover .social-icon {
+  transform: translateY(-3px);
+}
+
+.hero-social[href^="mailto:"]:hover .social-icon {
+  transform: scale(1.18);
+}
+
+/* Back arrows already glide with their link (translateX);
+   download/back parity for keyboard focus. */
+
+.resume-download:focus-visible,
+.resume-back:focus-visible,
+.hero-btn:focus-visible,
+.hero-social:focus-visible {
+  outline: 2px solid var(--hover-accent);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   PRESS + ICON SAFETY
+   ========================================================= */
+
+@media (hover: none) {
+  .hero-btn:active,
+  .navbar-resume:active,
+  .navbar-hire:active,
+  .featured-case-button:active,
+  .featured-case-secondary:active,
+  .contact-submit:active:not(:disabled),
+  .resume-back:active,
+  .resume-download:active,
+  .project-link:active,
+  .projects-page-link:active,
+  .nav-link:active,
+  .mobile-nav-link:active,
+  .mobile-menu-button:active,
+  .architecture-card:active,
+  .hero-social:active,
+  .github-repository:active,
+  .resume-download:hover span,
+  .hero-btn-resume:hover span:last-child,
+  .hero-social[href*="github"]:hover .social-icon,
+  .hero-social[href*="linkedin"]:hover .social-icon,
+  .hero-social[href^="mailto:"]:hover .social-icon {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-btn:active,
+  .navbar-resume:active,
+  .navbar-hire:active,
+  .featured-case-button:active,
+  .featured-case-secondary:active,
+  .contact-submit:active:not(:disabled),
+  .resume-back:active,
+  .resume-download:active,
+  .project-link:active,
+  .projects-page-link:active,
+  .nav-link:active,
+  .mobile-nav-link:active,
+  .mobile-menu-button:active,
+  .architecture-card:active,
+  .flow-list button:active,
+  .hero-social:active,
+  .github-repository:active,
+  .resume-download span,
+  .hero-btn-resume span:last-child,
+  .resume-download:hover span,
+  .hero-btn-resume:hover span:last-child,
+  .hero-social[href*="github"]:hover .social-icon,
+  .hero-social[href*="linkedin"]:hover .social-icon,
+  .hero-social[href^="mailto:"]:hover .social-icon {
+    transform: none;
+    transition: none;
+  }
+}

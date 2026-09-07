@@ -1,0 +1,457 @@
+.achievements-section {
+  position: relative;
+  padding: 120px 24px;
+  background: #0e1212;
+  color: #eef4f4;
+  overflow: hidden;
+}
+
+.achievements-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+/* Header */
+
+.achievements-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 70px;
+}
+
+.achievements-eyebrow {
+  display: block;
+  margin-bottom: 18px;
+  color: #54d8e6;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.achievements-header h2 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  font-weight: 650;
+}
+
+.achievements-header h2 span {
+  color: #899696;
+}
+
+.achievements-header > p {
+  margin: 0;
+  color: #899696;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Main grid */
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 28px;
+}
+
+/* Achievement list */
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievement-card {
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr) 30px;
+  gap: 18px;
+  align-items: center;
+  min-height: 145px;
+  padding: 25px;
+  border: 1px solid #293333;
+  border-radius: 5px;
+  background: #121818;
+  transition:
+    border-color 220ms ease,
+    transform 220ms ease,
+    background 220ms ease;
+}
+
+.achievement-card:hover {
+  border-color: #3a4a4a;
+  background: #141b1b;
+  transform: translateY(-3px);
+}
+
+.achievement-number {
+  align-self: start;
+  color: #536161;
+  font-family: monospace;
+  font-size: 11px;
+  padding-top: 2px;
+}
+
+.achievement-content {
+  min-width: 0;
+}
+
+.achievement-subtitle {
+  display: block;
+  margin-bottom: 7px;
+  color: #54d8e6;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.achievement-content h3 {
+  margin: 0;
+  color: #edf3f3;
+  font-size: 19px;
+  font-weight: 650;
+}
+
+.achievement-content p {
+  margin: 10px 0;
+  color: #899696;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.achievement-meta {
+  color: #5f6d6d;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.achievement-arrow {
+  color: #566363;
+  font-size: 18px;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.achievement-card:hover .achievement-arrow {
+  color: #54d8e6;
+  transform: translateX(3px);
+}
+
+/* GitHub panel */
+
+.github-panel {
+  padding: 28px;
+  border: 1px solid #293333;
+  border-radius: 5px;
+  background: #121818;
+}
+
+.github-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.github-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #647171;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.github-panel h3 {
+  margin: 0;
+  color: #edf3f3;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.github-link {
+  padding: 8px 10px;
+  border: 1px solid #293333;
+  border-radius: 3px;
+  color: #879494;
+  font-family: monospace;
+  font-size: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.github-link:hover {
+  border-color: #54d8e6;
+  color: #54d8e6;
+}
+
+/* Terminal */
+
+.github-terminal {
+  overflow: hidden;
+  border: 1px solid #273131;
+  border-radius: 5px;
+  background: #0b0f0f;
+}
+
+.terminal-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #222a2a;
+  background: #101515;
+}
+
+.terminal-top > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3d4848;
+}
+
+.terminal-top small {
+  margin-left: auto;
+  color: #586565;
+  font-family: monospace;
+  font-size: 9px;
+}
+
+.terminal-body {
+  min-height: 180px;
+  padding: 20px;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 2;
+}
+
+.terminal-green {
+  color: #54d8e6;
+}
+
+.terminal-muted {
+  color: #657373;
+}
+
+.terminal-command {
+  margin-top: 5px;
+  color: #d1dada;
+}
+
+.terminal-output {
+  color: #718080;
+}
+
+.terminal-cursor {
+  color: #54d8e6;
+}
+
+/* GitHub stats */
+
+.github-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 16px;
+  border: 1px solid #293333;
+  border-radius: 4px;
+}
+
+.github-stat {
+  padding: 16px 10px;
+  text-align: center;
+}
+
+.github-stat + .github-stat {
+  border-left: 1px solid #293333;
+}
+
+.github-stat strong {
+  display: block;
+  color: #dfe7e7;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.github-stat span {
+  display: block;
+  margin-top: 5px;
+  color: #647171;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+/* Note */
+
+.github-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #252e2e;
+}
+
+.github-note-icon {
+  color: #54d8e6;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.github-note p {
+  margin: 0;
+  color: #718080;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* Bottom */
+
+.achievements-bottom {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 22px 24px;
+  border: 1px solid #293333;
+  border-radius: 5px;
+  background: #111616;
+}
+
+.bottom-mark {
+  color: #54d8e6;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.achievements-bottom strong {
+  color: #e7eeee;
+  font-size: 13px;
+}
+
+.achievements-bottom p {
+  margin: 5px 0 0;
+  color: #788686;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .achievements-header {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .achievements-section {
+    padding: 90px 18px;
+  }
+
+  .achievements-header {
+    margin-bottom: 50px;
+  }
+
+  .achievements-header h2 {
+    font-size: 38px;
+  }
+
+  .achievement-card {
+    grid-template-columns: 32px minmax(0, 1fr) 20px;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .achievement-content h3 {
+    font-size: 17px;
+  }
+
+  .github-panel {
+    padding: 20px;
+  }
+
+  .github-panel-header {
+    display: block;
+  }
+
+  .github-link {
+    display: inline-block;
+    margin-top: 15px;
+  }
+
+  .github-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .github-stat + .github-stat {
+    border-top: 1px solid #293333;
+    border-left: 0;
+  }
+
+  .achievements-bottom {
+    align-items: flex-start;
+  }
+}
+
+/* Small mobile */
+
+@media (max-width: 420px) {
+  .achievements-header h2 {
+    font-size: 33px;
+  }
+
+  .achievement-card {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-number {
+    padding: 0;
+  }
+
+  .achievement-arrow {
+    display: none;
+  }
+
+  .terminal-body {
+    min-height: 160px;
+    padding: 15px;
+    font-size: 10px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .achievement-card,
+  .achievement-arrow,
+  .github-link {
+    transition: none;
+  }
+
+  .achievement-card:hover {
+    transform: none;
+  }
+
+  .achievement-card:hover .achievement-arrow {
+    transform: none;
+  }
+}
