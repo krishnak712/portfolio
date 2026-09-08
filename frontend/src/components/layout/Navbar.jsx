@@ -4,6 +4,10 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import {
+  scrollToSectionId,
+  scrollToTop,
+} from "../../utils/hashScroll";
 import "./css/Navbar.css";
 
 const navItems = [
@@ -111,46 +115,48 @@ export default function Navbar() {
      GO TO HOMEPAGE SECTION
   ========================================================= */
 
- const goToSection = (id) => {
+  const goToSection = (id) => {
   setMenuOpen(false);
 
-  // Already on homepage
-  if (isHomePage) {
-    const element = document.getElementById(id);
+  /*
+   * Single navigation + hash-scroll system:
+   * navigate to / with the hash and let ScrollManager
+   * (the only location-driven scroll handler) wait for
+   * the section to render and scroll to it. Direct
+   * scrolling happens ONLY when re-clicking the hash
+   * that is already active, since that emits no
+   * location change for ScrollManager to react to.
+   */
+  if (id === "home") {
+    if (isHomePage) {
+      if (location.hash) {
+        // Let ScrollManager scroll to the top.
+        navigate("/");
+        return;
+      }
 
-    if (!element) {
+      scrollToTop();
+
       return;
     }
 
-    const navbarOffset = 90;
-
-    const elementTop =
-      element.getBoundingClientRect().top +
-      window.scrollY -
-      navbarOffset;
-
-    window.scrollTo({
-      top: Math.max(0, elementTop),
-      left: 0,
-      behavior: "smooth",
-    });
-
-    window.history.replaceState(
-      null,
-      "",
-      `/#${id}`
-    );
-
-    return;
-  }
-
-  // Coming from Resume / Projects / Case Study
-  if (id === "home") {
     navigate("/");
+
     return;
   }
 
-  navigate(`/#${id}`);
+  if (
+    isHomePage &&
+    location.hash === `#${id}`
+  ) {
+    scrollToSectionId(id);
+    return;
+  }
+
+  navigate({
+    pathname: "/",
+    hash: `#${id}`,
+  });
 };
 
 
@@ -162,13 +168,13 @@ export default function Navbar() {
   setMenuOpen(false);
 
   if (isHomePage) {
-    window.history.replaceState(null, "", "/");
+    if (location.hash) {
+      // Let ScrollManager scroll to the top.
+      navigate("/");
+      return;
+    }
 
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
+    scrollToTop();
 
     return;
   }

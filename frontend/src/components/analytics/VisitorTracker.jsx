@@ -76,6 +76,8 @@ export default function VisitorTracker() {
           location.search +
           location.hash;
 
+        console.log("TRACKING PAGE:", pagePath);
+
         /*
          * 4. Get browser session ID
          */

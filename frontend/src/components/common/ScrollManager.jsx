@@ -1,130 +1,151 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { scrollToSectionId } from "../../utils/hashScroll";
+
+/*
+ * THE single navigation + hash-scroll system.
+ *
+ * - Navbar navigates to / with the selected hash and
+ *   performs NO scrolling itself (except re-clicking the
+ *   already-active hash, which emits no location change).
+ * - This component owns every location-driven scroll.
+ * - It polls until the target section exists, because
+ *   HomePage renders sections only after async profile
+ *   data arrives. A single delayed attempt is not enough.
+ */
+
+const POLL_INTERVAL_MS = 100;
+const MAX_WAIT_MS = 10000;
+
+/*
+ * Re-assert the position after images/fonts settle and
+ * shift the layout. Uses instant scrolling so the page
+ * does not visibly glide a second time.
+ */
+const SETTLE_DELAYS_MS = [500, 1500];
 
 function ScrollManager() {
-  const location = useLocation();
+  const { pathname, hash } = useLocation();
+
+  /*
+   * Stop the browser's native hash jump from competing
+   * with the offset scroll below.
+   */
+  useEffect(() => {
+    try {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+    } catch {
+      // Non-critical — keep default behavior.
+    }
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
-    let attempts = 0;
-    let timer;
-    let lastHeight = -1;
-    let stableCount = 0;
+    let rafId = 0;
+    const timers = [];
 
-    const scrollToTarget = () => {
-      if (cancelled) {
-        return;
+    const later = (fn, ms) => {
+      const timer = window.setTimeout(() => {
+        if (!cancelled) {
+          fn();
+        }
+      }, ms);
+
+      timers.push(timer);
+    };
+
+    const cleanup = () => {
+      cancelled = true;
+
+      if (rafId) {
+        cancelAnimationFrame(rafId);
       }
 
-      /* =========================================
-         NORMAL ROUTE
-         /resume
-         /projects
-         /projects/smart-blood-search
-      ========================================= */
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
 
-      if (!location.hash) {
+    /*
+     * Non-home routes have no home sections.
+     * Plain route changes go back to the top.
+     * (A non-home location WITH a hash is left alone —
+     * there is nothing to scroll to there.)
+     */
+    if (pathname !== "/") {
+      if (!hash) {
         window.scrollTo({
           top: 0,
           left: 0,
           behavior: "auto",
         });
-
-        return;
       }
 
-      /* =========================================
-         HASH ROUTE
-         /#about
-         /#skills
-         /#projects
-         /#experience
-         /#achievements
-         /#contact
-      ========================================= */
+      return cleanup;
+    }
 
-      const sectionId = decodeURIComponent(
-        location.hash.substring(1)
-      );
-
-      const element =
-        document.getElementById(sectionId);
-
-      /* Section is not rendered yet, or sections above it
-         are still expanding as their data arrives (page height
-         still changing) — wait until the layout settles so the
-         computed scroll position is final. */
-      const height =
-        document.documentElement.scrollHeight;
-
-      if (!element || height !== lastHeight) {
-        lastHeight = height;
-        stableCount = 0;
-        attempts += 1;
-
-        if (attempts < 300) {
-          requestAnimationFrame(
-            scrollToTarget
-          );
-        }
-
-        return;
-      }
-
-      stableCount += 1;
-
-      if (stableCount < 10) {
-        attempts += 1;
-
-        if (attempts < 300) {
-          requestAnimationFrame(
-            scrollToTarget
-          );
-        }
-
-        return;
-      }
-
-      /* =========================================
-         WAIT FOR FINAL LAYOUT
-      ========================================= */
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          if (cancelled) {
-            return;
-          }
-
-          const navbarHeight = 90;
-
-          const top =
-            element.getBoundingClientRect().top +
-            window.scrollY -
-            navbarHeight;
-
-          window.scrollTo({
-            top: Math.max(0, top),
-            left: 0,
-            behavior: "smooth",
-          });
-        });
+    /*
+     * Home without a hash (logo click, direct / visit,
+     * or navigate("/") from another page) goes to top.
+     */
+    if (!hash) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
       });
+
+      return cleanup;
+    }
+
+    const sectionId = decodeURIComponent(hash.slice(1));
+
+    const start = performance.now();
+
+    const attempt = () => {
+      if (cancelled) {
+        return;
+      }
+
+      const found = scrollToSectionId(sectionId);
+
+      if (found) {
+        /*
+         * Section rendered — lock the final position
+         * once late-loading content settles.
+         */
+        SETTLE_DELAYS_MS.forEach((delay) => {
+          later(() => {
+            scrollToSectionId(sectionId, "auto");
+          }, delay);
+        });
+
+        return;
+      }
+
+      if (performance.now() - start >= MAX_WAIT_MS) {
+        return;
+      }
+
+      const timer = window.setTimeout(() => {
+        if (cancelled) {
+          return;
+        }
+
+        rafId = requestAnimationFrame(attempt);
+      }, POLL_INTERVAL_MS);
+
+      timers.push(timer);
     };
 
-    timer = window.setTimeout(
-      scrollToTarget,
-      150
-    );
+    /*
+     * Wait a frame so the destination route commits
+     * before the first lookup.
+     */
+    rafId = requestAnimationFrame(attempt);
 
-    return () => {
-      cancelled = true;
-
-      clearTimeout(timer);
-    };
-  }, [
-    location.pathname,
-    location.hash,
-  ]);
+    return cleanup;
+  }, [pathname, hash]);
 
   return null;
 }

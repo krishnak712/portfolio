@@ -1,4 +1,5 @@
 import "./css/Hero.css";
+import Hero3D from "./Hero3D";
 
 function Hero({ profile }) {
   if (!profile) {
@@ -202,6 +203,7 @@ function Hero({ profile }) {
                 </div>
 
               </div>
+              <Hero3D />
 
             </div>
 

@@ -802,6 +802,10 @@
     gap: 45px;
   }
 
+  .hero-profile-section {
+    padding-top: 55px;
+  }
+
   .hero-profile-wrapper {
     width: min(82vw, 330px);
   }
