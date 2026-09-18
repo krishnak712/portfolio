@@ -20,6 +20,18 @@ const navItems = [
   { label: "Contact", id: "contact" },
 ];
 
+function getInitials(name) {
+  if (!name) return "P";
+
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0))
+    .join("")
+    .toUpperCase();
+}
+
 export default function Navbar({profile }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -202,11 +214,11 @@ export default function Navbar({profile }) {
             aria-label="Go to home"
           >
             <span className="logo-mark">
-              KK
+             {getInitials(profile?.name)}
             </span>
 
             <span className="logo-text">
-              KRISHNA KUMAR
+             {profile?.name || "PORTFOLIO"}
             </span>
           </button>
 

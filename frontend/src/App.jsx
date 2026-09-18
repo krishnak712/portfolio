@@ -161,6 +161,7 @@ function App() {
 
       {!introFinished && (
         <OpeningAnimation
+          profile={profile}
           onComplete={() => setIntroFinished(true)}
         />
       )}

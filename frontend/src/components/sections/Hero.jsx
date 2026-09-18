@@ -14,7 +14,7 @@ function Hero({ profile }) {
                 <span>Loading...</span>
               </div>
               <h1 className="hero-title">
-                Hi, I&apos;m <span>Krishna Kumar</span>
+               Loading portfolio...
               </h1>
               <p className="hero-description">Loading profile...</p>
             </div>

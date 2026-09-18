@@ -42,11 +42,13 @@ function statusLabel(progress) {
   return "ENTERING PORTFOLIO";
 }
 
-export default function OpeningAnimation({ onComplete }) {
+export default function OpeningAnimation({ profile,onComplete }) {
   const [active] = useState(shouldPlayIntro);
   const [visible, setVisible] = useState(active);
   const [exiting, setExiting] = useState(false);
   const [progress, setProgress] = useState(0);
+  const displayName = profile?.name || "PORTFOLIO";
+  const displayRole = profile?.role || "FULL STACK DEVELOPER";
 
   const finishedRef = useRef(false);
 
@@ -283,7 +285,7 @@ export default function OpeningAnimation({ onComplete }) {
               ],
             }}
           >
-            KRISHNA KUMAR
+            {displayName}
           </motion.h1>
 
           <motion.p
@@ -301,7 +303,7 @@ export default function OpeningAnimation({ onComplete }) {
               duration: 0.7,
             }}
           >
-            Java Full Stack Developer
+            {displayRole}
           </motion.p>
 
           <motion.div
