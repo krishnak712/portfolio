@@ -20,7 +20,7 @@ const navItems = [
   { label: "Contact", id: "contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({profile }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -419,21 +419,25 @@ export default function Navbar() {
 
         <div className="mobile-sidebar-footer">
 
-          <a
-            href="https://github.com/krishnak712"
+          {profile?.github_url && (
+           <a
+            href={profile.github_url}
             target="_blank"
             rel="noopener noreferrer"
-          >
+           >
             GitHub ↗
-          </a>
+           </a>
+          )}
 
-          <a
-            href="https://linkedin.com/in/krishna-kumar712"
+          {profile?.linkedin_url && (
+           <a
+            href={profile.linkedin_url}
             target="_blank"
             rel="noopener noreferrer"
-          >
+           >
             LinkedIn ↗
-          </a>
+           </a>
+          )}
 
         </div>
 

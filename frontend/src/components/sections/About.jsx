@@ -6,7 +6,7 @@ function formatName(name = "") {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function About({ name, about }) {
+function About({ profile  }) {
   const highlights = [
     {
       number: "01",
@@ -58,8 +58,8 @@ function About({ name, about }) {
             <div className="about-copy">
               <p className="about-lead">
                 I&apos;m{" "}
-                <strong>{formatName(name)}</strong>
-                {about ? `, ${about}` : "."}
+                <strong>{formatName(profile?.name)}</strong>
+                {profile?.about ? `, ${profile.about}` : "."}
               </p>
 
               <p>
@@ -101,22 +101,22 @@ function About({ name, about }) {
           </div>
         </div>
 
-        <div className="about-meta">
-          <div className="about-meta-item">
-            <span>ROLE</span>
-            <strong>Java Full Stack Developer</strong>
-          </div>
+      <div className="about-meta">
+       <div className="about-meta-item">
+        <span>ROLE</span>
+        <strong>{profile?.role || "—"}</strong>
+       </div>
 
-          <div className="about-meta-item">
-            <span>LOCATION</span>
-            <strong>Sivakasi, India</strong>
-          </div>
+       <div className="about-meta-item">
+        <span>LOCATION</span>
+        <strong>{profile?.location || "—"}</strong>
+       </div>
 
-          <div className="about-meta-item">
-            <span>FOCUS</span>
-            <strong>Backend &amp; Full Stack Systems</strong>
-          </div>
-        </div>
+       <div className="about-meta-item">
+        <span>FOCUS</span>
+        <strong>Backend &amp; Full Stack Systems</strong>
+       </div>
+      </div>
       </div>
     </section>
   );

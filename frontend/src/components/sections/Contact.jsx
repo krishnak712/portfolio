@@ -9,7 +9,7 @@ const initialForm = {
   message: "",
 };
 
-export default function Contact() {
+export default function Contact({ profile }) {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
@@ -210,11 +210,15 @@ export default function Contact() {
                   </div>
 
                   <a
-                    className="contact-email-link"
-                    href="mailto:pandiraman131@gmail.com"
+                   className="contact-email-link"
+                   href={
+                    profile?.email ? `mailto:${profile.email}`: undefined }
                   >
-                    <span>pandiraman131@gmail.com</span>
-                    <span aria-hidden="true">↗</span>
+                   <span>
+                    {profile?.email || "—"}
+                   </span>
+
+                   <span aria-hidden="true">↗</span>
                   </a>
                 </div>
 
@@ -225,8 +229,8 @@ export default function Contact() {
                   </div>
 
                   <p className="contact-location">
-                    <span aria-hidden="true">◆</span>
-                    <span>Sivakasi, India</span>
+                   <span aria-hidden="true">◆</span>
+                   <span>{profile?.location || "—"}</span>
                   </p>
                 </div>
 
@@ -237,23 +241,27 @@ export default function Contact() {
                   </div>
 
                   <div className="contact-socials">
+                   {profile?.github_url && (
                     <a
-                      href="https://github.com/krishnak712"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                     href={profile.github_url}
+                     target="_blank"
+                     rel="noopener noreferrer"
                     >
-                      <span>GitHub</span>
-                      <span aria-hidden="true">↗</span>
+                     <span>GitHub</span>
+                     <span aria-hidden="true">↗</span>
                     </a>
+                   )}
 
+                   {profile?.linkedin_url && (
                     <a
-                      href="https://www.linkedin.com/in/krishna-kumar712"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                     href={profile.linkedin_url}
+                     target="_blank"
+                     rel="noopener noreferrer"
                     >
-                      <span>LinkedIn</span>
-                      <span aria-hidden="true">↗</span>
+                     <span>LinkedIn</span>
+                     <span aria-hidden="true">↗</span>
                     </a>
+                   )}
                   </div>
                 </div>
 
@@ -481,7 +489,7 @@ export default function Contact() {
               <span className="contact-bottom-brand">KKR.DEV</span>
             </div>
 
-            <p>Java Full Stack Developer · Building with purpose.</p>
+            <p>{profile?.role || "Developer"} · Building with purpose.</p>
 
             <span className="contact-bottom-year">// 2026</span>
           </div>
