@@ -1,0 +1,490 @@
+
+/* =========================================================
+   PORTFOLIO — GLOBAL VISUAL SYSTEM
+   Apply this file AFTER the section CSS files.
+   Goal:
+   - one shared page background
+   - one shared container width
+   - consistent section spacing
+   - consistent typography
+   - consistent mobile behavior
+   - keep cards/surfaces visually separated from the page
+   ========================================================= */
+
+:root {
+  --portfolio-bg: #101419;
+  --portfolio-surface-lowest: #0a0e14;
+  --portfolio-surface-low: #181c21;
+  --portfolio-surface: #1c2025;
+  --portfolio-surface-high: #262a30;
+  --portfolio-surface-highest: #31353b;
+
+  --portfolio-text: #e0e2ea;
+  --portfolio-muted: #b9cacb;
+  --portfolio-subtle: #849495;
+  --portfolio-line: #3a494b;
+
+  --portfolio-cyan: #00f2fe;
+  --portfolio-cyan-soft: #00dce6;
+
+  --portfolio-container: 1240px;
+  --portfolio-section-x: 32px;
+  --portfolio-section-top: 104px;
+  --portfolio-section-bottom: 96px;
+}
+
+/* =========================================================
+   GLOBAL PAGE BASE
+   ========================================================= */
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 0;
+  background: var(--portfolio-bg);
+  color: var(--portfolio-text);
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  min-width: 0;
+  background: var(--portfolio-bg) !important;
+}
+
+/* =========================================================
+   ALL HOME SECTIONS — EXACT SAME BASE BACKGROUND
+   ========================================================= */
+
+.hero,
+.about-section,
+.skills-section,
+.featured-case-section,
+.projects-section,
+.experience-section,
+.achievements-section,
+.contact-section {
+  background-color: var(--portfolio-bg) !important;
+  color: var(--portfolio-text);
+}
+
+/*
+  Remove different section-level radial/background gradients.
+  Their internal grid/glow elements can remain subtle.
+  This guarantees that section boundaries do not change color.
+*/
+.hero,
+.about-section,
+.skills-section,
+.featured-case-section,
+.projects-section,
+.experience-section,
+.achievements-section,
+.contact-section {
+  background-image: none !important;
+}
+
+/* =========================================================
+   SHARED SECTION HEIGHT / SPACING
+   ========================================================= */
+
+.about-section,
+.skills-section,
+.featured-case-section,
+.projects-section,
+.experience-section,
+.achievements-section,
+.contact-section {
+  min-height: 0 !important;
+  padding-top: var(--portfolio-section-top) !important;
+  padding-bottom: var(--portfolio-section-bottom) !important;
+  scroll-margin-top: 100px;
+}
+
+/* Hero keeps viewport-first behavior. */
+.hero {
+  min-height: calc(100vh - 90px) !important;
+  padding-top: 72px !important;
+  padding-bottom: 88px !important;
+}
+
+/* =========================================================
+   SHARED CONTAINER WIDTH / HORIZONTAL ALIGNMENT
+   ========================================================= */
+
+.hero-container,
+.about-container,
+.skills-container,
+.featured-case-container,
+.projects-container,
+.experience-container,
+.achievements-container,
+.contact-container {
+  width: min(var(--portfolio-container), calc(100% - (var(--portfolio-section-x) * 2))) !important;
+  max-width: var(--portfolio-container) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* =========================================================
+   SHARED TYPOGRAPHY
+   ========================================================= */
+
+.about-heading h2,
+.skills-title,
+.featured-case-title,
+.projects-heading h2,
+.experience-heading h2,
+.achievements-heading h2,
+.contact-header h2 {
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif !important;
+  font-size: clamp(34px, 4.1vw, 54px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+  font-weight: 700 !important;
+}
+
+.about-copy p,
+.skills-intro,
+.featured-case-description,
+.projects-heading p,
+.experience-heading p,
+.achievements-heading p,
+.contact-header p {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+/* Technical labels */
+.about-kicker,
+.skills-kicker,
+.featured-case-kicker,
+.projects-kicker,
+.experience-eyebrow,
+.achievements-eyebrow,
+.contact-eyebrow,
+.hero-eyebrow,
+.hero-environment,
+.hero-btn,
+.hero-social,
+.projects-filter,
+.experience-registry-left,
+.achievements-registry-left,
+.contact-registry-left,
+.contact-channel-status {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace !important;
+}
+
+/* =========================================================
+   SHARED SECTION HEADER RHYTHM
+   ========================================================= */
+
+.skills-section-header,
+.featured-case-header,
+.projects-heading,
+.experience-header,
+.achievements-header,
+.contact-header {
+  margin-bottom: 34px;
+}
+
+/* =========================================================
+   CARD SURFACE SYSTEM
+   Keep cards darker/lighter than the page, but do not let
+   their colors become section backgrounds.
+   ========================================================= */
+
+.skill-card,
+.featured-case-card,
+.project-card-inner,
+.experience-card,
+.achievement-card,
+.contact-dossier,
+.contact-form-panel {
+  background-color: var(--portfolio-surface-low) !important;
+  border-color: rgba(132, 148, 149, 0.28);
+}
+
+.featured-case-visual,
+.project-visual {
+  background-color: var(--portfolio-surface-lowest) !important;
+}
+
+/* =========================================================
+   TECHNICAL GRID ELEMENTS — SAME STRENGTH EVERYWHERE
+   ========================================================= */
+
+.hero-grid-overlay,
+.about-section::before,
+.skills-grid-pattern,
+.featured-case-grid-pattern,
+.projects-grid-pattern,
+.experience-grid-pattern,
+.achievements-bg-grid,
+.contact-grid-background {
+  opacity: 0.24 !important;
+}
+
+/* Make section glows decorative instead of changing the base
+   section color strongly. */
+.hero-glow,
+.about-section::before,
+.skills-section::before,
+.featured-case-section::before,
+.projects-section::before,
+.experience-section::before,
+.achievements-bg-glow,
+.contact-glow {
+  pointer-events: none;
+}
+
+/* =========================================================
+   HERO ALIGNMENT
+   ========================================================= */
+
+.hero-grid {
+  align-items: center;
+}
+
+.hero-content {
+  min-width: 0;
+}
+
+.hero-title {
+  font-size: clamp(42px, 5.2vw, 72px) !important;
+  line-height: 1.02 !important;
+}
+
+.hero-description {
+  max-width: 680px;
+  font-size: 16px !important;
+  line-height: 1.72 !important;
+}
+
+/* =========================================================
+   SECTION CONTENT WIDTH — PREVENT TEXT FROM BECOMING TOO WIDE
+   ========================================================= */
+
+.about-copy,
+.skills-intro,
+.featured-case-description,
+.projects-heading p,
+.experience-heading p,
+.achievements-heading p,
+.contact-header p {
+  max-width: 820px;
+}
+
+/* =========================================================
+   BUTTON CONSISTENCY
+   ========================================================= */
+
+.hero-btn,
+.contact-submit,
+.projects-reset-button {
+  min-height: 42px;
+}
+
+/* =========================================================
+   REMOVE ACCIDENTAL HORIZONTAL OVERFLOW
+   ========================================================= */
+
+.hero *,
+.about-section *,
+.skills-section *,
+.featured-case-section *,
+.projects-section *,
+.experience-section *,
+.achievements-section *,
+.contact-section * {
+  max-width: 100%;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  :root {
+    --portfolio-section-x: 18px;
+    --portfolio-section-top: 78px;
+    --portfolio-section-bottom: 76px;
+  }
+
+  .hero,
+  .about-section,
+  .skills-section,
+  .featured-case-section,
+  .projects-section,
+  .experience-section,
+  .achievements-section,
+  .contact-section {
+    padding-left: var(--portfolio-section-x) !important;
+    padding-right: var(--portfolio-section-x) !important;
+  }
+
+  .hero {
+    min-height: auto !important;
+    padding-top: 62px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .hero-container,
+  .about-container,
+  .skills-container,
+  .featured-case-container,
+  .projects-container,
+  .experience-container,
+  .achievements-container,
+  .contact-container {
+    width: 100% !important;
+  }
+
+  .about-heading h2,
+  .skills-title,
+  .featured-case-title,
+  .projects-heading h2,
+  .experience-heading h2,
+  .achievements-heading h2,
+  .contact-header h2 {
+    font-size: clamp(30px, 9vw, 44px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .about-copy p,
+  .skills-intro,
+  .featured-case-description,
+  .projects-heading p,
+  .experience-heading p,
+  .achievements-heading p,
+  .contact-header p {
+    font-size: 14px !important;
+    line-height: 1.68 !important;
+  }
+
+  .hero-title {
+    font-size: clamp(38px, 12vw, 58px) !important;
+  }
+
+  .hero-description {
+    font-size: 14px !important;
+    line-height: 1.68 !important;
+  }
+}
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 420px) {
+  :root {
+    --portfolio-section-x: 14px;
+    --portfolio-section-top: 68px;
+    --portfolio-section-bottom: 68px;
+  }
+
+  .about-heading h2,
+  .skills-title,
+  .featured-case-title,
+  .projects-heading h2,
+  .experience-heading h2,
+  .achievements-heading h2,
+  .contact-header h2 {
+    font-size: 28px !important;
+  }
+
+  .about-copy p,
+  .skills-intro,
+  .featured-case-description,
+  .projects-heading p,
+  .experience-heading p,
+  .achievements-heading p,
+  .contact-header p {
+    font-size: 13px !important;
+  }
+
+  .hero-title {
+    font-size: 36px !important;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   SUBTLE ANIMATED DOT BACKGROUND
+   Same background color, only tiny moving points
+   ============================================================ */
+
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(132, 148, 149, 0.24) 1px,
+      transparent 1.2px
+    );
+
+  background-size: 28px 28px;
+  opacity: 0.20;
+
+  animation: portfolio-dot-drift 18s linear infinite;
+}
+
+@keyframes portfolio-dot-drift {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 28px 28px;
+  }
+}
+
+/* Keep dots extremely subtle on mobile */
+@media (max-width: 760px) {
+  main::before {
+    background-size: 24px 24px;
+    opacity: 0.14;
+    animation-duration: 24s;
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  main::before {
+    animation: none;
+  }
+}

@@ -1,1760 +1,2822 @@
-/* =====================================================
-   PROJECT DETAIL PAGE
-===================================================== */
+/* =========================================================
+
+   PROJECT DETAIL — PREMIUM TECHNICAL CASE STUDY
+
+   Responsive: desktop / laptop / tablet / mobile
+
+   ========================================================= */
 
 .project-detail-page {
+
+  --pd-bg: #080a0e;
+
+  --pd-surface: #0f1319;
+
+  --pd-elevated: #151b24;
+
+  --pd-card: #18202c;
+
+  --pd-border: #1e293b;
+
+  --pd-text: #f8fafc;
+
+  --pd-muted: #94a3b8;
+
+  --pd-subtle: #64748b;
+
+  --pd-cyan: #00d2ff;
+
+  --pd-green: #34d399;
+
+  --pd-red: #fb7185;
+
   min-height: 100vh;
-  background: #0e1212;
-  color: #eef4f4;
+
+  width: 100%;
+
+  background:
+
+    radial-gradient(circle at 50% -8%, rgba(0, 210, 255, 0.055), transparent 38%),
+
+    linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+
+    var(--pd-bg);
+
+  background-size: 100% 100%, 48px 48px, 48px 48px, auto;
+
+  color: var(--pd-text);
+
+  overflow-x: clip;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
 }
 
+.project-detail-page *,
 
-/* =====================================================
-   COMMON CONTAINER
-===================================================== */
+.project-detail-page *::before,
 
-.project-detail-container {
-  width: min(1200px, calc(100% - 48px));
-  margin: 0 auto;
+.project-detail-page *::after {
+
+  box-sizing: border-box;
+
 }
 
+.project-detail-page a {
 
-/* =====================================================
-   LOADING / 404
-===================================================== */
-
-.project-not-found {
-  min-height: 100vh;
-
-  display: flex;
-  align-items: center;
-
-  padding: 140px 24px 80px;
-
-  background: #0e1212;
-  color: #eef4f4;
-}
-
-.project-not-found > div {
-  width: min(900px, 100%);
-  margin: 0 auto;
-}
-
-.project-not-found span {
-  color: #54d8e6;
-
-  font-family: monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.project-not-found h1 {
-  margin: 20px 0 0;
-
-  font-size: clamp(48px, 7vw, 90px);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.project-not-found p {
-  max-width: 600px;
-
-  margin: 25px 0 0;
-
-  color: #7f8c8c;
-
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.project-not-found a {
-  display: inline-flex;
-
-  margin-top: 30px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-  font-size: 10px;
-  font-weight: 700;
+  color: inherit;
 
   text-decoration: none;
 
-  transition: color 180ms ease;
 }
 
-.project-not-found a:hover {
-  color: #8be6ef;
+.project-detail-page button {
+
+  font: inherit;
+
 }
 
+.project-detail-shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 70px 5px 88px;
+}
 
-/* =====================================================
-   HERO
-===================================================== */
+.project-reveal {
+  scroll-margin-top: 112px;
+}
 
-.project-detail-hero {
+.project-section {
+
   position: relative;
 
-  padding: 150px 0 100px;
-
-  border-bottom: 1px solid #293333;
-
-  overflow: hidden;
 }
 
-.project-detail-hero::before {
+/* ---------------------------------------------------------
+
+   HERO
+
+   --------------------------------------------------------- */
+
+.project-hero {
+
+  position: relative;
+
+  padding: 10px 0 52px;
+
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+
+}
+
+.project-hero::after {
+
   content: "";
 
   position: absolute;
 
-  top: -260px;
-  right: -170px;
+  top: 0;
 
-  width: 560px;
-  height: 560px;
+  right: 4%;
 
-  border: 1px solid rgba(84, 216, 230, 0.06);
+  width: 300px;
 
-  border-radius: 50%;
-
-  pointer-events: none;
-}
-
-.project-detail-hero::after {
-  content: "";
-
-  position: absolute;
-
-  top: -170px;
-  right: -80px;
-
-  width: 370px;
-  height: 370px;
-
-  border: 1px solid rgba(84, 216, 230, 0.04);
+  height: 300px;
 
   border-radius: 50%;
 
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.07), transparent 68%);
+
+  filter: blur(8px);
+
   pointer-events: none;
+
 }
 
+.project-hero-top {
 
-/* =====================================================
-   BACK LINK
-===================================================== */
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 54px;
+
+}
 
 .project-back-link {
-  position: relative;
-  z-index: 2;
 
   display: inline-flex;
 
-  color: #687575;
-
-  font-family: monospace;
-  font-size: 10px;
-  letter-spacing: 0.03em;
-
-  text-decoration: none;
-
-  transition:
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.project-back-link:hover {
-  color: #54d8e6;
-
-  transform: translateX(-4px);
-}
-
-
-/* =====================================================
-   PROJECT META
-===================================================== */
-
-.project-detail-meta {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
 
-  gap: 18px;
+  justify-content: center;
 
-  margin-top: 55px;
+  gap: 10px;
 
-  color: #687575;
+  min-height: 42px;
 
-  font-family: monospace;
-  font-size: 9px;
+  padding: 9px 14px;
 
-  letter-spacing: 0.1em;
-}
+  border: 1px solid var(--pd-border);
 
-.project-detail-meta span:first-child {
-  color: #54d8e6;
-}
+  border-radius: 8px;
 
-.project-detail-meta .project-status {
-  padding: 6px 9px;
+  background: rgba(15, 19, 25, 0.9);
 
-  border: 1px solid rgba(84, 216, 230, 0.28);
+  color: var(--pd-muted);
 
-  color: #54d8e6;
-
-  background: rgba(84, 216, 230, 0.03);
-}
-
-
-/* =====================================================
-   HERO HEADING
-===================================================== */
-
-.project-detail-heading {
-  position: relative;
-  z-index: 2;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1.25fr)
-    minmax(280px, 0.75fr);
-
-  gap: 70px;
-
-  margin-top: 35px;
-
-  align-items: end;
-}
-
-.project-eyebrow {
-  display: block;
-
-  margin-bottom: 20px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-  font-size: 9px;
-  font-weight: 700;
-
-  letter-spacing: 0.14em;
-}
-
-.project-detail-heading h1 {
-  max-width: 950px;
-
-  margin: 0;
-
-  color: #eef4f4;
-
-  font-size: clamp(48px, 7vw, 88px);
-
-  line-height: 0.96;
-
-  letter-spacing: -0.065em;
-
-  font-weight: 700;
-}
-
-.project-detail-heading h1 span {
-  color: #54d8e6;
-}
-
-.project-detail-heading h2 {
-  margin: 24px 0 0;
-
-  color: #899696;
-
-  font-family: monospace;
-
-  font-size: 11px;
-
-  font-weight: 500;
+  font: 700 0.68rem/1.2 "JetBrains Mono", monospace;
 
   letter-spacing: 0.08em;
 
   text-transform: uppercase;
+
+  transition: color 220ms ease, border-color 220ms ease, background 220ms ease, transform 220ms ease;
+
 }
 
-.project-detail-heading > p {
-  max-width: 500px;
+.project-back-link > span {
 
-  margin: 0;
+  color: var(--pd-cyan);
 
-  color: #899696;
+  font-size: 0.95rem;
 
-  font-size: 14px;
-
-  line-height: 1.9;
 }
 
+.project-back-link:hover {
 
-/* =====================================================
-   TECHNOLOGIES
-===================================================== */
+  color: #fff;
 
-.project-technologies {
+  border-color: rgba(0, 210, 255, 0.38);
+
+  background: rgba(0, 210, 255, 0.045);
+
+  transform: translateX(-2px);
+
+}
+
+.project-hero-meta {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  color: var(--pd-subtle);
+
+  font: 700 0.66rem/1.4 "JetBrains Mono", monospace;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+}
+
+.project-index {
+
+  color: var(--pd-cyan);
+
+  font-size: 0.82rem;
+
+}
+
+.project-meta-divider {
+
+  color: #475569;
+
+}
+
+.project-live-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  max-width: 100%;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(52, 211, 153, 0.23);
+
+  border-radius: 999px;
+
+  background: rgba(52, 211, 153, 0.055);
+
+  color: var(--pd-green);
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-live-dot,
+
+.project-security-status-dot {
+
+  width: 7px;
+
+  height: 7px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+}
+
+.project-live-dot {
+
+  animation: project-status-pulse 2.2s ease-in-out infinite;
+
+}
+
+.project-type {
+
+  color: #cbd5e1;
+
+}
+
+.project-hero-grid {
+
   position: relative;
-  z-index: 2;
 
-  margin-top: 65px;
+  z-index: 1;
 
-  padding-top: 28px;
+  display: grid;
 
-  border-top: 1px solid #293333;
+  grid-template-columns: minmax(0, 1fr) 320px;
+
+  gap: 56px;
+
+  align-items: end;
+
 }
 
-.technology-label {
-  display: block;
+.project-hero-copy {
+
+  min-width: 0;
+
+}
+
+.project-eyebrow,
+
+.project-card-kicker,
+
+.project-section-marker > span,
+
+.project-technologies-heading,
+
+.project-security-status,
+
+.project-security-note,
+
+.project-system-hint,
+
+.project-inspect-label,
+
+.project-workflow-panel-kicker,
+
+.project-workflow-items-heading,
+
+.project-state-label,
+
+.project-state-foot,
+
+.project-hero-side-label,
+
+.project-module-tag {
+
+  font-family: "JetBrains Mono", monospace;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.07em;
+
+}
+
+.project-eyebrow {
+
+  display: inline-block;
 
   margin-bottom: 15px;
 
-  color: #687575;
+  color: rgba(0, 210, 255, 0.9);
 
-  font-family: monospace;
-
-  font-size: 9px;
+  font-size: 0.72rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.12em;
 }
 
-.technology-list {
+.project-hero-title {
+
+  max-width: 1000px;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(2.5rem, 7vw, 6.6rem);
+
+  font-weight: 750;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+
+  overflow-wrap: anywhere;
+
+  text-wrap: balance;
+
+}
+
+.project-hero-title > span {
+
+  color: var(--pd-cyan);
+
+}
+
+.project-role-row {
+
   display: flex;
 
   flex-wrap: wrap;
 
-  gap: 7px;
-}
-
-.technology-list span {
-  padding: 7px 10px;
-
-  border: 1px solid #293333;
-
-  border-radius: 3px;
-
-  background: #111616;
-
-  color: #7f8c8c;
-
-  font-family: monospace;
-
-  font-size: 8px;
-
-  transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.technology-list span:hover {
-  border-color: rgba(84, 216, 230, 0.4);
-
-  color: #54d8e6;
-
-  transform: translateY(-2px);
-}
-
-
-/* =====================================================
-   COMMON SECTION HEADING
-===================================================== */
-
-.project-section-heading {
-  max-width: 850px;
-
-  margin-bottom: 55px;
-}
-
-.project-section-heading > span {
-  display: block;
-
-  margin-bottom: 17px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.13em;
-}
-
-.project-section-heading h2 {
-  margin: 0;
-
-  color: #eef4f4;
-
-  font-size: clamp(38px, 5vw, 65px);
-
-  line-height: 1;
-
-  letter-spacing: -0.055em;
-
-  font-weight: 650;
-}
-
-.project-section-heading h2 strong {
-  color: #54d8e6;
-
-  font-weight: inherit;
-}
-
-.project-section-heading > p {
-  max-width: 700px;
-
-  margin: 25px 0 0;
-
-  color: #7f8c8c;
-
-  font-size: 13px;
-
-  line-height: 1.85;
-}
-
-
-/* =====================================================
-   OVERVIEW
-===================================================== */
-
-.project-overview {
-  padding: 115px 0;
-}
-
-.project-overview-grid {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1.1fr)
-    minmax(300px, 0.9fr);
-
-  gap: 90px;
-
-  align-items: start;
-}
-
-.project-overview-copy {
-  max-width: 700px;
-}
-
-.project-overview-copy p {
-  margin: 0 0 25px;
-
-  color: #899696;
-
-  font-size: 14px;
-
-  line-height: 1.95;
-}
-
-.project-overview-copy p:last-child {
-  margin-bottom: 0;
-}
-
-
-/* =====================================================
-   CORE WORKFLOW
-===================================================== */
-
-.project-flow {
-  padding-left: 35px;
-
-  border-left: 1px solid #293333;
-}
-
-.flow-label {
-  display: block;
-
-  margin-bottom: 20px;
-
-  color: #687575;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.12em;
-}
-
-.flow-list {
-  display: flex;
-
-  flex-direction: column;
-}
-
-.flow-list button {
-  display: grid;
-
-  grid-template-columns: 38px minmax(0, 1fr);
-
-  gap: 15px;
-
-  width: 100%;
-
-  padding: 14px 0;
-
-  border: 0;
-  border-bottom: 1px solid #202828;
-
-  background: transparent;
-
-  color: #899696;
-
-  font-family: inherit;
-
-  font-size: 12px;
-
-  text-align: left;
-
-  cursor: pointer;
-
-  transition:
-    color 180ms ease,
-    padding-left 180ms ease;
-}
-
-.flow-list button:hover {
-  color: #54d8e6;
-
-  padding-left: 5px;
-}
-
-.flow-list button span {
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 9px;
-}
-
-
-/* =====================================================
-   SYSTEM DESIGN
-===================================================== */
-
-.project-architecture {
-  padding: 115px 0;
-
-  border-top: 1px solid #293333;
-
-  border-bottom: 1px solid #293333;
-}
-
-
-/* =====================================================
-   8-CARD GRID
-===================================================== */
-
-.architecture-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
   gap: 12px;
+
+  margin-top: 24px;
+
 }
 
+.project-role-badge {
 
-/* =====================================================
-   ARCHITECTURE CARD
-===================================================== */
+  display: inline-flex;
 
-.architecture-card {
-  position: relative;
+  align-items: center;
 
-  display: flex;
+  max-width: 100%;
 
-  flex-direction: column;
+  min-height: 38px;
 
-  min-height: 200px;
+  padding: 9px 12px;
 
-  padding: 18px;
+  border: 1px solid #334155;
 
-  border: 1px solid #293333;
+  border-radius: 8px;
 
-  background: #101616;
+  background: rgba(15, 19, 25, 0.82);
 
-  color: #eef4f4;
+  color: #e2e8f0;
 
-  text-align: left;
+  font-size: 0.83rem;
 
-  cursor: pointer;
+  line-height: 1.35;
 
-  transition:
-    transform 220ms ease,
-    border-color 220ms ease,
-    background 220ms ease,
-    box-shadow 220ms ease;
+  overflow-wrap: anywhere;
+
 }
 
-.architecture-card:hover {
-  transform: translateY(-5px);
+.project-hero-description {
 
-  border-color: rgba(84, 216, 230, 0.4);
+  max-width: 860px;
 
-  background: #111818;
+  margin: 26px 0 0;
 
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.18);
+  color: #cbd5e1;
+
+  font-size: clamp(1rem, 1.6vw, 1.28rem);
+
+  line-height: 1.82;
+
+  overflow-wrap: anywhere;
+
 }
 
-.architecture-card-active {
-  border-color: #54d8e6;
+.project-hero-side {
 
-  background: #121a1a;
+  min-width: 0;
 
-  box-shadow:
-    0 0 0 1px rgba(84, 216, 230, 0.08);
+  padding: 22px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 14px;
+
+  background: rgba(15, 19, 25, 0.8);
+
+  box-shadow: 0 24px 50px -34px rgba(0, 0, 0, 0.95);
+
 }
 
+.project-hero-side-label {
 
-/* =====================================================
-   ARCHITECTURE NUMBER
-===================================================== */
+  margin-bottom: 6px;
 
-.architecture-number {
-  display: block;
+  color: var(--pd-subtle);
 
-  margin-bottom: 45px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 10px;
+  font-size: 0.66rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.06em;
 }
 
+.project-hero-side-line {
 
-/* =====================================================
-   ARCHITECTURE TITLE
-===================================================== */
-
-.architecture-card h3 {
-  margin: 0;
-
-  color: #eef4f4;
-
-  font-size: 21px;
-
-  line-height: 1.25;
-
-  letter-spacing: -0.025em;
-
-  transition: color 180ms ease;
-}
-
-.architecture-card:hover h3,
-.architecture-card-active h3 {
-  color: #54d8e6;
-}
-
-
-/* =====================================================
-   ARCHITECTURE EXPLANATION
-===================================================== */
-
-.architecture-card > p {
-  max-width: 520px;
-
-  margin: 18px 0 0;
-
-  color: #789090;
-
-  font-size: 12px;
-
-  line-height: 1.8;
-}
-
-
-/* =====================================================
-   CARD ACTION
-===================================================== */
-
-.architecture-card-action {
-  display: block;
-
-  margin-top: auto;
-
-  padding-top: 25px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 8px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-}
-
-
-/* =====================================================
-   SELECTED WORKFLOW DETAIL PANEL
-===================================================== */
-
-.workflow-detail-panel {
-  margin-top: 12px;
-
-  padding: 42px;
-
-  border: 1px solid rgba(84, 216, 230, 0.32);
-
-  background: #101616;
-
-  animation: workflowDetailIn 220ms ease;
-}
-
-@keyframes workflowDetailIn {
-  from {
-    opacity: 0;
-
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform: translateY(0);
-  }
-}
-
-
-/* =====================================================
-   WORKFLOW DETAIL HEADER
-===================================================== */
-
-.workflow-detail-header {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: flex-start;
-
-  gap: 30px;
-
-  padding-bottom: 28px;
-
-  border-bottom: 1px solid #293333;
-}
-
-.workflow-detail-header span {
-  display: block;
-
-  margin-bottom: 13px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.12em;
-}
-
-.workflow-detail-header h3 {
-  margin: 0;
-
-  color: #eef4f4;
-
-  font-size: clamp(28px, 4vw, 46px);
-
-  line-height: 1.05;
-
-  letter-spacing: -0.04em;
-}
-
-.workflow-detail-header > button {
-  flex-shrink: 0;
-
-  padding: 9px 13px;
-
-  border: 1px solid #293333;
-
-  background: transparent;
-
-  color: #687575;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    color 180ms ease,
-    border-color 180ms ease;
-}
-
-.workflow-detail-header > button:hover {
-  color: #54d8e6;
-
-  border-color: #54d8e6;
-}
-
-
-/* =====================================================
-   WORKFLOW DESCRIPTION
-===================================================== */
-
-.workflow-detail-description {
-  max-width: 850px;
-
-  margin: 30px 0 0;
-
-  color: #899696;
-
-  font-size: 14px;
-
-  line-height: 1.9;
-}
-
-
-/* =====================================================
-   WORKFLOW ITEMS
-===================================================== */
-
-.workflow-detail-items {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 1px;
-
-  margin-top: 35px;
-
-  border: 1px solid #293333;
-
-  background: #293333;
-}
-
-.workflow-detail-item {
-  display: grid;
-
-  grid-template-columns: 42px minmax(0, 1fr);
-
-  gap: 18px;
-
-  padding: 26px;
-
-  background: #0e1212;
-
-  transition: background 180ms ease;
-}
-
-.workflow-detail-item:hover {
-  background: #111717;
-}
-
-.workflow-detail-item-number {
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  font-weight: 700;
-}
-
-.workflow-detail-item h4 {
-  margin: 0;
-
-  color: #eef4f4;
-
-  font-size: 14px;
-
-  line-height: 1.4;
-}
-
-.workflow-detail-item p {
-  margin: 9px 0 0;
-
-  color: #718181;
-
-  font-size: 11px;
-
-  line-height: 1.75;
-}
-
-
-/* =====================================================
-   EMPTY WORKFLOW
-===================================================== */
-
-.workflow-detail-empty {
-  margin-top: 30px;
-
-  padding: 25px;
-
-  border: 1px solid #293333;
-
-  background: #0e1212;
-}
-
-.workflow-detail-empty p {
-  margin: 0;
-
-  color: #687575;
-
-  font-family: monospace;
-
-  font-size: 10px;
-}
-
-
-/* =====================================================
-   ROLE-BASED ACCESS CONTROL
-===================================================== */
-
-.project-roles {
-  padding: 115px 0;
-}
-
-
-.project-roles .project-section-heading {
-  max-width: 850px;
-}
-
-
-.project-roles .project-section-heading > p {
-  max-width: 700px;
-
-  margin-top: 25px;
-
-  color: #7f8c8c;
-
-  font-size: 13px;
-
-  line-height: 1.85;
-}
-
-
-/* =====================================================
-   ROLES GRID
-===================================================== */
-
-.roles-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 12px;
-}
-
-
-/* =====================================================
-   ROLE CARD
-===================================================== */
-
-.role-card {
-  position: relative;
-
-  display: flex;
-
-  flex-direction: column;
-
-  min-height: 220px;
-
-  padding: 25px;
-
-  border: 1px solid #293333;
-
-  background: #101616;
-
-  transition:
-    transform 220ms ease,
-    border-color 220ms ease,
-    background 220ms ease;
-}
-
-
-.role-card:hover {
-  transform: translateY(-4px);
-
-  border-color: rgba(84, 216, 230, 0.4);
-
-  background: #111818;
-}
-
-
-/* =====================================================
-   ROLE CARD TOP
-===================================================== */
-
-.role-card-top {
   display: flex;
 
   align-items: center;
 
   justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 15px 0;
+
+  border-top: 1px solid rgba(30, 41, 59, 0.88);
+
 }
 
+.project-hero-side-line:first-of-type {
 
-.role-number {
-  color: #54d8e6;
+  margin-top: 8px;
 
-  font-family: monospace;
+}
 
-  font-size: 10px;
+.project-hero-side-line span {
+
+  color: var(--pd-subtle);
+
+  font: 700 0.63rem/1.3 "JetBrains Mono", monospace;
+
+  letter-spacing: 0.05em;
+
+}
+
+.project-hero-side-line strong {
+
+  max-width: 62%;
+
+  color: #e2e8f0;
+
+  font-size: 0.84rem;
+
+  font-weight: 650;
+
+  text-align: right;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-technologies {
+
+  position: relative;
+
+  z-index: 1;
+
+  margin-top: 44px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(30, 41, 59, 0.72);
+
+}
+
+.project-technologies-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 14px;
+
+  color: var(--pd-muted);
+
+  font-size: 0.7rem;
 
   font-weight: 700;
+
 }
 
+.project-section-dot {
 
-.role-scope {
-  color: #687575;
+  width: 7px;
 
-  font-family: monospace;
+  height: 7px;
 
-  font-size: 8px;
+  flex: 0 0 auto;
+
+  border-radius: 2px;
+
+  background: var(--pd-cyan);
+
+  box-shadow: 0 0 18px rgba(0, 210, 255, 0.36);
+
+}
+
+.project-tech-list {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+}
+
+.project-tech-pill {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 35px;
+
+  max-width: 100%;
+
+  padding: 8px 11px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 7px;
+
+  background: rgba(15, 19, 25, 0.94);
+
+  color: #dbe4ef;
+
+  font: 500 0.72rem/1.2 "JetBrains Mono", monospace;
+
+  overflow-wrap: anywhere;
+
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, color 220ms ease;
+
+}
+
+.project-tech-pill-dot {
+
+  width: 6px;
+
+  height: 6px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: rgba(0, 210, 255, 0.85);
+
+  transition: transform 220ms ease;
+
+}
+
+.project-tech-pill:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(0, 210, 255, 0.45);
+
+  background: rgba(0, 210, 255, 0.05);
+
+  color: #fff;
+
+}
+
+.project-tech-pill:hover .project-tech-pill-dot {
+
+  transform: scale(1.3);
+
+}
+
+/* ---------------------------------------------------------
+
+   SECTION MARKERS
+
+   --------------------------------------------------------- */
+
+.project-section-marker {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 17px;
+
+  padding-top: 16px;
+
+}
+
+.project-section-marker > span {
+
+  flex: 0 0 auto;
+
+  color: var(--pd-cyan);
+
+  font-size: 0.7rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.1em;
 }
 
+.project-section-marker-line {
 
-/* =====================================================
-   ROLE TITLE
-===================================================== */
+  height: 1px;
 
-.role-card h3 {
-  margin: 42px 0 0;
+  flex: 1;
 
-  color: #eef4f4;
-
-  font-size: 20px;
-
-  line-height: 1.25;
-
-  letter-spacing: -0.025em;
-
-  transition: color 180ms ease;
-}
-
-
-.role-card:hover h3 {
-  color: #54d8e6;
-}
-
-
-/* =====================================================
-   ROLE EXPLANATION
-===================================================== */
-
-.role-card p {
-  margin: 14px 0 0;
-
-  color: #748282;
-
-  font-size: 11px;
-
-  line-height: 1.75;
-}
-
-
-/* =====================================================
-   RBAC RESPONSIVE
-===================================================== */
-
-@media (max-width: 950px) {
-
-  .roles-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
+  background: var(--pd-border);
 
 }
 
+.project-section-intro h2,
 
-@media (max-width: 700px) {
+.project-system-heading h2,
 
-  .project-roles {
-    padding: 80px 0;
-  }
+.project-security-heading h2 {
 
-  .roles-grid {
-    grid-template-columns: 1fr;
-  }
+  margin: 0;
 
-  .role-card {
-    min-height: 190px;
-  }
+  color: #fff;
 
-}
+  font-size: clamp(1.82rem, 3.25vw, 3.1rem);
 
+  line-height: 1.08;
 
-@media (prefers-reduced-motion: reduce) {
+  letter-spacing: -0.035em;
 
-  .role-card,
-  .role-card h3 {
-    transition: none;
-  }
+  text-wrap: balance;
 
 }
 
-/* =====================================================
-   HOSPITAL WORKFLOW
-===================================================== */
+/* ---------------------------------------------------------
 
-.project-hospital-workflow {
-  padding: 115px 0;
+   OVERVIEW
 
-  border-top: 1px solid #293333;
-  border-bottom: 1px solid #293333;
+   --------------------------------------------------------- */
+
+.project-section#overview {
+
+  margin-top: 88px;
+
 }
 
+.project-overview-grid {
 
-/* =====================================================
-   HOSPITAL WORKFLOW PANEL
-===================================================== */
-
-.hospital-workflow-panel {
-  max-width: 950px;
-
-  padding: 35px;
-
-  border: 1px solid #293333;
-
-  background: #101616;
-}
-
-
-/* =====================================================
-   WORKFLOW STEP
-===================================================== */
-
-.hospital-workflow-step {
   display: grid;
 
-  grid-template-columns: 55px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.28fr) minmax(310px, 0.72fr);
 
-  gap: 22px;
+  gap: 42px;
 
   align-items: start;
 
-  padding: 5px 0;
+  margin-top: 36px;
+
 }
 
+.project-overview-copy {
 
-/* =====================================================
-   STEP NUMBER
-===================================================== */
+  min-width: 0;
 
-.hospital-workflow-step > span {
-  color: #54d8e6;
+}
 
-  font-family: monospace;
+.project-context-card,
 
-  font-size: 10px;
+.project-mini-card,
+
+.project-core-workflow,
+
+.project-architecture-card,
+
+.project-security-card,
+
+.project-workflow-panel-inner {
+
+  border: 1px solid var(--pd-border);
+
+  background: rgba(15, 19, 25, 0.88);
+
+}
+
+.project-context-card {
+
+  padding: 28px;
+
+  border-radius: 14px;
+
+}
+
+.project-card-kicker {
+
+  margin-bottom: 9px;
+
+  color: var(--pd-subtle);
+
+  font-size: 0.66rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.05em;
 }
 
+.project-card-kicker-bright {
 
-/* =====================================================
-   STEP TITLE
-===================================================== */
+  display: inline-flex;
 
-.hospital-workflow-step strong {
-  display: block;
+  align-items: center;
 
-  color: #eef4f4;
+  gap: 8px;
 
-  font-size: 17px;
+  color: #dce7f3;
+
+}
+
+.project-icon-dot {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 19px;
+
+  height: 19px;
+
+  border: 1px solid rgba(0, 210, 255, 0.34);
+
+  border-radius: 5px;
+
+  background: rgba(0, 210, 255, 0.05);
+
+  color: var(--pd-cyan);
+
+  font-size: 0.62rem;
+
+}
+
+.project-context-card h3 {
+
+  margin: 0 0 10px;
+
+  color: #fff;
+
+  font-size: 1.08rem;
+
+  font-weight: 650;
+
+}
+
+.project-context-card p,
+
+.project-mini-card p {
+
+  margin: 0;
+
+  color: var(--pd-muted);
+
+  font-size: 0.95rem;
+
+  line-height: 1.82;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-overview-mini-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 14px;
+
+}
+
+.project-mini-card {
+
+  min-width: 0;
+
+  padding: 20px;
+
+  border-radius: 11px;
+
+  background: rgba(21, 27, 36, 0.85);
+
+}
+
+.project-mini-problem .project-card-kicker {
+
+  color: var(--pd-red);
+
+}
+
+.project-mini-solution .project-card-kicker {
+
+  color: var(--pd-cyan);
+
+}
+
+.project-core-workflow {
+
+  padding: 20px;
+
+  border-radius: 14px;
+
+  box-shadow: 0 24px 50px -38px rgba(0, 0, 0, 0.9);
+
+}
+
+.project-core-workflow-head {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 16px;
+
+  margin-bottom: 10px;
+
+  border-bottom: 1px solid var(--pd-border);
+
+}
+
+.project-inspect-label {
+
+  color: #64748b;
+
+  font-size: 0.61rem;
+
+  font-weight: 700;
+
+  text-align: right;
+
+}
+
+.project-flow-list {
+
+  display: grid;
+
+  gap: 7px;
+
+}
+
+.project-flow-item {
+
+  display: grid;
+
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+
+  align-items: center;
+
+  gap: 10px;
+
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(30, 41, 59, 0.82);
+
+  border-radius: 8px;
+
+  background: rgba(24, 32, 44, 0.92);
+
+  color: #dbe4ef;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, color 220ms ease, box-shadow 220ms ease;
+
+}
+
+.project-flow-number {
+
+  color: var(--pd-cyan);
+
+  font: 700 0.69rem/1 "JetBrains Mono", monospace;
+
+}
+
+.project-flow-title {
+
+  min-width: 0;
+
+  font-size: 0.81rem;
+
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-flow-arrow {
+
+  color: #64748b;
+
+  transition: transform 220ms ease, color 220ms ease;
+
+}
+
+.project-flow-item:hover {
+
+  transform: translateX(3px);
+
+  border-color: rgba(0, 210, 255, 0.38);
+
+  color: #fff;
+
+}
+
+.project-flow-item:hover .project-flow-arrow,
+
+.project-flow-item.is-active .project-flow-arrow {
+
+  color: var(--pd-cyan);
+
+}
+
+.project-flow-item:hover .project-flow-arrow {
+
+  transform: translateX(2px);
+
+}
+
+.project-flow-item.is-active {
+
+  border-color: var(--pd-cyan);
+
+  background: rgba(0, 210, 255, 0.07);
+
+  box-shadow: 0 0 0 1px rgba(0, 210, 255, 0.18);
+
+}
+
+/* ---------------------------------------------------------
+
+   SYSTEM DESIGN
+
+   --------------------------------------------------------- */
+
+.project-system-section,
+
+.project-security-section {
+
+  margin-top: 112px;
+
+}
+
+.project-system-heading,
+
+.project-security-heading {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 26px;
+
+  margin-top: 28px;
+
+}
+
+.project-system-heading p {
+
+  max-width: 760px;
+
+  margin: 13px 0 0;
+
+  color: var(--pd-muted);
+
+  font-size: 0.97rem;
+
+  line-height: 1.75;
+
+}
+
+.project-system-hint {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  flex: 0 0 auto;
+
+  color: #64748b;
+
+  font-size: 0.62rem;
+
+  font-weight: 700;
+
+  text-align: right;
+
+}
+
+.project-system-hint-dot {
+
+  width: 7px;
+
+  height: 7px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: var(--pd-cyan);
+
+  box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.06);
+
+}
+
+.project-architecture-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-top: 34px;
+
+}
+
+.project-architecture-card {
+
+  position: relative;
+
+  display: flex;
+
+  min-width: 0;
+
+  min-height: 300px;
+
+  flex-direction: column;
+
+  padding: 20px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 13px;
+
+  background: linear-gradient(180deg, rgba(15, 19, 25, 0.96), rgba(24, 32, 44, 0.82));
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 250ms ease, box-shadow 300ms ease, background 250ms ease;
+
+}
+
+.project-architecture-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  right: -25%;
+
+  bottom: -40%;
+
+  width: 85%;
+
+  height: 150px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.065), transparent 70%);
+
+  pointer-events: none;
+
+}
+
+.project-architecture-card:hover {
+
+  transform: translate3d(0, -4px, 0);
+
+  border-color: rgba(0, 210, 255, 0.42);
+
+  box-shadow: 0 18px 38px -22px rgba(0, 0, 0, 0.85), 0 0 24px -10px rgba(0, 210, 255, 0.16);
+
+}
+
+.project-architecture-card.is-active {
+
+  border-color: var(--pd-cyan);
+
+  background: linear-gradient(180deg, rgba(16, 30, 44, 0.97), rgba(17, 30, 44, 0.9));
+
+  box-shadow: 0 0 0 1px rgba(0, 210, 255, 0.3), 0 20px 42px -20px rgba(0, 210, 255, 0.15);
+
+}
+
+.project-architecture-top {
+
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+}
+
+.project-architecture-number {
+
+  color: var(--pd-cyan);
+
+  font: 700 1.6rem/1 "JetBrains Mono", monospace;
+
+}
+
+.project-module-tag {
+
+  max-width: 62%;
+
+  padding: 5px 7px;
+
+  border: 1px solid rgba(51, 65, 85, 0.85);
+
+  border-radius: 5px;
+
+  background: rgba(15, 19, 25, 0.82);
+
+  color: #94a3b8;
+
+  font-size: 0.54rem;
+
+  font-weight: 700;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+}
+
+.project-architecture-body {
+
+  position: relative;
+
+  z-index: 1;
+
+  margin-top: 26px;
+
+}
+
+.project-architecture-body h3 {
+
+  margin: 0 0 11px;
+
+  color: #fff;
+
+  font-size: 1rem;
 
   line-height: 1.4;
 
   letter-spacing: -0.015em;
-}
 
-
-/* =====================================================
-   STEP EXPLANATION
-===================================================== */
-
-.hospital-workflow-step p {
-  max-width: 720px;
-
-  margin: 10px 0 0;
-
-  color: #748282;
-
-  font-size: 12px;
-
-  line-height: 1.8;
-}
-
-
-/* =====================================================
-   STEP ARROW
-===================================================== */
-
-.hospital-workflow-arrow {
-  margin: 18px 0 18px 4px;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 13px;
-
-  line-height: 1;
-}
-
-
-/* =====================================================
-   HOVER
-===================================================== */
-
-.hospital-workflow-step {
-  transition: transform 180ms ease;
-}
-
-.hospital-workflow-step:hover {
-  transform: translateX(4px);
-}
-
-.hospital-workflow-step:hover strong {
-  color: #54d8e6;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 700px) {
-
-  .project-hospital-workflow {
-    padding: 80px 0;
-  }
-
-  .hospital-workflow-panel {
-    padding: 23px;
-  }
-
-  .hospital-workflow-step {
-    grid-template-columns:
-      38px minmax(0, 1fr);
-
-    gap: 14px;
-  }
-
-  .hospital-workflow-step strong {
-    font-size: 15px;
-  }
-
-  .hospital-workflow-step p {
-    font-size: 11px;
-  }
+  overflow-wrap: anywhere;
 
 }
 
+.project-architecture-body p {
 
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
+  margin: 0;
 
-@media (prefers-reduced-motion: reduce) {
+  color: #94a3b8;
 
-  .hospital-workflow-step {
-    transition: none;
-  }
+  font-size: 0.81rem;
+
+  line-height: 1.72;
+
+  overflow-wrap: anywhere;
 
 }
 
-/* =====================================================
-   SECURITY
-===================================================== */
+.project-architecture-footer {
 
-.project-security {
-  padding: 115px 0;
-}
+  position: relative;
 
-.security-panel {
-  padding: 50px;
+  z-index: 1;
 
-  border: 1px solid #293333;
-
-  background: #101616;
-}
-
-.security-header {
   display: flex;
-
-  justify-content: space-between;
 
   align-items: center;
 
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: auto;
+
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(30, 41, 59, 0.8);
+
+  color: #64748b;
+
+  font: 700 0.6rem/1.25 "JetBrains Mono", monospace;
+
+}
+
+.project-architecture-footer span:first-child {
+
+  color: var(--pd-cyan);
+
+  transition: transform 220ms ease;
+
+}
+
+.project-architecture-card:hover .project-architecture-footer span:first-child {
+
+  transform: translateX(2px);
+
+}
+
+/* ---------------------------------------------------------
+
+   WORKFLOW DETAIL PANEL
+
+   --------------------------------------------------------- */
+
+.project-workflow-panel {
+
+  margin-top: 22px;
+
+  animation: project-panel-open 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  scroll-margin-top: 110px;
+
+}
+
+.project-workflow-panel-inner {
+
+  position: relative;
+
+  padding: 28px;
+
+  border: 1px solid rgba(0, 210, 255, 0.42);
+
+  border-radius: 15px;
+
+  background: linear-gradient(180deg, rgba(21, 27, 36, 0.98), rgba(15, 19, 25, 0.96));
+
+  box-shadow: 0 25px 60px -35px rgba(0, 0, 0, 0.95), 0 0 35px -20px rgba(0, 210, 255, 0.14);
+
+  overflow: hidden;
+
+}
+
+.project-workflow-panel-header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
   gap: 20px;
 
-  padding-bottom: 20px;
+  padding-bottom: 18px;
 
-  border-bottom: 1px solid #293333;
+  border-bottom: 1px solid var(--pd-border);
+
 }
 
-.security-header span {
-  color: #54d8e6;
+.project-workflow-panel-kicker {
 
-  font-family: monospace;
+  display: flex;
 
-  font-size: 9px;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin-bottom: 8px;
+
+  color: var(--pd-cyan);
+
+  font-size: 0.65rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.12em;
 }
 
-.security-header strong {
-  color: #687575;
+.project-workflow-panel-kicker span:last-child {
 
-  font-family: monospace;
+  color: var(--pd-green);
 
-  font-size: 8px;
-
-  letter-spacing: 0.08em;
 }
 
-.security-panel h2 {
-  max-width: 800px;
+.project-workflow-panel-header h3 {
 
-  margin: 38px 0 0;
-
-  color: #eef4f4;
-
-  font-size: clamp(34px, 5vw, 58px);
-
-  line-height: 1;
-
-  letter-spacing: -0.05em;
-}
-
-.security-panel h2 span {
-  color: #54d8e6;
-}
-
-.security-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  gap: 1px;
-
-  margin-top: 45px;
-
-  border: 1px solid #293333;
-
-  background: #293333;
-}
-
-.security-grid > div {
-  min-height: 190px;
-
-  padding: 25px;
-
-  background: #0e1212;
-}
-
-.security-grid strong {
-  display: block;
-
-  color: #54d8e6;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  letter-spacing: 0.08em;
-}
-
-.security-grid p {
-  margin: 18px 0 0;
-
-  color: #748282;
-
-  font-size: 11px;
-
-  line-height: 1.75;
-}
-
-
-/* =====================================================
-   PROJECT STATUS / BOTTOM
-===================================================== */
-
-.project-detail-bottom {
-  padding: 90px 0 130px;
-
-  border-top: 1px solid #293333;
-}
-
-.project-next {
   max-width: 850px;
 
-  margin-top: 75px;
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+
+  line-height: 1.3;
+
+  letter-spacing: -0.02em;
+
+  overflow-wrap: anywhere;
+
 }
 
-.project-next > span {
-  display: block;
+.project-close-button {
 
-  margin-bottom: 17px;
+  flex: 0 0 auto;
 
-  color: #54d8e6;
+  min-width: 92px;
 
-  font-family: monospace;
+  min-height: 44px;
 
-  font-size: 9px;
+  padding: 10px 13px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 8px;
+
+  background: var(--pd-surface);
+
+  color: #cbd5e1;
+
+  font: 700 0.64rem/1 "JetBrains Mono", monospace;
+
+  cursor: pointer;
+
+  transition: color 220ms ease, border-color 220ms ease, background 220ms ease;
+
+}
+
+.project-close-button:hover {
+
+  border-color: rgba(0, 210, 255, 0.44);
+
+  background: rgba(0, 210, 255, 0.045);
+
+  color: #fff;
+
+}
+
+.project-workflow-description {
+
+  max-width: 900px;
+
+  margin: 24px 0 28px;
+
+  color: #cbd5e1;
+
+  font-size: 0.94rem;
+
+  line-height: 1.82;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-workflow-items-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 14px;
+
+  color: #94a3b8;
+
+  font-size: 0.66rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.12em;
 }
 
-.project-next h2 {
+.project-workflow-items {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+}
+
+.project-workflow-item {
+
+  min-width: 0;
+
+  padding: 19px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 10px;
+
+  background: rgba(15, 19, 25, 0.84);
+
+}
+
+.project-workflow-item-number {
+
+  margin-bottom: 7px;
+
+  color: var(--pd-cyan);
+
+  font: 700 0.64rem/1.2 "JetBrains Mono", monospace;
+
+}
+
+.project-workflow-item h4 {
+
+  margin: 0 0 9px;
+
+  color: #fff;
+
+  font-size: 0.9rem;
+
+  line-height: 1.42;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-workflow-item p {
+
   margin: 0;
 
-  color: #eef4f4;
+  color: #94a3b8;
 
-  font-size: clamp(38px, 5vw, 68px);
+  font-size: 0.76rem;
 
-  line-height: 1;
+  line-height: 1.72;
 
-  letter-spacing: -0.055em;
-}
-
-.project-next p {
-  max-width: 700px;
-
-  margin: 25px 0 0;
-
-  color: #7f8c8c;
-
-  font-size: 13px;
-
-  line-height: 1.85;
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 950px) {
-
-  .project-detail-heading {
-    grid-template-columns: 1fr;
-
-    gap: 35px;
-  }
-
-  .project-overview-grid {
-    grid-template-columns: 1fr;
-
-    gap: 55px;
-  }
-
-  .project-flow {
-    padding-left: 0;
-
-    padding-top: 30px;
-
-    border-left: 0;
-
-    border-top: 1px solid #293333;
-  }
-
-  .roles-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .security-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
+  overflow-wrap: anywhere;
 
 }
 
+/* ---------------------------------------------------------
 
-/* =====================================================
-   MOBILE
-===================================================== */
+   SECURITY
 
-@media (max-width: 700px) {
+   --------------------------------------------------------- */
 
-  .project-detail-container {
-    width: calc(100% - 36px);
+.project-security-heading h2 {
+
+  max-width: 760px;
+
+  margin-top: 10px;
+
+}
+
+.project-security-status {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: var(--pd-green);
+
+  font-size: 0.67rem;
+
+  font-weight: 700;
+
+}
+
+.project-security-note {
+
+  color: #64748b;
+
+  font-size: 0.61rem;
+
+  font-weight: 700;
+
+  text-align: right;
+
+}
+
+.project-security-status-dot {
+
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.07);
+
+}
+
+.project-security-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 32px;
+
+}
+
+.project-security-card {
+
+  min-width: 0;
+
+  min-height: 250px;
+
+  padding: 22px;
+
+  border-radius: 13px;
+
+  transition: transform 260ms ease, border-color 220ms ease, box-shadow 260ms ease;
+
+}
+
+.project-security-card:hover {
+
+  transform: translateY(-3px);
+
+  border-color: #334155;
+
+  box-shadow: 0 16px 34px -25px rgba(0, 0, 0, 0.92);
+
+}
+
+.project-security-icon {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 34px;
+
+  height: 34px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid rgba(0, 210, 255, 0.32);
+
+  border-radius: 8px;
+
+  background: rgba(0, 210, 255, 0.05);
+
+  color: var(--pd-cyan);
+
+  font-size: 0.78rem;
+
+}
+
+.project-security-card .project-card-kicker {
+
+  color: var(--pd-cyan);
+
+  margin-bottom: 6px;
+
+}
+
+.project-security-card h3 {
+
+  margin: 0 0 9px;
+
+  color: #fff;
+
+  font-size: 0.99rem;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-security-card p {
+
+  margin: 0;
+
+  color: #94a3b8;
+
+  font-size: 0.79rem;
+
+  line-height: 1.75;
+
+  overflow-wrap: anywhere;
+
+}
+
+/* ---------------------------------------------------------
+
+   STATUS
+
+   --------------------------------------------------------- */
+
+.project-status-section {
+
+  margin-top: 112px;
+
+  padding-top: 1px;
+
+  border-top: 1px solid var(--pd-border);
+
+}
+
+.project-status-panel {
+
+  position: relative;
+
+  min-height: 320px;
+
+  margin-top: 42px;
+
+  padding: 36px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 17px;
+
+  background:
+
+    radial-gradient(circle at 85% 18%, rgba(0, 210, 255, 0.085), transparent 29%),
+
+    linear-gradient(180deg, rgba(15, 19, 25, 0.98), rgba(21, 27, 36, 0.95));
+
+  overflow: hidden;
+
+}
+
+.project-status-content {
+
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 850px;
+
+}
+
+.project-status-kicker {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 13px;
+
+  color: var(--pd-cyan);
+
+  font: 700 0.67rem/1.2 "JetBrains Mono", monospace;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.07em;
+
+}
+
+.project-status-panel h2 {
+
+  max-width: 900px;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(1.9rem, 3.6vw, 3.45rem);
+
+  line-height: 1.06;
+
+  letter-spacing: -0.04em;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-status-panel p {
+
+  max-width: 850px;
+
+  margin: 17px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 0.95rem;
+
+  line-height: 1.84;
+
+  overflow-wrap: anywhere;
+
+}
+
+.project-status-actions {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 28px;
+
+}
+
+.project-primary-action,
+
+.project-secondary-action {
+
+  display: inline-flex;
+
+  cursor:pointer;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 46px;
+
+  padding: 11px 16px;
+
+  border-radius: 9px;
+
+  font-size: 0.79rem;
+
+  line-height: 1.2;
+
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, color 220ms ease, box-shadow 220ms ease;
+
+}
+
+.project-primary-action {
+
+  border: 1px solid rgba(0, 210, 255, 0.2);
+
+  background: var(--pd-cyan);
+
+  color: #04131a;
+
+  font-weight: 750;
+
+  box-shadow: 0 12px 28px -18px rgba(0, 210, 255, 0.85);
+
+}
+
+.project-primary-action:hover {
+
+  transform: translateY(-2px);
+
+  background: #38d9ff;
+
+  box-shadow: 0 16px 32px -18px rgba(0, 210, 255, 0.85);
+
+}
+
+.project-secondary-action {
+
+  border: 1px solid var(--pd-border);
+
+  background: rgba(15, 19, 25, 0.8);
+
+  color: #cbd5e1;
+
+}
+
+.project-secondary-action:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(0, 210, 255, 0.4);
+
+  color: #fff;
+
+}
+
+.project-status-watermark {
+
+  position: absolute;
+
+  right: 26px;
+
+  bottom: 7px;
+
+  color: rgba(0, 210, 255, 0.1);
+
+  font: 900 clamp(4rem, 9vw, 7rem)/1 "JetBrains Mono", monospace;
+
+  letter-spacing: -0.07em;
+
+  pointer-events: none;
+
+  user-select: none;
+
+}
+
+/* ---------------------------------------------------------
+
+   STATES
+
+   --------------------------------------------------------- */
+
+.project-empty-inline {
+
+  color: var(--pd-subtle);
+
+  font-size: 0.77rem;
+
+}
+
+.project-empty-block {
+
+  margin: 0;
+
+  padding: 18px;
+
+  border: 1px dashed #334155;
+
+  border-radius: 9px;
+
+  color: var(--pd-subtle);
+
+  font-size: 0.8rem;
+
+  line-height: 1.6;
+
+}
+
+.project-empty-span {
+
+  grid-column: 1 / -1;
+
+}
+
+.project-state {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 78vh;
+
+  padding: 80px 22px;
+
+}
+
+.project-state-card {
+
+  position: relative;
+
+  width: min(100%, 720px);
+
+  padding: 38px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 15px;
+
+  background: rgba(15, 19, 25, 0.94);
+
+  box-shadow: 0 28px 70px -45px rgba(0, 0, 0, 0.95);
+
+  overflow: hidden;
+
+}
+
+.project-state-loading-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(110deg, transparent 30%, rgba(0, 210, 255, 0.035) 50%, transparent 70%);
+
+  transform: translateX(-100%);
+
+  animation: project-shimmer 2.2s linear infinite;
+
+  pointer-events: none;
+
+}
+
+.project-state-label {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  color: var(--pd-cyan);
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+}
+
+.project-state-label-error {
+
+  color: var(--pd-red);
+
+}
+
+.project-state-dot {
+
+  width: 9px;
+
+  height: 9px;
+
+  border-radius: 50%;
+
+}
+
+.project-state-dot-cyan {
+
+  background: var(--pd-cyan);
+
+  box-shadow: 0 0 0 5px rgba(0, 210, 255, 0.07);
+
+}
+
+.project-state-dot-error {
+
+  background: var(--pd-red);
+
+  box-shadow: 0 0 0 5px rgba(251, 113, 133, 0.06);
+
+}
+
+.project-state-card h1 {
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  line-height: 1.08;
+
+  letter-spacing: -0.03em;
+
+}
+
+.project-state-card p {
+
+  max-width: 620px;
+
+  margin: 12px 0 0;
+
+  color: var(--pd-muted);
+
+  font-size: 0.94rem;
+
+  line-height: 1.75;
+
+}
+
+.project-state-error-card {
+
+  max-width: 620px;
+
+  text-align: center;
+
+  border-color: rgba(127, 29, 29, 0.38);
+
+}
+
+.project-state-error-card p {
+
+  margin-inline: auto;
+
+}
+
+.project-state-action {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  min-height: 44px;
+
+  margin-top: 24px;
+
+  padding: 10px 15px;
+
+  border: 1px solid var(--pd-border);
+
+  border-radius: 8px;
+
+  background: rgba(24, 32, 44, 0.9);
+
+  color: #fff;
+
+  font-size: 0.8rem;
+
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+
+}
+
+.project-state-action:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(0, 210, 255, 0.4);
+
+  background: rgba(0, 210, 255, 0.05);
+
+}
+
+.project-skeleton {
+
+  display: grid;
+
+  gap: 12px;
+
+  margin-top: 28px;
+
+}
+
+.skeleton {
+
+  display: block;
+
+  border: 1px solid rgba(51, 65, 85, 0.7);
+
+  border-radius: 8px;
+
+  background: rgba(24, 32, 44, 0.85);
+
+}
+
+.skeleton-lg {
+
+  width: 82%;
+
+  height: 36px;
+
+}
+
+.skeleton-md {
+
+  width: 54%;
+
+  height: 18px;
+
+}
+
+.skeleton-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 4px;
+
+}
+
+.skeleton-card {
+
+  height: 92px;
+
+}
+
+.project-state-foot {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-top: 28px;
+
+  padding-top: 17px;
+
+  border-top: 1px solid var(--pd-border);
+
+  color: var(--pd-subtle);
+
+  font-size: 0.6rem;
+
+  line-height: 1.4;
+
+}
+
+.project-state-foot span:last-child {
+
+  color: rgba(0, 210, 255, 0.75);
+
+  text-align: right;
+
+}
+
+/* ---------------------------------------------------------
+
+   ANIMATION
+
+   --------------------------------------------------------- */
+
+@keyframes project-status-pulse {
+
+  0%,
+
+  100% {
+
+    opacity: 1;
+
+    transform: scale(1);
+
   }
 
+  50% {
 
-  .project-detail-hero {
-    padding: 115px 0 75px;
+    opacity: 0.58;
+
+    transform: scale(0.9);
+
   }
 
+}
 
-  .project-detail-meta {
-    margin-top: 45px;
+@keyframes project-panel-open {
 
-    gap: 10px;
+  0% {
+
+    opacity: 0;
+
+    transform: translate3d(0, 12px, 0);
+
   }
 
+  100% {
 
-  .project-detail-heading {
-    margin-top: 28px;
+    opacity: 1;
 
-    gap: 30px;
+    transform: translate3d(0, 0, 0);
+
   }
 
+}
 
-  .project-detail-heading h1 {
-    font-size: clamp(42px, 12vw, 68px);
+@keyframes project-shimmer {
+
+  0% {
+
+    transform: translateX(-100%);
+
   }
 
+  100% {
 
-  .project-detail-heading h2 {
-    font-size: 9px;
+    transform: translateX(100%);
+
   }
 
+}
 
-  .project-detail-heading > p {
-    font-size: 13px;
+/* Compatible with the portfolio's existing PageScrollAnimation. */
+
+.project-detail-page .psa-item {
+
+  min-width: 0;
+
+}
+
+/* ---------------------------------------------------------
+
+   RESPONSIVE
+
+   --------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+  .project-detail-shell {
+    padding-top: 108px;
+    padding-inline: 32px;
   }
 
+  .project-hero-grid {
 
-  .project-technologies {
-    margin-top: 45px;
+    grid-template-columns: minmax(0, 1fr) 290px;
+
+    gap: 38px;
+
   }
 
+  .project-architecture-grid {
 
-  .project-overview,
-  .project-architecture,
-  .project-roles,
-  .project-hospital-workflow,
-  .project-security {
-    padding: 80px 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
   }
 
+  .project-security-grid {
 
-  .project-section-heading {
-    margin-bottom: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
   }
 
+}
 
-  .project-section-heading h2 {
-    font-size: clamp(34px, 10vw, 52px);
-  }
+@media (max-width: 980px) {
 
+  .project-hero-top {
 
-  .architecture-grid {
-    grid-template-columns: 1fr;
-  }
-
-
-  .architecture-card {
-    min-height: 250px;
-
-    padding: 25px;
-  }
-
-
-  .architecture-number {
-    margin-bottom: 38px;
-  }
-
-
-  .workflow-detail-panel {
-    padding: 25px;
-  }
-
-
-  .workflow-detail-header {
-    flex-direction: column;
-  }
-
-
-  .workflow-detail-header > button {
-    align-self: flex-start;
-  }
-
-
-  .workflow-detail-items {
-    grid-template-columns: 1fr;
-  }
-
-
-  .workflow-detail-item {
-    padding: 20px;
-  }
-
-
-  .roles-grid {
-    grid-template-columns: 1fr;
-  }
-
-
-  .role-card {
-    min-height: 190px;
-  }
-
-
-  .hospital-workflow-panel {
-    padding: 22px;
-  }
-
-
-  .hospital-workflow-step {
-    grid-template-columns: 38px minmax(0, 1fr);
-
-    gap: 14px;
-  }
-
-
-  .security-panel {
-    padding: 28px;
-  }
-
-
-  .security-header {
     align-items: flex-start;
 
     flex-direction: column;
+
+    margin-bottom: 42px;
+
   }
 
+  .project-hero-meta {
 
-  .security-grid {
-    grid-template-columns: 1fr;
+    justify-content: flex-start;
+
   }
 
+  .project-hero-grid {
 
-  .security-grid > div {
-    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 28px;
+
+    align-items: stretch;
+
   }
 
+  .project-hero-side {
 
-  .project-detail-bottom {
-    padding: 70px 0 90px;
+    max-width: 700px;
+
   }
 
+  .project-overview-grid {
 
-  .project-next {
-    margin-top: 55px;
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 26px;
+
   }
 
-}
+  .project-system-heading,
 
+  .project-security-heading {
 
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
+    align-items: flex-start;
 
-@media (max-width: 480px) {
+    flex-direction: column;
 
-  .project-detail-container {
-    width: calc(100% - 32px);
   }
 
+  .project-system-hint,
 
-  .project-detail-hero {
-    padding-top: 105px;
+  .project-security-note {
+
+    text-align: left;
+
   }
 
+  .project-architecture-grid {
 
-  .project-detail-heading h1 {
-    font-size: 43px;
-  }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-
-  .technology-list span {
-    font-size: 7px;
-
-    padding: 6px 8px;
-  }
-
-
-  .project-overview-copy p {
-    font-size: 13px;
-  }
-
-
-  .architecture-card {
-    min-height: 235px;
-
-    padding: 22px;
-  }
-
-
-  .architecture-card h3 {
-    font-size: 19px;
-  }
-
-
-  .architecture-card > p {
-    font-size: 11px;
-  }
-
-
-  .workflow-detail-header h3 {
-    font-size: 28px;
-  }
-
-
-  .security-panel {
-    padding: 22px;
-  }
-
-
-  .security-panel h2 {
-    font-size: 34px;
   }
 
 }
 
+@media (max-width: 760px) {
 
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
+  .project-detail-shell {
+    padding: 104px 20px 68px;
+  }
+
+  .project-hero {
+
+    padding-top: 8px;
+
+    padding-bottom: 40px;
+
+  }
+
+  .project-hero-meta {
+
+    gap: 9px;
+
+    font-size: 0.62rem;
+
+  }
+
+  .project-hero-title {
+
+    font-size: clamp(2.4rem, 11vw, 4.7rem);
+
+  }
+
+  .project-hero-description {
+
+    font-size: 0.98rem;
+
+    line-height: 1.78;
+
+  }
+
+  .project-section-intro h2,
+
+  .project-system-heading h2,
+
+  .project-security-heading h2 {
+
+    font-size: clamp(1.7rem, 8vw, 2.45rem);
+
+  }
+
+  .project-overview-mini-grid {
+
+    grid-template-columns: minmax(0, 1fr);
+
+  }
+
+  .project-architecture-grid,
+
+  .project-security-grid,
+
+  .project-workflow-items {
+
+    grid-template-columns: minmax(0, 1fr);
+
+  }
+
+  .project-architecture-card {
+
+    min-height: 250px;
+
+  }
+
+  .project-status-panel {
+
+    min-height: 0;
+
+    padding: 28px;
+
+  }
+
+  .project-status-watermark {
+
+    right: 18px;
+
+    bottom: 7px;
+
+  }
+
+  .project-state {
+
+    padding-inline: 18px;
+
+  }
+
+  .project-state-card {
+
+    padding: 28px 22px;
+
+  }
+
+  .project-state-foot {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+  .project-state-foot span:last-child {
+
+    text-align: left;
+
+  }
+
+  .skeleton-grid {
+
+    grid-template-columns: minmax(0, 1fr);
+
+  }
+
+  .skeleton-card {
+
+    height: 64px;
+
+  }
+
+}
+
+@media (max-width: 560px) {
+
+  .project-detail-shell {
+    padding-top: 96px;
+    padding-inline: 16px;
+  }
+
+  .project-hero-top {
+
+    margin-bottom: 34px;
+
+  }
+
+  .project-back-link {
+
+    width: 100%;
+
+  }
+
+  .project-hero-meta {
+
+    width: 100%;
+
+  }
+
+  .project-meta-divider {
+
+    display: none;
+
+  }
+
+  .project-live-badge {
+
+    padding: 5px 8px;
+
+  }
+
+  .project-hero-side {
+
+    padding: 17px;
+
+  }
+
+  .project-hero-side-line {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+  }
+
+  .project-hero-side-line strong {
+
+    max-width: 100%;
+
+    text-align: left;
+
+  }
+
+  .project-technologies {
+
+    margin-top: 34px;
+
+  }
+
+  .project-context-card {
+
+    padding: 20px;
+
+  }
+
+  .project-mini-card {
+
+    padding: 18px;
+
+  }
+
+  .project-core-workflow {
+
+    padding: 16px;
+
+  }
+
+  .project-core-workflow-head {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+  .project-inspect-label {
+
+    text-align: left;
+
+  }
+
+  .project-flow-item {
+
+    grid-template-columns: 30px minmax(0, 1fr) 22px;
+
+    min-height: 50px;
+
+    padding: 10px;
+
+  }
+
+  .project-flow-title {
+
+    font-size: 0.78rem;
+
+  }
+
+  .project-architecture-card {
+
+    min-height: 240px;
+
+    padding: 18px;
+
+  }
+
+  .project-workflow-panel-inner {
+
+    padding: 20px 16px;
+
+  }
+
+  .project-workflow-panel-header {
+
+    flex-direction: column;
+
+  }
+
+  .project-close-button {
+
+    width: 100%;
+
+  }
+
+  .project-security-card {
+
+    min-height: 0;
+
+    padding: 20px;
+
+  }
+
+  .project-status-panel {
+
+    padding: 22px 19px 26px;
+
+    margin-top: 28px;
+
+  }
+
+  .project-status-actions {
+
+    align-items: stretch;
+
+    flex-direction: column;
+
+  }
+
+  .project-primary-action,
+
+  .project-secondary-action {
+
+    width: 100%;
+
+  }
+
+  .project-status-watermark {
+
+    display: none;
+
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .project-detail-shell {
+    padding-top: 92px;
+    padding-inline: 13px;
+  }
+
+  .project-hero-title {
+
+    font-size: clamp(2.15rem, 12.5vw, 3.45rem);
+
+    letter-spacing: -0.045em;
+
+  }
+
+  .project-eyebrow,
+
+  .project-section-marker > span,
+
+  .project-card-kicker,
+
+  .project-workflow-items-heading {
+
+    font-size: 0.61rem;
+
+  }
+
+  .project-tech-pill {
+
+    font-size: 0.66rem;
+
+  }
+
+  .project-hero-description,
+
+  .project-context-card p,
+
+  .project-mini-card p {
+
+    font-size: 0.88rem;
+
+  }
+
+}
+
+/* ---------------------------------------------------------
+
+   FOCUS / TOUCH / REDUCED MOTION
+
+   --------------------------------------------------------- */
+
+.project-detail-page button:focus-visible,
+
+.project-detail-page a:focus-visible {
+
+  outline: 2px solid var(--pd-cyan);
+
+  outline-offset: 3px;
+
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+  .project-back-link:hover,
+
+  .project-tech-pill:hover,
+
+  .project-flow-item:hover,
+
+  .project-architecture-card:hover,
+
+  .project-security-card:hover,
+
+  .project-primary-action:hover,
+
+  .project-secondary-action:hover,
+
+  .project-state-action:hover {
+
+    transform: none;
+
+  }
+
+}
 
 @media (prefers-reduced-motion: reduce) {
 
-  .project-back-link,
-  .project-not-found a,
-  .technology-list span,
-  .flow-list button,
-  .architecture-card,
-  .architecture-card h3,
-  .role-card,
-  .workflow-detail-header > button,
-  .workflow-detail-item {
-    transition: none;
+  .project-detail-page *,
+
+  .project-detail-page *::before,
+
+  .project-detail-page *::after {
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+
   }
 
+  .project-live-dot,
 
-  .workflow-detail-panel {
-    animation: none;
+  .project-state-loading-card::after {
+
+    animation: none !important;
+
+  }
+
+  .project-back-link:hover,
+
+  .project-tech-pill:hover,
+
+  .project-flow-item:hover,
+
+  .project-architecture-card:hover,
+
+  .project-security-card:hover,
+
+  .project-primary-action:hover,
+
+  .project-secondary-action:hover,
+
+  .project-state-action:hover {
+
+    transform: none !important;
+
   }
 
 }

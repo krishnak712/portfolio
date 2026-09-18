@@ -2,120 +2,100 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/ResumePage.css";
 
-
 function ResumePage() {
   const [copied, setCopied] = useState(false);
 
   const resumeText = `KRISHNA KUMAR R
 Java Full Stack Developer
 
-Sivakasi, Tamil Nadu, India
 pandiraman131@gmail.com
-
-github.com/krishnak712
++91-9345380842
+Sivakasi, India
 linkedin.com/in/krishna-kumar712
+github.com/krishnak712
+https://krishnakumar-rd.vercel.app
 
 SUMMARY
 
-Java Full Stack Developer focused on building secure, scalable and user-focused applications. Experienced in Java, Spring Boot, REST APIs, SQL, React.js and React Native, with hands-on experience in backend services, API integration, database-driven applications and microservice-based systems.
+Java Full Stack Developer with professional experience developing backend services and RESTful APIs using Java, Spring Boot, Spring Security, and PostgreSQL. Experienced in building secure role-based applications with JWT-based authentication and RBAC, along with microservice-based backend components. Skilled in integrating React.js and React Native applications with backend services and implementing business logic, request validation, exception handling, database operations, and asynchronous communication using RabbitMQ.
 
 TECHNICAL SKILLS
 
-Languages & Core:
-Java, Python, JavaScript, SQL
+Languages — Java, Python, JavaScript, SQL
+Backend — Spring, Spring Boot, FastAPI, REST APIs, Microservices
+Security — Spring Security, JWT, Role-Based Access Control (RBAC)
+Frontend — React.js, React Native, HTML5, CSS
+Database & Caching — PostgreSQL, Redis
+ORM & Data Access — Hibernate, JDBC, SQLAlchemy
+Messaging, Background Processing — RabbitMQ, Kafka
+Tools — Docker
+Testing — Manual Testing, Automation Testing
 
-Frontend:
-HTML5, CSS3, React.js, React Native
+WORK EXPERIENCE
 
-Backend & APIs:
-Spring, Spring Boot, FastAPI, REST APIs, Microservices
+Software Developer
+IKRGY Infotech Pvt. Ltd
+04/2026 – Present
+Hyderabad, Telangana
 
-Database & Persistence:
-PostgreSQL, Redis, Hibernate, JDBC
+• Develop and integrate RESTful backend services using Java and Spring Boot to support application workflows and frontend operations.
+• Implement authentication and authorization using Spring Security, JWT, and role-based access control (RBAC).
+• Develop and maintain microservice-based backend components with PostgreSQL for persistent data management.
+• Implement business logic, request validation, exception handling, and structured service layer components to build maintainable backend systems.
 
-Security:
-Spring Security, JWT, Role-Based Access Control
+Software Developer - Intern
+Besant Technologies
+08/2025 – 01/2026
+Chennai, Tamil Nadu
 
-Tools & Practices:
-Docker, Manual Testing, Automation Testing
-
-PROFESSIONAL EXPERIENCE
-
-Software Engineer | IKRGY Infotech Pvt Ltd
-Hyderabad, India
-April 2026 — Present
-
-- Contributing to software development and backend engineering.
-- Developing applications using Java and Spring Boot.
-- Building and integrating REST APIs.
-- Working with Spring Security, JWT and role-based access control.
-- Working with PostgreSQL and database-driven application development.
-- Contributing to microservice-based application development.
-
-PROJECTS
-
-1. Smart Blood Search, Donation & Tracking Management System
-Mode: Personal
-Status: In Progress
-
-An enterprise-level hospital-centered blood donation platform designed to connect verified hospitals with eligible blood donors and reduce the time required to find compatible donors during emergencies.
-
-Technology:
-Java, Spring Boot, Spring Data JPA, Hibernate, REST APIs, Microservices, Spring Security, JWT, RabbitMQ, PostgreSQL, Redis, React.js, React Native, Python, PaddleOCR
-
-Key Features:
-- Mobile OTP and email verification
-- Live selfie and liveness verification
-- Role-Based Access Control
-- Hospital-centered blood request workflow
-- Intelligent donor matching
-- Real-time notifications
-- Voluntary live location tracking
-- Hospital geofencing
-- Six-digit donation PIN verification
-- Audit logging and accountability
-
-Roles:
-Super Admin
-Platform Admin
-Donor
-Main Hospital Admin
-Branch Hospital Admin
-Hospital Staff
-
-2. Integrated College / University Management System
-Mode: Professional
-Status: In Progress
-Role: Backend Developer
-
-An enterprise-grade college and university management system designed to support academic, administrative and institutional operations through a secure and scalable backend architecture.
-
-Backend Contribution:
-- Developing REST APIs using Python and FastAPI
-- Implementing backend business logic
-- Developing data-access functionality
-- Implementing validation
-- Working with authorization and access control
-- Integrating PostgreSQL-backed services
-- Contributing to Redis-supported backend services
-- Supporting asynchronous background processing
-- Contributing to microservice-based backend architecture
-
-Technology:
-Python, FastAPI, SQLAlchemy, Alembic, Pydantic, PostgreSQL, Redis, Celery, Casbin, JWT, OIDC, MFA, Microservices
+• Developed full-stack web applications using Java, Spring Boot, React.js, and PostgreSQL as part of a structured full-stack development program.
+• Designed and integrated RESTful APIs to establish communication between frontend applications and backend services.
+• Implemented business logic, database operations, input validation, exception handling, and authentication flows.
+• Debugged application issues and applied structured development practices across implementation, testing, and API integration.
 
 EDUCATION
 
-B.Sc Chemistry
+B.Sc. Chemistry
 Government Arts and Science College
-2021 — 2024
-Sivakasi, Tamil Nadu, India
+2021 – 2024
+Sivakasi
 
-CERTIFICATION
+CERTIFICATIONS
 
 Java Full Stack Developer Certificate
-Besant Technologies, Chennai`;
+Besant Technologies
 
+PROJECTS
+
+Integrated College / University Management System
+Scalable Academic & Administrative Management System
+
+Tech Stack:
+Python, FastAPI, SQLAlchemy, PostgreSQL, Redis, Celery, Pydantic, Casbin, JWT, Microservices
+
+05/2026
+
+• Developed RESTful backend APIs using Python and FastAPI to support academic and administrative management workflows.
+• Implemented modular service-layer business logic, request processing, validation, and database operations using SQLAlchemy and PostgreSQL.
+• Implemented role-based and attribute-based access control using Casbin to enforce permissions across different application operations.
+• Implemented JWT-based authentication and authorization for securing protected API endpoints.
+• Used Redis for application-level caching and Celery for background task processing to support asynchronous application operations.
+• Structured backend components using a microservice-oriented architecture to separate application responsibilities and improve maintainability.
+
+Smart Blood Search, Donation & Tracking Management System
+In Progress
+
+Tech Stack:
+Java, Spring Boot, Spring Security, JWT, RabbitMQ, PostgreSQL, React.js, React Native, Microservices
+
+09/2026
+
+• Developing a role-based blood donation and hospital management platform supporting Super Admin, Platform Admin, Main Hospital Admin, Branch Hospital Admin, and Hospital Staff with hierarchical access control.
+• Implementing secure authentication and authorization using Spring Security, JWT, password hashing, mobile OTP verification, and RBAC to control access across platform and hospital workflows.
+• Developing Spring Boot microservices and RESTful APIs for core business workflows, with PostgreSQL for persistent data management and structured service-layer architecture.
+• Implementing request validation, centralized exception handling, and business-rule processing to improve API reliability and maintainability.
+• Using RabbitMQ for asynchronous communication between authentication and notification services, decoupling notification processing from core business operations.
+• Building React.js web interfaces for administrative and hospital workflows and a React Native mobile application for donor and hospital staff operations.`;
 
   const copyResume = async () => {
     try {
@@ -127,13 +107,9 @@ Besant Technologies, Chennai`;
         setCopied(false);
       }, 2200);
     } catch (error) {
-      console.error(
-        "Unable to copy resume:",
-        error
-      );
+      console.error("Unable to copy resume:", error);
     }
   };
-
 
   const shareResume = async () => {
     try {
@@ -157,1079 +133,372 @@ Besant Technologies, Chennai`;
         setCopied(false);
       }, 2200);
     } catch (error) {
-      console.error(
-        "Unable to share resume:",
-        error
-      );
+      console.error("Unable to share resume:", error);
     }
   };
-
 
   return (
     <main className="resume-page">
 
-      <div className="resume-shell">
+      {/* =========================================
+          TOP ACTION BAR
+      ========================================= */}
 
-        {/* =========================================
-            TOP CONTROL DECK
-        ========================================= */}
+      <div className="resume-toolbar">
 
-        <div className="resume-topbar">
+        <Link
+          to="/"
+          className="resume-back-link"
+        >
+          ← Back to Portfolio
+        </Link>
 
-          <div className="resume-breadcrumb">
+        <div className="resume-toolbar-actions">
 
-            <Link
-              to="/"
-              className="resume-root-link"
-            >
-              <span className="resume-terminal-icon">
-                ⌘
-              </span>
+          <a
+            href="/resume.pdf"
+            download
+            className="resume-button resume-button-primary"
+          >
+            ↓ Download PDF
+          </a>
 
-              <span>
-                SYSTEM_ROOT
-              </span>
-            </Link>
+          <button
+            type="button"
+            className="resume-button"
+            onClick={() => window.print()}
+          >
+            Print
+          </button>
 
-            <span className="resume-slash">
-              /
-            </span>
+          <button
+            type="button"
+            className="resume-button"
+            onClick={copyResume}
+          >
+            {copied ? "Copied!" : "Copy"}
+          </button>
 
-            <span className="resume-dossier">
-              DOSSIER
-            </span>
+          <button
+            type="button"
+            className="resume-button"
+            onClick={shareResume}
+          >
+            Share
+          </button>
 
-            <span className="resume-slash">
-              /
-            </span>
+        </div>
 
-            <span className="resume-current">
-              CURRICULUM_VITAE.pdf
-            </span>
-
-            <span className="resume-sync">
-              LATEST_SYNC // 2026
-            </span>
-
-          </div>
+      </div>
 
 
-          <div className="resume-actions">
+      {/* =========================================
+          RESUME DOCUMENT
+      ========================================= */}
 
-            <a
-              href="/resume.pdf"
-              download
-              className="resume-action resume-action-primary"
-            >
-              <span>↓</span>
-              <span>
-                Export ATS / PDF
-              </span>
+      <div className="resume-document">
+
+        {/* =======================================
+            HEADER
+        ======================================= */}
+
+        <header className="resume-header">
+
+          <h1>
+            KRISHNA KUMAR R
+          </h1>
+
+          <h2>
+            Java Full Stack Developer
+          </h2>
+
+          <div className="resume-contact">
+
+            <a href="mailto:pandiraman131@gmail.com">
+              pandiraman131@gmail.com
             </a>
 
+            <span>|</span>
 
-            <button
-              type="button"
-              className="resume-action"
-              onClick={() => window.print()}
+            <a href="tel:+919345380842">
+              +91-9345380842
+            </a>
+
+            <span>|</span>
+
+            <span>
+              Sivakasi, India
+            </span>
+
+            <span>|</span>
+
+            <a
+              href="https://www.linkedin.com/in/krishna-kumar712"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span>▣</span>
+              linkedin.com/in/krishna-kumar712
+            </a>
 
-              <span className="resume-action-print-text">
-                Print Document
-              </span>
-            </button>
+            <span>|</span>
 
-
-            <button
-              type="button"
-              className="resume-action"
-              onClick={copyResume}
+            <a
+              href="https://github.com/krishnak712"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span>□</span>
+              github.com/krishnak712
+            </a>
 
-              <span>
-                {copied
-                  ? "Copied!"
-                  : "Copy Raw Text"}
-              </span>
-            </button>
+            <span>|</span>
 
-
-            <button
-              type="button"
-              className="resume-action"
-              onClick={shareResume}
+            <a
+              href="https://krishnakumar-rd.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span>↗</span>
-
-              <span className="resume-action-share-text">
-                Share
-              </span>
-            </button>
-
-
-            <Link
-              to="/projects/smart-blood-search"
-              className="resume-action resume-action-project"
-            >
-              <span>◇</span>
-
-              <span className="resume-action-project-text">
-                Live Architecture
-              </span>
-            </Link>
+              krishnakumar-rd.vercel.app
+            </a>
 
           </div>
 
+        </header>
+
+
+        {/* =======================================
+            SUMMARY
+        ======================================= */}
+
+        <ResumeSection title="SUMMARY">
+
+          <p className="resume-paragraph">
+            Java Full Stack Developer with professional
+            experience developing backend services and
+            RESTful APIs using Java, Spring Boot,
+            Spring Security, and PostgreSQL. Experienced
+            in building secure role-based applications
+            with JWT-based authentication and RBAC,
+            along with microservice-based backend
+            components. Skilled in integrating React.js
+            and React Native applications with backend
+            services and implementing business logic,
+            request validation, exception handling,
+            database operations, and asynchronous
+            communication using RabbitMQ.
+          </p>
+
+        </ResumeSection>
+
+
+        {/* =======================================
+            TECHNICAL SKILLS
+        ======================================= */}
+
+        <ResumeSection title="TECHNICAL SKILLS">
+
+          <div className="resume-skills">
+
+            <SkillLine
+              title="Languages"
+              value="Java, Python, JavaScript, SQL"
+            />
+
+            <SkillLine
+              title="Backend"
+              value="Spring, Spring Boot, FastAPI, REST APIs, Microservices"
+            />
+
+            <SkillLine
+              title="Security"
+              value="Spring Security, JWT, Role-Based Access Control (RBAC)"
+            />
+
+            <SkillLine
+              title="Frontend"
+              value="React.js, React Native, HTML5, CSS"
+            />
+
+            <SkillLine
+              title="Database & Caching"
+              value="PostgreSQL, Redis"
+            />
+
+            <SkillLine
+              title="ORM & Data Access"
+              value="Hibernate, JDBC, SQLAlchemy"
+            />
+
+            <SkillLine
+              title="Messaging, Background Processing"
+              value="RabbitMQ, Kafka"
+            />
+
+            <SkillLine
+              title="Tools"
+              value="Docker"
+            />
+
+            <SkillLine
+              title="Testing"
+              value="Manual Testing, Automation Testing"
+            />
+
+          </div>
+
+        </ResumeSection>
+
+
+        {/* =======================================
+            WORK EXPERIENCE
+        ======================================= */}
+
+        <ResumeSection title="WORK EXPERIENCE">
+
+          <ExperienceItem
+            title="Software Developer"
+            company="IKRGY Infotech Pvt. Ltd"
+            date="04/2026 – Present"
+            location="Hyderabad, Telangana"
+            bullets={[
+              "Develop and integrate RESTful backend services using Java and Spring Boot to support application workflows and frontend operations.",
+              "Implement authentication and authorization using Spring Security, JWT, and role-based access control (RBAC).",
+              "Develop and maintain microservice-based backend components with PostgreSQL for persistent data management.",
+              "Implement business logic, request validation, exception handling, and structured service layer components to build maintainable backend systems.",
+            ]}
+          />
+
+          <ExperienceItem
+            title="Software Developer - Intern"
+            company="Besant Technologies"
+            date="08/2025 – 01/2026"
+            location="Chennai, Tamil Nadu"
+            bullets={[
+              "Developed full-stack web applications using Java, Spring Boot, React.js, and PostgreSQL as part of a structured full-stack development program.",
+              "Designed and integrated RESTful APIs to establish communication between frontend applications and backend services.",
+              "Implemented business logic, database operations, input validation, exception handling, and authentication flows.",
+              "Debugged application issues and applied structured development practices across implementation, testing, and API integration.",
+            ]}
+          />
+
+        </ResumeSection>
+
+
+        {/* =======================================
+            EDUCATION
+        ======================================= */}
+
+        <ResumeSection title="EDUCATION">
+
+          <div className="resume-simple-row">
+
+            <div>
+              <strong>
+                B.Sc. Chemistry
+              </strong>
+
+              <span>
+                Government Arts and Science College
+              </span>
+
+              <span>
+                Sivakasi
+              </span>
+            </div>
+
+            <strong>
+              2021 – 2024
+            </strong>
+
+          </div>
+
+        </ResumeSection>
+
+
+        {/* =======================================
+            CERTIFICATIONS
+        ======================================= */}
+
+        <ResumeSection title="CERTIFICATIONS">
+
+          <div className="resume-certification">
+
+            <strong>
+              Java Full Stack Developer Certificate
+            </strong>
+
+            <span>
+              — Besant Technologies
+            </span>
+
+          </div>
+
+        </ResumeSection>
+
+
+        {/* =======================================
+            PROJECTS
+            New page-like section on desktop
+        ======================================= */}
+
+        <div className="resume-projects-page">
+
+          <ResumeSection title="PROJECTS">
+
+            {/* ICMS */}
+
+            <ProjectItem
+              title="Integrated College / University Management System"
+              subtitle="Scalable Academic & Administrative Management System"
+              date="05/2026"
+              tech="Python, FastAPI, SQLAlchemy, PostgreSQL, Redis, Celery, Pydantic, Casbin, JWT, Microservices"
+              bullets={[
+                "Developed RESTful backend APIs using Python and FastAPI to support academic and administrative management workflows.",
+                "Implemented modular service-layer business logic, request processing, validation, and database operations using SQLAlchemy and PostgreSQL.",
+                "Implemented role-based and attribute-based access control using Casbin to enforce permissions across different application operations.",
+                "Implemented JWT-based authentication and authorization for securing protected API endpoints.",
+                "Used Redis for application-level caching and Celery for background task processing to support asynchronous application operations.",
+                "Structured backend components using a microservice-oriented architecture to separate application responsibilities and improve maintainability.",
+              ]}
+            />
+
+
+            {/* Smart Blood Search */}
+
+            <ProjectItem
+              title="Smart Blood Search, Donation & Tracking Management System"
+              subtitle="In Progress"
+              date="09/2026"
+              tech="Java, Spring Boot, Spring Security, JWT, RabbitMQ, PostgreSQL, React.js, React Native, Microservices"
+              bullets={[
+                "Developing a role-based blood donation and hospital management platform supporting Super Admin, Platform Admin, Main Hospital Admin, Branch Hospital Admin, and Hospital Staff with hierarchical access control.",
+                "Implementing secure authentication and authorization using Spring Security, JWT, password hashing, mobile OTP verification, and RBAC to control access across platform and hospital workflows.",
+                "Developing Spring Boot microservices and RESTful APIs for core business workflows, with PostgreSQL for persistent data management and structured service-layer architecture.",
+                "Implementing request validation, centralized exception handling, and business-rule processing to improve API reliability and maintainability.",
+                "Using RabbitMQ for asynchronous communication between authentication and notification services, decoupling notification processing from core business operations.",
+                "Building React.js web interfaces for administrative and hospital workflows and a React Native mobile application for donor and hospital staff operations.",
+              ]}
+            />
+
+          </ResumeSection>
+
         </div>
 
 
-        {/* =========================================
-            MAIN DOSSIER
-        ========================================= */}
+        {/* =======================================
+            DOCUMENT FOOTER
+        ======================================= */}
 
-        <div className="resume-document">
+        <footer className="resume-footer">
 
-          {/* =======================================
-              IDENTITY HEADER
-          ======================================= */}
+          <span>
+            KRISHNA KUMAR R
+          </span>
 
-          <header className="resume-identity">
+          <span>
+            Java Full Stack Developer
+          </span>
 
-            <div className="resume-identity-main">
-
-              <div className="resume-name-row">
-
-                <h1>
-                  KRISHNA KUMAR. R
-                </h1>
-
-                <span className="resume-status">
-                  <span className="resume-status-dot" />
-                  Software Engineer
-                </span>
-
-              </div>
-
-
-              <p className="resume-primary-role">
-                Java Full Stack Developer
-              </p>
-
-
-              <p className="resume-intro">
-                Java Full Stack Developer focused on
-                building secure, scalable and
-                user-focused applications with modern
-                backend, frontend and database
-                technologies.
-              </p>
-
-
-              <div className="resume-availability">
-
-                <span className="resume-availability-dot" />
-
-                Open to Software Engineering
-                Opportunities
-
-              </div>
-
-            </div>
-
-
-            {/* CONTACT MATRIX */}
-
-            <div className="resume-contact-card">
-
-              <div className="resume-contact-title">
-                COORDINATES &amp; CHANNELS
-              </div>
-
-
-              <div className="resume-contact-row">
-
-                <span>
-                  ⌖ Location
-                </span>
-
-                <strong>
-                  Sivakasi, Tamil Nadu
-                </strong>
-
-              </div>
-
-
-              <div className="resume-contact-row">
-
-                <span>
-                  ✉ Dispatch
-                </span>
-
-                <a href="mailto:pandiraman131@gmail.com">
-                  pandiraman131@gmail.com
-                </a>
-
-              </div>
-
-
-              <div className="resume-contact-row">
-
-                <span>
-                  ◈ GitHub
-                </span>
-
-                <a
-                  href="https://github.com/krishnak712"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  krishnak712
-                </a>
-
-              </div>
-
-
-              <div className="resume-contact-row">
-
-                <span>
-                  in LinkedIn
-                </span>
-
-                <a
-                  href="https://www.linkedin.com/in/krishna-kumar712"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  /in/krishna-kumar712
-                </a>
-
-              </div>
-
-
-              <div className="resume-contact-footer">
-
-                <span>
-                  JAVA / SPRING BOOT
-                </span>
-
-                <span>
-                  FULL STACK
-                </span>
-
-              </div>
-
-            </div>
-
-          </header>
-
-
-          {/* =======================================
-              01 SUMMARY
-          ======================================= */}
-
-          <section className="resume-section">
-
-            <ResumeSectionTitle
-              number="01"
-              title="Executive Summary"
-              label="ENGINEERING PROFILE"
-            />
-
-
-            <div className="resume-summary-grid">
-
-              <div className="resume-panel resume-summary-main">
-
-                <span className="resume-panel-label">
-                  PROFESSIONAL PROFILE
-                </span>
-
-                <p>
-                  Java Full Stack Developer focused
-                  on building reliable backend systems
-                  and modern web applications.
-                </p>
-
-                <p>
-                  Experienced in Java, Spring Boot,
-                  REST APIs, SQL, React.js and React
-                  Native, with practical experience in
-                  secure backend services, API
-                  integration, database-driven solutions
-                  and microservice-based applications.
-                </p>
-
-              </div>
-
-
-              <div className="resume-panel resume-focus-panel">
-
-                <span className="resume-panel-label">
-                  PRIMARY ENGINEERING FOCUS
-                </span>
-
-
-                <div className="resume-focus-list">
-
-                  <div>
-                    <strong>01</strong>
-                    <span>
-                      Backend Engineering
-                    </span>
-                  </div>
-
-                  <div>
-                    <strong>02</strong>
-                    <span>
-                      REST API Development
-                    </span>
-                  </div>
-
-                  <div>
-                    <strong>03</strong>
-                    <span>
-                      Secure Applications
-                    </span>
-                  </div>
-
-                  <div>
-                    <strong>04</strong>
-                    <span>
-                      Full Stack Development
-                    </span>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          {/* =======================================
-              02 SKILLS
-          ======================================= */}
-
-          <section className="resume-section">
-
-            <ResumeSectionTitle
-              number="02"
-              title="Core Competencies & Matrix"
-              label="HARDENED STACK CLASSIFICATION"
-            />
-
-
-            <div className="resume-skills-grid">
-
-              <SkillCard
-                number="01"
-                title="Languages & Core"
-                description="Primary programming languages and application development fundamentals."
-                skills={[
-                  "Java",
-                  "Python",
-                  "JavaScript",
-                  "SQL",
-                ]}
-              />
-
-
-              <SkillCard
-                number="02"
-                title="Frontend"
-                description="Modern web and mobile interfaces for user-focused applications."
-                skills={[
-                  "React.js",
-                  "React Native",
-                  "HTML5",
-                  "CSS3",
-                ]}
-              />
-
-
-              <SkillCard
-                number="03"
-                title="Backend & APIs"
-                description="Backend services, APIs and service-oriented application architecture."
-                skills={[
-                  "Spring",
-                  "Spring Boot",
-                  "FastAPI",
-                  "REST APIs",
-                  "Microservices",
-                ]}
-              />
-
-
-              <SkillCard
-                number="04"
-                title="Database & Security"
-                description="Persistence, authentication and authorization technologies."
-                skills={[
-                  "PostgreSQL",
-                  "Redis",
-                  "Hibernate",
-                  "JDBC",
-                  "Spring Security",
-                  "JWT",
-                  "RBAC",
-                ]}
-              />
-
-            </div>
-
-          </section>
-
-
-          {/* =======================================
-              03 EXPERIENCE
-          ======================================= */}
-
-          <section className="resume-section">
-
-            <ResumeSectionTitle
-              number="03"
-              title="Professional Experience"
-              label="CHRONOLOGICAL PRODUCTION LOG"
-            />
-
-
-            <article className="resume-experience-card">
-
-              <div className="resume-experience-header">
-
-                <div>
-
-                  <div className="resume-experience-title-row">
-
-                    <h3>
-                      Software Engineer
-                    </h3>
-
-                    <span>
-                      @ IKRGY Infotech Pvt Ltd
-                    </span>
-
-                  </div>
-
-                  <p>
-                    Hyderabad, India
-                  </p>
-
-                </div>
-
-
-                <div className="resume-date-badge">
-                  APR 2026 — PRESENT
-                </div>
-
-              </div>
-
-
-              <ul className="resume-bullets">
-
-                <li>
-                  <span>→</span>
-
-                  <p>
-                    Contributing to software
-                    development and backend engineering
-                    for reliable and maintainable
-                    applications.
-                  </p>
-                </li>
-
-                <li>
-                  <span>→</span>
-
-                  <p>
-                    Developing backend services and
-                    REST APIs using Java and Spring Boot.
-                  </p>
-                </li>
-
-                <li>
-                  <span>→</span>
-
-                  <p>
-                    Working with Spring Security, JWT
-                    and role-based access control to
-                    support secure application
-                    workflows.
-                  </p>
-                </li>
-
-                <li>
-                  <span>→</span>
-
-                  <p>
-                    Working with PostgreSQL and
-                    database-driven application
-                    development.
-                  </p>
-                </li>
-
-                <li>
-                  <span>→</span>
-
-                  <p>
-                    Contributing to microservice-based
-                    application development and API
-                    integration.
-                  </p>
-                </li>
-
-              </ul>
-
-
-              <div className="resume-tech-row">
-
-                {[
-                  "Java",
-                  "Spring Boot",
-                  "REST APIs",
-                  "Spring Security",
-                  "JWT",
-                  "PostgreSQL",
-                  "Microservices",
-                ].map((tech) => (
-                  <span key={tech}>
-                    {tech}
-                  </span>
-                ))}
-
-              </div>
-
-            </article>
-
-          </section>
-
-
-          {/* =======================================
-              04 PROJECTS
-          ======================================= */}
-
-          <section className="resume-section">
-
-            <ResumeSectionTitle
-              number="04"
-              title="Selected Projects"
-              label="PERSONAL & PROFESSIONAL SYSTEMS"
-            />
-
-
-            {/* =====================================
-                PERSONAL PROJECT
-            ====================================== */}
-
-            <article className="resume-project-card">
-
-              <div className="resume-project-header">
-
-                <div>
-
-                  <span className="resume-project-code">
-                    PERSONAL // SMART-BLOOD-SEARCH
-                  </span>
-
-                  <h3>
-                    Smart Blood Search, Donation
-                    &amp; Tracking Management System
-                  </h3>
-
-                  <p>
-                    Enterprise Web &amp; Mobile Application
-                  </p>
-
-                </div>
-
-
-                <div>
-
-                  <span className="resume-project-mode">
-                    PERSONAL
-                  </span>
-
-                  <span className="resume-project-status">
-                    IN PROGRESS
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div className="resume-project-body">
-
-                <div>
-
-                  <span className="resume-panel-label">
-                    OVERVIEW
-                  </span>
-
-                  <p>
-                    An enterprise-level hospital-centered
-                    blood donation platform designed to
-                    connect verified hospitals with eligible
-                    blood donors and reduce the time required
-                    to find compatible donors during
-                    emergencies.
-                  </p>
-
-                  <p>
-                    The platform focuses on authenticity,
-                    security, transparency and accountability
-                    through hospital verification, intelligent
-                    donor matching, real-time coordination,
-                    live tracking and verified donation
-                    workflows.
-                  </p>
-
-                </div>
-
-
-                <div className="resume-project-features">
-
-                  <span className="resume-panel-label">
-                    CORE WORKFLOWS
-                  </span>
-
-                  <div className="resume-feature-grid">
-
-                    <span>
-                      Hospital Verification
-                    </span>
-
-                    <span>
-                      RBAC
-                    </span>
-
-                    <span>
-                      Smart Donor Matching
-                    </span>
-
-                    <span>
-                      Real-Time Notifications
-                    </span>
-
-                    <span>
-                      Live Location
-                    </span>
-
-                    <span>
-                      Hospital Geofence
-                    </span>
-
-                    <span>
-                      Donation PIN
-                    </span>
-
-                    <span>
-                      Audit Logging
-                    </span>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div className="resume-project-tech">
-
-                {[
-                  "Java",
-                  "Spring Boot",
-                  "Spring Data JPA",
-                  "Hibernate",
-                  "REST APIs",
-                  "Microservices",
-                  "Spring Security",
-                  "JWT",
-                  "RabbitMQ",
-                  "PostgreSQL",
-                  "Redis",
-                  "React.js",
-                  "React Native",
-                  "Python",
-                  "PaddleOCR",
-                ].map((tech) => (
-                  <span key={tech}>
-                    {tech}
-                  </span>
-                ))}
-
-              </div>
-
-
-              <div className="resume-role-grid">
-
-                <div>
-                  <span>ROLE</span>
-
-                  <strong>
-                    Java Full Stack Developer
-                  </strong>
-                </div>
-
-
-                <div>
-                  <span>PROJECT MODE</span>
-
-                  <strong>
-                    Personal
-                  </strong>
-                </div>
-
-
-                <div>
-                  <span>ARCHITECTURE</span>
-
-                  <strong>
-                    Hospital-Centered /
-                    Microservices
-                  </strong>
-                </div>
-
-              </div>
-
-            </article>
-
-
-            {/* =====================================
-                PROFESSIONAL PROJECT
-            ====================================== */}
-
-            <article className="resume-project-card resume-project-card-professional">
-
-              <div className="resume-project-header">
-
-                <div>
-
-                  <span className="resume-project-code">
-                    PROFESSIONAL // ICMS
-                  </span>
-
-                  <h3>
-                    Integrated College / University
-                    Management System
-                  </h3>
-
-                  <p>
-                    Enterprise Management Platform
-                  </p>
-
-                </div>
-
-
-                <div>
-
-                  <span className="resume-project-mode">
-                    PROFESSIONAL
-                  </span>
-
-                  <span className="resume-project-status">
-                    IN PROGRESS
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div className="resume-project-body">
-
-                <div>
-
-                  <span className="resume-panel-label">
-                    OVERVIEW
-                  </span>
-
-                  <p>
-                    An enterprise-grade Integrated
-                    College / University Management
-                    System designed to support academic,
-                    administrative and institutional
-                    operations through a secure and
-                    scalable backend architecture.
-                  </p>
-
-                  <p>
-                    I contribute as a Backend Developer,
-                    developing APIs, backend services,
-                    business logic, data access,
-                    validation and authorization within
-                    the system architecture.
-                  </p>
-
-                </div>
-
-
-                <div className="resume-project-features">
-
-                  <span className="resume-panel-label">
-                    BACKEND CONTRIBUTION
-                  </span>
-
-                  <div className="resume-feature-grid">
-
-                    <span>
-                      REST API Development
-                    </span>
-
-                    <span>
-                      Business Logic
-                    </span>
-
-                    <span>
-                      Data Access
-                    </span>
-
-                    <span>
-                      Validation
-                    </span>
-
-                    <span>
-                      Authorization
-                    </span>
-
-                    <span>
-                      PostgreSQL Integration
-                    </span>
-
-                    <span>
-                      Redis Services
-                    </span>
-
-                    <span>
-                      Async Processing
-                    </span>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div className="resume-project-tech">
-
-                {[
-                  "Python",
-                  "FastAPI",
-                  "SQLAlchemy",
-                  "Alembic",
-                  "Pydantic",
-                  "PostgreSQL",
-                  "Redis",
-                  "Celery",
-                  "Casbin",
-                  "JWT",
-                  "OIDC",
-                  "MFA",
-                  "Microservices",
-                ].map((tech) => (
-                  <span key={tech}>
-                    {tech}
-                  </span>
-                ))}
-
-              </div>
-
-
-              <div className="resume-role-grid">
-
-                <div>
-                  <span>ROLE</span>
-
-                  <strong>
-                    Backend Developer
-                  </strong>
-                </div>
-
-
-                <div>
-                  <span>PROJECT MODE</span>
-
-                  <strong>
-                    Professional
-                  </strong>
-                </div>
-
-
-                <div>
-                  <span>ARCHITECTURE</span>
-
-                  <strong>
-                    Microservices / FastAPI
-                  </strong>
-                </div>
-
-              </div>
-
-            </article>
-
-          </section>
-
-
-          {/* =======================================
-              05 ROLES
-          ======================================= */}
-
-          <section className="resume-section">
-
-            <ResumeSectionTitle
-              number="05"
-              title="System Roles"
-              label="ROLE-BASED ACCESS CONTROL"
-            />
-
-
-            <div className="resume-roles-grid">
-
-              {[
-                "Super Admin",
-                "Platform Admin",
-                "Donor",
-                "Main Hospital Admin",
-                "Branch Hospital Admin",
-                "Hospital Staff",
-              ].map((role, index) => (
-
-                <div
-                  className="resume-role-card"
-                  key={role}
-                >
-
-                  <span>
-                    {String(index + 1).padStart(
-                      2,
-                      "0"
-                    )}
-                  </span>
-
-                  <strong>
-                    {role}
-                  </strong>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </section>
-
-
-          {/* =======================================
-              06 EDUCATION
-          ======================================= */}
-
-          <section className="resume-section">
-
-            <ResumeSectionTitle
-              number="06"
-              title="Credentials & Education"
-              label="ACADEMIC & PROFESSIONAL RECORD"
-            />
-
-
-            <div className="resume-credentials-grid">
-
-              <div className="resume-credential-card">
-
-                <div className="resume-credential-top">
-
-                  <span>
-                    UNIVERSITY DEGREE
-                  </span>
-
-                  <strong>
-                    2021 — 2024
-                  </strong>
-
-                </div>
-
-                <h3>
-                  B.Sc Chemistry
-                </h3>
-
-                <p>
-                  Government Arts and Science College
-                </p>
-
-                <small>
-                  Sivakasi, Tamil Nadu, India
-                </small>
-
-              </div>
-
-
-              <div className="resume-credential-card">
-
-                <div className="resume-credential-top">
-
-                  <span>
-                    PROFESSIONAL CERTIFICATION
-                  </span>
-
-                  <strong>
-                    VERIFIED
-                  </strong>
-
-                </div>
-
-                <h3>
-                  Java Full Stack Developer Certificate
-                </h3>
-
-                <p>
-                  Besant Technologies
-                </p>
-
-                <small>
-                  Chennai
-                </small>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          {/* =======================================
-              FOOTER
-          ======================================= */}
-
-          <footer className="resume-document-footer">
-
-            <div>
-
-              <span className="resume-footer-dot" />
-
-              <span>
-                DOCUMENT STATUS: CURRENT
-              </span>
-
-            </div>
-
-
-            <div>
-
-              <span>
-                DOCUMENT FORMAT: ATS-STANDARD
-              </span>
-
-            </div>
-
-          </footer>
-
-        </div>
+        </footer>
 
       </div>
 
@@ -1239,52 +508,17 @@ Besant Technologies, Chennai`;
 
 
 /* =========================================
-   SMALL COMPONENTS
+   SECTION
 ========================================= */
 
-function ResumeSectionTitle({
-  number,
+function ResumeSection({
   title,
-  label,
+  children,
 }) {
   return (
-    <div className="resume-section-title">
+    <section className="resume-section">
 
-      <div className="resume-section-title-main">
-
-        <span>
-          {number} //
-        </span>
-
-        <h2>
-          {title}
-        </h2>
-
-      </div>
-
-      <span className="resume-section-label">
-        {label}
-      </span>
-
-    </div>
-  );
-}
-
-
-function SkillCard({
-  number,
-  title,
-  description,
-  skills,
-}) {
-  return (
-    <article className="resume-skill-card">
-
-      <div className="resume-card-heading">
-
-        <span className="resume-card-number">
-          {number}
-        </span>
+      <div className="resume-section-heading">
 
         <h3>
           {title}
@@ -1292,21 +526,142 @@ function SkillCard({
 
       </div>
 
+      {children}
 
-      <p>
-        {description}
-      </p>
+    </section>
+  );
+}
 
 
-      <div className="resume-skill-tags">
+/* =========================================
+   SKILL LINE
+========================================= */
 
-        {skills.map((skill) => (
-          <span key={skill}>
-            {skill}
+function SkillLine({
+  title,
+  value,
+}) {
+  return (
+    <div className="resume-skill-line">
+
+      <strong>
+        {title}
+        {" — "}
+      </strong>
+
+      <span>
+        {value}
+      </span>
+
+    </div>
+  );
+}
+
+
+/* =========================================
+   EXPERIENCE ITEM
+========================================= */
+
+function ExperienceItem({
+  title,
+  company,
+  date,
+  location,
+  bullets,
+}) {
+  return (
+    <article className="resume-experience">
+
+      <div className="resume-experience-header">
+
+        <div>
+
+          <h4>
+            {title},{" "}
+            <em>{company}</em>
+          </h4>
+
+        </div>
+
+        <div className="resume-experience-meta">
+
+          <strong>
+            {date}
+          </strong>
+
+          <span>
+            {location}
           </span>
-        ))}
+
+        </div>
 
       </div>
+
+      <ul>
+
+        {bullets.map((bullet, index) => (
+          <li key={index}>
+            {bullet}
+          </li>
+        ))}
+
+      </ul>
+
+    </article>
+  );
+}
+
+
+/* =========================================
+   PROJECT ITEM
+========================================= */
+
+function ProjectItem({
+  title,
+  subtitle,
+  date,
+  tech,
+  bullets,
+}) {
+  return (
+    <article className="resume-project">
+
+      <div className="resume-project-header">
+
+        <div>
+
+          <h4>
+            {title}
+          </h4>
+
+          <p className="resume-project-subtitle">
+            {subtitle}
+          </p>
+
+        </div>
+
+        <strong className="resume-project-date">
+          {date}
+        </strong>
+
+      </div>
+
+      <p className="resume-project-tech-line">
+        <strong>
+          Tech Stack:
+        </strong>{" "}
+        {tech}
+      </p>
+
+      <ul>
+
+        {bullets.map((bullet, index) => (
+          <li key={index}>
+            {bullet}
+          </li>
+        ))}
+
+      </ul>
 
     </article>
   );
