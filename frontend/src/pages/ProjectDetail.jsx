@@ -200,14 +200,21 @@ function ProjectDetail() {
         <section className="project-state project-state-error">
           <div className="project-state-card project-state-error-card">
             <div className="project-state-label project-state-label-error">
-              <span className="project-state-dot project-state-dot-error" />
-              PROJECT / 404
+             <span className="project-state-dot project-state-dot-error" />
+
+              {error === "Project not found" ? "PROJECT / 404": "PROJECT / ERROR"}
             </div>
 
-            <h1>Project not found.</h1>
+            <h1>
+             {error === "Project not found"
+             ? "Project not found."
+             : "Unable to load project."}
+            </h1>
+
             <p>
-              The requested project could not be loaded from the portfolio
-              project registry.
+             {error === "Project not found"
+             ? "The requested project does not exist in the portfolio project registry."
+             : "The project could not be loaded from the portfolio API. Please try again later."}
             </p>
 
             <Link to="/projects" className="project-state-action">
