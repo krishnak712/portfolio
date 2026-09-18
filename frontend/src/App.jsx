@@ -5,16 +5,22 @@ import {
 } from "react-router-dom";
 
 import { getProfile } from "./services/contentServices";
+
 import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetail from "./pages/ProjectDetail";
 import ResumePage from "./pages/ResumePage";
+
 import VisitorLocation from "./components/analytics/VisitorLocation";
+import VisitorTracker from "./components/analytics/VisitorTracker";
+
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+
 import OpeningAnimation from "./components/intro/OpeningAnimation";
+
 import PageScrollAnimation from "./components/common/PageScrollAnimation";
 import ScrollManager from "./components/common/ScrollManager";
-import VisitorTracker from "./components/analytics/VisitorTracker";
+
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
@@ -29,26 +35,33 @@ import Contact from "./components/sections/Contact";
    HOME PAGE
 ========================================================= */
 
-function HomePage() {
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    getProfile()
-      .then((data) => {
-        setProfile(data);
-      })
-      .catch((error) => {
-        console.error(
-          "Failed to load profile:",
-          error
-        );
-      });
-  }, []);
-
-  if (!profile) {
+function HomePage({
+  profile,
+  profileLoading,
+  profileError,
+  onRetryProfile,
+}) {
+  if (profileLoading) {
     return (
       <div className="page-loading">
-        Loading...
+        Loading portfolio...
+      </div>
+    );
+  }
+
+  if (profileError || !profile) {
+    return (
+      <div className="page-loading">
+        <p>
+          Unable to load portfolio data.
+        </p>
+
+        <button
+          type="button"
+          onClick={onRetryProfile}
+        >
+          Retry
+        </button>
       </div>
     );
   }
@@ -57,10 +70,7 @@ function HomePage() {
     <>
       <Hero profile={profile} />
 
-      <About
-        name={profile.name}
-        about={profile.about}
-      />
+      <About profile={profile} />
 
       <Skills />
 
@@ -72,7 +82,7 @@ function HomePage() {
 
       <Achievements />
 
-      <Contact />
+      <Contact profile={profile} />
     </>
   );
 }
@@ -113,6 +123,35 @@ function NotFoundPage() {
 function App() {
   const [introFinished, setIntroFinished] = useState(false);
 
+  const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [profileError, setProfileError] = useState(false);
+
+  const loadProfile = async () => {
+    try {
+      setProfileLoading(true);
+      setProfileError(false);
+
+      const data = await getProfile();
+
+      setProfile(data);
+    } catch (error) {
+      console.error(
+        "Failed to load profile:",
+        error
+      );
+
+      setProfile(null);
+      setProfileError(true);
+    } finally {
+      setProfileLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
   return (
     <>
       <ScrollManager />
@@ -120,32 +159,55 @@ function App() {
       <VisitorTracker />
       <VisitorLocation />
 
-      {/* Opening animation */}
       {!introFinished && (
         <OpeningAnimation
           onComplete={() => setIntroFinished(true)}
         />
       )}
 
-      {/* Navbar appears ONLY after opening animation */}
-      {introFinished && <Navbar />}
+      {introFinished && (
+        <Navbar profile={profile} />
+      )}
 
       <PageScrollAnimation />
 
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                profile={profile}
+                profileLoading={profileLoading}
+                profileError={profileError}
+                onRetryProfile={loadProfile}
+              />
+            }
+          />
+
+          <Route
+            path="/projects"
+            element={<ProjectsPage />}
+          />
+
           <Route
             path="/projects/:projectSlug"
             element={<ProjectDetail />}
           />
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="*" element={<NotFoundPage />} />
+
+          <Route
+            path="/resume"
+            element={<ResumePage />}
+          />
+
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
         </Routes>
       </main>
 
-      <Footer />
+      <Footer profile={profile} />
     </>
   );
 }
