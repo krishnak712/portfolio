@@ -41,7 +41,7 @@ class VisitorResponse(BaseModel):
 
     visit_count: int
 
-    ip_address: str | None
+    ip_hash: str | None
 
     country: str | None
     city: str | None
