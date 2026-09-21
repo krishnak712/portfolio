@@ -1,3 +1,4 @@
+import hashlib
 from datetime import datetime, timezone
 
 from fastapi import (
@@ -55,33 +56,44 @@ def create_visitor(
         )
 
     # -----------------------------------------
-    # Check existing visitor BY IP
+    # Hash IP before storing
+    # -----------------------------------------
+
+    ip_hash = None
+
+    if ip_address:
+        ip_hash = hashlib.sha256(
+            ip_address.encode("utf-8")
+        ).hexdigest()
+
+    # -----------------------------------------
+    # Check existing visitor BY IP HASH
     # -----------------------------------------
 
     existing_visitor = None
 
-    if ip_address:
+    if ip_hash:
         existing_visitor = (
             db.query(Visitor)
             .filter(
-                Visitor.ip_address == ip_address
+                Visitor.ip_hash == ip_hash
             )
             .first()
         )
 
     # -----------------------------------------
-    # Existing IP → update existing visitor
+    # Existing visitor → update
     # -----------------------------------------
 
     if existing_visitor:
 
-        existing_visitor.visit_count += 1
+        existing_visitor.visit_count = (
+            existing_visitor.visit_count or 0
+        ) + 1
 
         existing_visitor.last_visit_at = (
             datetime.now(timezone.utc)
         )
-
-        # Update visitor information when available
 
         if visitor_data.country:
             existing_visitor.country = (
@@ -119,7 +131,7 @@ def create_visitor(
         return existing_visitor
 
     # -----------------------------------------
-    # New IP → create new visitor
+    # New visitor → create
     # -----------------------------------------
 
     visitor = Visitor(
@@ -133,7 +145,7 @@ def create_visitor(
             visitor_data.visitor_id
         )
 
-    visitor.ip_address = ip_address
+    visitor.ip_hash = ip_hash
 
     db.add(visitor)
     db.commit()

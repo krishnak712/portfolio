@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProjects } from "../../services/contentServices";
 import "./css/Projects.css";
+
+const FILTERS = ["All", "Personal", "Professional"];
+
+const modeKey = (value) => String(value || "").trim().toLowerCase();
+const projectNumber = (index) => String(index + 1).padStart(2, "0");
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -10,69 +15,90 @@ function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   useEffect(() => {
+    let mounted = true;
+
     const loadProjects = async () => {
       try {
         setLoading(true);
         setError("");
 
         const data = await getProjects();
+        if (!mounted) return;
 
-        const sortedProjects = [...data].sort(
-          (a, b) =>
-            (a.display_order ?? 0) -
-            (b.display_order ?? 0)
+        const list = Array.isArray(data) ? data : [];
+        setProjects(
+          [...list].sort(
+            (a, b) => (a?.display_order ?? 0) - (b?.display_order ?? 0)
+          )
         );
-
-        setProjects(sortedProjects);
       } catch (err) {
         console.error("Failed to load projects:", err);
+        if (!mounted) return;
         setError("Unable to load projects.");
+        setProjects([]);
       } finally {
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     };
 
     loadProjects();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  /*
-   * Filter projects using project_mode
-   * received from the backend.
-   */
-  const filteredProjects = projects.filter((project) => {
-    if (activeFilter === "All") {
-      return true;
-    }
+  const counts = useMemo(
+    () => ({
+      All: projects.length,
+      Personal: projects.filter((p) => modeKey(p.project_mode) === "personal").length,
+      Professional: projects.filter((p) => modeKey(p.project_mode) === "professional").length,
+    }),
+    [projects]
+  );
 
-    return project.project_mode === activeFilter;
-  });
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "All") return projects;
+    return projects.filter(
+      (project) => modeKey(project.project_mode) === modeKey(activeFilter)
+    );
+  }, [projects, activeFilter]);
 
-  /*
-   * Loading State
-   */
   if (loading) {
     return (
-      <section className="projects-section" id="projects">
+      <section id="projects" className="projects-section psa-reveal">
+        <div className="projects-grid-pattern" aria-hidden="true" />
         <div className="projects-container">
-          <div className="projects-state">
-            <span>PROJECTS / LOADING</span>
-            <p>Loading projects...</p>
+          <RegistryBar loading />
+          <ProjectsHeading count="--" loading />
+          <div className="projects-loading-grid">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <article className="project-card project-skeleton psa-item" key={index}>
+                <div className="skeleton-head"><span /><span /></div>
+                <span className="skeleton-title" />
+                <div className="skeleton-copy"><span /><span /><span /></div>
+                <span className="skeleton-visual" />
+                <div className="skeleton-pills"><span /><span /><span /><span /></div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
     );
   }
 
-  /*
-   * Error State
-   */
   if (error) {
     return (
-      <section className="projects-section" id="projects">
+      <section id="projects" className="projects-section psa-reveal">
+        <div className="projects-grid-pattern" aria-hidden="true" />
         <div className="projects-container">
-          <div className="projects-state">
-            <span>PROJECTS / ERROR</span>
-            <p>{error}</p>
+          <RegistryBar />
+          <div className="projects-error-state psa-item">
+            <div className="projects-error-icon">!</div>
+            <div>
+              <span className="projects-state-kicker">PROJECTS / ERROR</span>
+              <h3>Unable to load projects.</h3>
+              <p>The project registry could not be loaded at this time.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -80,275 +106,219 @@ function Projects() {
   }
 
   return (
-    <section className="projects-section" id="projects">
+    <section id="projects" className="projects-section psa-reveal" aria-labelledby="projects-title">
+      <div className="projects-grid-pattern" aria-hidden="true" />
+
       <div className="projects-container">
+        <RegistryBar />
+        <ProjectsHeading count={filteredProjects.length} />
 
-        {/* =========================
-            Heading
-        ========================== */}
-        <div className="projects-heading">
-
-          <div>
-            <span className="projects-kicker">
-              05 / PROJECTS
-            </span>
-
-            <h2>
-              Selected work &
-              <span> engineering projects.</span>
-            </h2>
-
-            <p>
-              A collection of systems and applications
-              I've worked on, with a focus on backend
-              engineering, APIs, security and full-stack
-              development.
-            </p>
+        <div className="projects-filter-rail psa-item">
+          <div className="projects-filter-left">
+            <span className="projects-filter-label">[ FILTER ]</span>
+            <div className="projects-filters" role="group" aria-label="Filter projects">
+              {FILTERS.map((filter) => {
+                const active = activeFilter === filter;
+                return (
+                  <button
+                    key={filter}
+                    type="button"
+                    className={`projects-filter ${active ? "active" : ""}`}
+                    onClick={() => setActiveFilter(filter)}
+                    aria-pressed={active}
+                  >
+                    <span className="projects-filter-dot" aria-hidden="true" />
+                    <span>[ {filter.toUpperCase()} ]</span>
+                    <span className="projects-filter-count">
+                      ({String(counts[filter]).padStart(2, "0")})
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-
-          <span className="projects-count">
-            {String(filteredProjects.length).padStart(2, "0")}{" "}
-            PROJECTS
-          </span>
-
+          <div className="projects-filter-readout">
+            VIEW: <strong>{activeFilter.toUpperCase()}</strong>
+          </div>
         </div>
 
-        {/* =========================
-            Project Filters
-        ========================== */}
-        <div
-          className="projects-filters"
-          role="group"
-          aria-label="Filter projects"
-        >
-
-          <button
-            type="button"
-            className={`projects-filter ${
-              activeFilter === "All" ? "active" : ""
-            }`}
-            onClick={() => setActiveFilter("All")}
-          >
-            All
-          </button>
-
-          <button
-            type="button"
-            className={`projects-filter ${
-              activeFilter === "Personal" ? "active" : ""
-            }`}
-            onClick={() => setActiveFilter("Personal")}
-          >
-            Personal
-          </button>
-
-          <button
-            type="button"
-            className={`projects-filter ${
-              activeFilter === "Professional" ? "active" : ""
-            }`}
-            onClick={() =>
-              setActiveFilter("Professional")
-            }
-          >
-            Professional
-          </button>
-
-        </div>
-
-        {/* =========================
-            Empty State
-        ========================== */}
         {filteredProjects.length === 0 ? (
-          <div className="projects-state">
-
-            <span>
-              PROJECTS / EMPTY
-            </span>
-
-            <p>
-              {activeFilter === "Personal"
-                ? "No personal projects are currently available."
-                : activeFilter === "Professional"
-                ? "No professional projects are currently available."
-                : "No projects are currently available."}
-            </p>
-
+          <div className="projects-empty-state psa-item">
+            <span className="projects-empty-mark">[ 0x00 ]</span>
+            <span className="projects-state-kicker">PROJECT REGISTRY / EMPTY</span>
+            <h3>NO {activeFilter.toUpperCase()} PROJECTS AVAILABLE</h3>
+            <p>No project records match the active registry filter.</p>
+            {activeFilter !== "All" && (
+              <button
+                type="button"
+                className="projects-reset-button"
+                onClick={() => setActiveFilter("All")}
+              >
+                RESET FILTER
+              </button>
+            )}
           </div>
         ) : (
-
-          /* =========================
-             Projects Grid
-          ========================== */
           <div className="projects-grid">
-
             {filteredProjects.map((project, index) => {
-
-              const technologies = [
-                ...(project.technologies || []),
-              ]
-                .sort(
-                  (a, b) =>
-                    (a.display_order ?? 0) -
-                    (b.display_order ?? 0)
-                )
+              const technologies = [...(project?.technologies || [])]
+                .sort((a, b) => (a?.display_order ?? 0) - (b?.display_order ?? 0))
                 .slice(0, 6);
 
+              const tech1 = technologies[0]?.technology || "APPLICATION";
+              const tech2 = technologies[1]?.technology || "SYSTEM";
+              const tech3 = technologies[2]?.technology || "MODULE";
+
               return (
-                <article
-                  className="project-card"
-                  key={project.id}
-                >
+                <article className="project-card psa-item" key={project.id}>
+                  <span className="card-corner tl">┌</span>
+                  <span className="card-corner tr">┐</span>
+                  <span className="card-corner bl">└</span>
+                  <span className="card-corner br">┘</span>
 
-                  {/* =========================
-                      Card Header
-                  ========================== */}
-                  <div className="project-card-header">
-
-                    <span className="project-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <span className="project-status">
-                      {project.status || "PROJECT"}
-                    </span>
-
-                  </div>
-
-                  {/* =========================
-                      Project Visual
-                  ========================== */}
-                  <div
-                    className="project-visual"
-                    data-parallax="0.05"
-                  >
-                    <div className="project-code-window">
-
-                      <div className="project-code-top">
-
-                        <span />
-                        <span />
-                        <span />
-
-                        <small>
-                          {project.slug ||
-                            "project.system"}
-                        </small>
-
+                  <div className="project-card-inner">
+                    <div className="project-card-header">
+                      <div className="project-index-group">
+                        <span className="project-number">{projectNumber(index)}</span>
+                        <span className="project-type">{project.project_mode || "PROJECT"}</span>
                       </div>
-
-                      <div className="project-code-body">
-
-                        <span className="code-line">
-                          <i>01</i>
-                          <b>system</b>
-                          <em>:</em>
-                          application
-                        </span>
-
-                        <span className="code-line">
-                          <i>02</i>
-                          <b>architecture</b>
-                          <em>:</em>
-                          scalable
-                        </span>
-
-                        <span className="code-line">
-                          <i>03</i>
-                          <b>security</b>
-                          <em>:</em>
-                          enabled
-                        </span>
-
-                        <span className="code-line">
-                          <i>04</i>
-                          <b>api</b>
-                          <em>:</em>
-                          REST
-                        </span>
-
+                      <div className="project-status">
+                        <span className="project-status-dot" />
+                        <span>{project.status || "AVAILABLE"}</span>
                       </div>
-
                     </div>
-                  </div>
 
-                  {/* =========================
-                      Card Content
-                  ========================== */}
-                  <div className="project-card-content">
+                    <div className="project-title-block">
+                      <span className="project-code-label">PROJECT_RECORD // {projectNumber(index)}</span>
+                      <h3>{project.title}</h3>
+                      <p>
+                        {project.short_description ||
+                          project.description ||
+                          "Project details are available in the case study."}
+                      </p>
+                    </div>
 
-                    {/* Project Mode */}
-                    {project.project_mode && (
-                      <span className="project-type">
-                        {project.project_mode}
-                      </span>
-                    )}
+                    <div className="project-visual" aria-hidden="true">
+                      <div className="project-visual-topline">
+                        <span>// PROJECT BLUEPRINT</span>
+                        <span>{(project.project_mode || "PROJECT").toUpperCase()}</span>
+                      </div>
+                      <div className="project-blueprint">
+                        <span className="blueprint-line top" />
+                        <span className="blueprint-line bottom" />
+                        <span className="blueprint-line vertical" />
 
-                    {/* Project Title */}
-                    <h3>
-                      {project.title}
-                    </h3>
+                        <BlueprintNode label="PROJECT" value="APPLICATION" main />
+                        <div className="blueprint-connector"><span /></div>
 
-                    {/* Description */}
-                    <p>
-                      {project.short_description ||
-                        project.description}
-                    </p>
+                        <div className="blueprint-node-row">
+                          <BlueprintNode label="STACK" value={tech1} />
+                          <BlueprintNode label="SYSTEM" value={tech2} />
+                          <BlueprintNode label="MODULE" value={tech3} wide />
+                        </div>
 
-                    {/* Technologies */}
+                        <div className="blueprint-footer">
+                          <span>STACK TRACE</span>
+                          <span className="blueprint-footer-line" />
+                          <span>{String(technologies.length).padStart(2, "0")} ITEMS</span>
+                        </div>
+                      </div>
+                    </div>
+
                     {technologies.length > 0 && (
-                      <div className="project-tech">
-
+                      <div className="project-tech" aria-label="Technologies used">
                         {technologies.map((tech) => (
-                          <span key={tech.id}>
+                          <span className="project-tech-pill" key={tech.id ?? tech.technology}>
                             {tech.technology}
                           </span>
                         ))}
-
                       </div>
                     )}
 
-                    {/* View Project */}
-                    <Link
-                      to={`/projects/${project.slug}`}
-                      className="project-link"
-                    >
-                      <span>
-                        View Project
-                      </span>
-
-                      <span>
-                        →
-                      </span>
-                    </Link>
-
+                    <div className="project-card-footer">
+                      <span className="project-footer-label">PROJECT RECORD</span>
+                      <Link to={`/projects/${project.slug}`} className="project-link">
+                        <span>VIEW PROJECT</span>
+                        <span className="project-link-arrow">→</span>
+                      </Link>
+                    </div>
                   </div>
-
                 </article>
               );
             })}
-
           </div>
         )}
 
-        {/* =========================
-            Footer
-        ========================== */}
-        <div className="projects-footer">
-
-          <span>
-            MORE PROJECTS WILL BE ADDED AS THEY ARE
-            COMPLETED.
-          </span>
-
-          <Link to="/#contact">
-            Discuss a Project →
-          </Link>
-
+        <div className="projects-footer psa-item">
+          <div className="projects-footer-left">
+            <span>TOTAL PROJECTS: <strong>{String(projects.length).padStart(2, "0")}</strong></span>
+            <span className="footer-divider">|</span>
+            <span>ACTIVE FILTER: <strong>{activeFilter.toUpperCase()}</strong></span>
+            <span className="footer-divider">|</span>
+            <span className="registry-status"><i /> REGISTRY STATUS: <strong>ONLINE</strong></span>
+          </div>
+          <Link to="/#contact" className="projects-discuss-link">DISCUSS A PROJECT →</Link>
         </div>
-
       </div>
     </section>
+  );
+}
+
+function RegistryBar({ loading = false }) {
+  return (
+    <div className="projects-registry-bar psa-item">
+      <div className="projects-registry-left">
+        <span className="registry-accent">┌[REGISTRY_INDEX]</span>
+        <span>NODE: ARCHIVE</span>
+        <span>•</span>
+        <span>PROJECT CATALOG</span>
+      </div>
+      <div className="projects-registry-live">
+        <span className="projects-pulse-dot" />
+        <span>{loading ? "LOADING REGISTRY" : "FEED: PROJECT REGISTRY"}</span>
+      </div>
+    </div>
+  );
+}
+
+function ProjectsHeading({ count, loading = false }) {
+  return (
+    <div className="projects-heading">
+      <div className="projects-heading-main psa-item">
+        <div className="projects-kicker">
+          <span className="projects-kicker-terminal">&gt;_</span>
+          <span>05 // PROJECTS | ENGINEERING ARCHIVE</span>
+        </div>
+        <h2 id="projects-title">
+          Selected work &amp;
+          <span> engineering projects.</span>
+        </h2>
+        <p>
+          A curated collection of systems and applications focused on backend engineering,
+          APIs, security, databases and full-stack development.
+        </p>
+      </div>
+      <div className="projects-count-card psa-item">
+        <span className="projects-count-value">
+          {typeof count === "number" ? String(count).padStart(2, "0") : count}
+        </span>
+        <span className="projects-count-label">PROJECTS</span>
+      </div>
+    </div>
+  );
+}
+
+function BlueprintNode({ label, value, main = false, wide = false }) {
+  return (
+    <div
+      className={`blueprint-node ${main ? "main" : ""} ${wide ? "wide" : ""}`}
+    >
+      <span className="blueprint-marker" />
+      <div>
+        <small>{label}</small>
+        <strong>{value}</strong>
+      </div>
+    </div>
   );
 }
 

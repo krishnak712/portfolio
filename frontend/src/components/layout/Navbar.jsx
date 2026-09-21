@@ -20,7 +20,19 @@ const navItems = [
   { label: "Contact", id: "contact" },
 ];
 
-export default function Navbar() {
+function getInitials(name) {
+  if (!name) return "P";
+
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0))
+    .join("")
+    .toUpperCase();
+}
+
+export default function Navbar({profile }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -202,11 +214,11 @@ export default function Navbar() {
             aria-label="Go to home"
           >
             <span className="logo-mark">
-              KK
+             {getInitials(profile?.name)}
             </span>
 
             <span className="logo-text">
-              KRISHNA KUMAR
+             {profile?.name || "PORTFOLIO"}
             </span>
           </button>
 
@@ -419,21 +431,25 @@ export default function Navbar() {
 
         <div className="mobile-sidebar-footer">
 
-          <a
-            href="https://github.com/krishnak712"
+          {profile?.github_url && (
+           <a
+            href={profile.github_url}
             target="_blank"
             rel="noopener noreferrer"
-          >
+           >
             GitHub ↗
-          </a>
+           </a>
+          )}
 
-          <a
-            href="https://linkedin.com/in/krishna-kumar712"
+          {profile?.linkedin_url && (
+           <a
+            href={profile.linkedin_url}
             target="_blank"
             rel="noopener noreferrer"
-          >
+           >
             LinkedIn ↗
-          </a>
+           </a>
+          )}
 
         </div>
 

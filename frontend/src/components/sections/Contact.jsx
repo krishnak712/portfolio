@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import apiClient from "../../services/apiClient";
 import "./css/Contact.css";
 
@@ -9,7 +9,7 @@ const initialForm = {
   message: "",
 };
 
-export default function Contact() {
+export default function Contact({ profile }) {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
@@ -26,17 +26,13 @@ export default function Contact() {
     if (!name) {
       newErrors.name = "Name is required.";
     } else if (name.length < 2) {
-      newErrors.name =
-        "Name must contain at least 2 characters.";
+      newErrors.name = "Name must contain at least 2 characters.";
     }
 
     if (!email) {
       newErrors.email = "Email is required.";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
-      newErrors.email =
-        "Enter a valid email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Enter a valid email address.";
     }
 
     if (!subject) {
@@ -46,11 +42,9 @@ export default function Contact() {
     if (!message) {
       newErrors.message = "Message is required.";
     } else if (message.length < 10) {
-      newErrors.message =
-        "Message must contain at least 10 characters.";
+      newErrors.message = "Message must contain at least 10 characters.";
     } else if (message.length > 2000) {
-      newErrors.message =
-        "Message cannot exceed 2000 characters.";
+      newErrors.message = "Message cannot exceed 2000 characters.";
     }
 
     setErrors(newErrors);
@@ -105,7 +99,6 @@ export default function Contact() {
       setShowSuccess(true);
     } catch (error) {
       console.error("Contact form error:", error);
-
       setStatus("error");
     }
   };
@@ -115,147 +108,220 @@ export default function Contact() {
     setStatus("idle");
   };
 
+  useEffect(() => {
+    if (!showSuccess) {
+      return undefined;
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        closeSuccessModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [showSuccess]);
+
   return (
     <>
-      {/* =====================================================
-          CONTACT SECTION
-      ===================================================== */}
+      <section className="contact-section psa-reveal" id="contact">
+        <div className="contact-grid-background" aria-hidden="true" />
+        <div className="contact-glow contact-glow-one" aria-hidden="true" />
+        <div className="contact-glow contact-glow-two" aria-hidden="true" />
 
-      <section
-        className="contact-section"
-        id="contact"
-      >
         <div className="contact-container">
+          {/* TOP REGISTRY RAIL */}
+          <div className="contact-registry psa-item">
+            <div className="contact-registry-left">
+              <span className="contact-registry-index">
+                ┌[CONTACT_INDEX]
+              </span>
+              <span className="contact-registry-separator">▪</span>
+              <span className="contact-registry-text">
+                INQUIRY REGISTER // COMMUNICATION_RECORD
+              </span>
+            </div>
 
-          {/* =================================================
-              HEADER
-          ================================================= */}
-
-          <div className="contact-header">
-
-            <span className="contact-eyebrow">
-              08 — CONTACT
-            </span>
-
-            <h2>
-              Let's build something
-              <span> meaningful.</span>
-            </h2>
-
-            <p>
-              Have a project idea, opportunity, or simply want to
-              connect? Send me a message and I'll get back to you.
-            </p>
-
+            <div className="contact-channel-status">
+              <span className="contact-channel-dot" />
+              <span>CONTACT CHANNEL ACTIVE</span>
+            </div>
           </div>
 
-          {/* =================================================
-              MAIN CONTENT
-          ================================================= */}
-
-          <div className="contact-grid">
-
-            {/* =================================================
-                CONTACT INFORMATION
-            ================================================= */}
-
-            <aside className="contact-info">
-
-              <div className="contact-info-block">
-
-                <span className="contact-info-label">
-                  EMAIL
-                </span>
-
-                <a href="mailto:pandiraman131@gmail.com">
-                  pandiraman131@gmail.com
-                </a>
-
+          {/* EDITORIAL HEADER */}
+          <header className="contact-header psa-item">
+            <div className="contact-header-copy">
+              <div className="contact-eyebrow">
+                <span>08 // CONTACT</span>
+                <i />
+                <span>INQUIRY DISPATCH / COMMUNICATION_CHANNEL</span>
               </div>
 
-              <div className="contact-info-block">
+              <h2>
+                Let&apos;s build something{" "}
+                <span>meaningful.</span>
+              </h2>
 
-                <span className="contact-info-label">
-                  LOCATION
-                </span>
+              <p>
+                Have a project idea, opportunity, or simply want to connect?
+                Send me a message and I&apos;ll get back to you.
+              </p>
+            </div>
 
-                <p>
-                  Sivakasi, India
-                </p>
-
+            <div className="contact-route-badge">
+              <div className="contact-route-title">
+                <span aria-hidden="true">◉</span>
+                <span>DIRECT ROUTE</span>
               </div>
 
-              <div className="contact-info-block">
+              <strong>
+                CONTACT
+                <br />
+                CHANNEL
+                <br />
+                <span>ACTIVE</span>
+              </strong>
+            </div>
+          </header>
 
-                <span className="contact-info-label">
-                  SOCIAL
-                </span>
+          {/* MAIN CONTACT GRID */}
+          <div className="contact-main-grid">
+            {/* LEFT: CONTACT DOSSIER */}
+            <aside className="contact-dossier psa-item">
+              <div className="contact-corner contact-corner-tl" />
+              <div className="contact-corner contact-corner-tr" />
+              <div className="contact-corner contact-corner-bl" />
+              <div className="contact-corner contact-corner-br" />
 
-                <div className="contact-socials">
+              <div className="contact-dossier-header">
+                <span>// DOSSIER_RECORDS :: DIRECT_ACCESS</span>
+                <span aria-hidden="true">◆</span>
+              </div>
+
+              <div className="contact-dossier-records">
+                <div className="contact-record">
+                  <div className="contact-record-heading">
+                    <span>[ 01 ] EMAIL</span>
+                    <small>PRIORITY_CHANNEL</small>
+                  </div>
 
                   <a
-                    href="https://github.com/krishnak712"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                   className="contact-email-link"
+                   href={
+                    profile?.email ? `mailto:${profile.email}`: undefined }
                   >
-                    GitHub ↗
-                  </a>
+                   <span>
+                    {profile?.email || "—"}
+                   </span>
 
-                  <a
-                    href="https://linkedin.com/in/krishna-kumar712"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    LinkedIn ↗
+                   <span aria-hidden="true">↗</span>
                   </a>
-
                 </div>
 
-              </div>
+                <div className="contact-record">
+                  <div className="contact-record-heading">
+                    <span>[ 02 ] LOCATION</span>
+                    <small>REGION // INDIA</small>
+                  </div>
 
-              <div className="contact-availability">
+                  <p className="contact-location">
+                   <span aria-hidden="true">◆</span>
+                   <span>{profile?.location || "—"}</span>
+                  </p>
+                </div>
 
-                <span className="availability-dot" />
+                <div className="contact-record">
+                  <div className="contact-record-heading">
+                    <span>[ 03 ] SOCIAL_CHANNELS</span>
+                    <small>VERIFIED_IDS</small>
+                  </div>
 
-                <div>
+                  <div className="contact-socials">
+                   {profile?.github_url && (
+                    <a
+                     href={profile.github_url}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                    >
+                     <span>GitHub</span>
+                     <span aria-hidden="true">↗</span>
+                    </a>
+                   )}
 
-                  <strong>
-                    Available for opportunities
-                  </strong>
+                   {profile?.linkedin_url && (
+                    <a
+                     href={profile.linkedin_url}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                    >
+                     <span>LinkedIn</span>
+                     <span aria-hidden="true">↗</span>
+                    </a>
+                   )}
+                  </div>
+                </div>
+
+                <div className="contact-record contact-record-availability">
+                  <div className="contact-record-heading">
+                    <span>[ 04 ] AVAILABILITY</span>
+                  </div>
+
+                  <div className="contact-availability-row">
+                    <span className="contact-availability-dot" />
+                    <strong>Available for opportunities</strong>
+                  </div>
 
                   <p>
-                    Open to relevant software development
-                    opportunities and technical collaborations.
+                    Open to relevant software development opportunities and
+                    technical collaborations.
                   </p>
-
                 </div>
-
               </div>
-
             </aside>
 
-            {/* =================================================
-                CONTACT FORM
-            ================================================= */}
+            {/* RIGHT: CONTACT FORM */}
+            <div className="contact-form-panel psa-item">
+              <div className="contact-corner contact-corner-tl" />
+              <div className="contact-corner contact-corner-tr" />
+              <div className="contact-corner contact-corner-bl" />
+              <div className="contact-corner contact-corner-br" />
 
-            <div className="contact-form-wrapper">
+              <div className="contact-form-header">
+                <div>
+                  <span className="contact-form-title">
+                    <span aria-hidden="true">→</span>
+                    MESSAGE DISPATCH
+                  </span>
+                  <p>SUBMIT PROJECT / OPPORTUNITY INQUIRY</p>
+                </div>
+              </div>
 
-              <form
-                className="contact-form"
-                onSubmit={handleSubmit}
-                noValidate
-              >
+              {status === "error" && (
+                <div className="contact-error-panel" role="alert">
+                  <span className="contact-error-icon" aria-hidden="true">
+                    !
+                  </span>
 
-                {/* ---------------------------------------------
-                    NAME + EMAIL
-                --------------------------------------------- */}
+                  <div>
+                    <strong>[ SYSTEM_ALERT ] DISPATCH_FAILURE</strong>
+                    <p>
+                      MESSAGE COULD NOT BE SENT. Please check your connection
+                      and try again.
+                    </p>
+                  </div>
+                </div>
+              )}
 
-                <div className="form-row">
-
-                  <div className="form-field">
-
+              <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                <div className="contact-form-row">
+                  <div className="contact-field">
                     <label htmlFor="contact-name">
-                      NAME
+                      <span>01 // SENDER_NAME *</span>
+                      <small>REQ</small>
                     </label>
 
                     <input
@@ -266,25 +332,28 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="Your name"
                       autoComplete="name"
-                      className={
-                        errors.name
-                          ? "has-error"
-                          : ""
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={
+                        errors.name ? "contact-name-error" : undefined
                       }
+                      className={errors.name ? "has-error" : ""}
                     />
 
                     {errors.name && (
-                      <span className="field-error">
+                      <span
+                        id="contact-name-error"
+                        className="contact-field-error"
+                        role="alert"
+                      >
                         {errors.name}
                       </span>
                     )}
-
                   </div>
 
-                  <div className="form-field">
-
+                  <div className="contact-field">
                     <label htmlFor="contact-email">
-                      EMAIL
+                      <span>02 // RETURN_ADDRESS *</span>
+                      <small>REQ</small>
                     </label>
 
                     <input
@@ -295,31 +364,29 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="you@example.com"
                       autoComplete="email"
-                      className={
-                        errors.email
-                          ? "has-error"
-                          : ""
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={
+                        errors.email ? "contact-email-error" : undefined
                       }
+                      className={errors.email ? "has-error" : ""}
                     />
 
                     {errors.email && (
-                      <span className="field-error">
+                      <span
+                        id="contact-email-error"
+                        className="contact-field-error"
+                        role="alert"
+                      >
                         {errors.email}
                       </span>
                     )}
-
                   </div>
-
                 </div>
 
-                {/* ---------------------------------------------
-                    SUBJECT
-                --------------------------------------------- */}
-
-                <div className="form-field">
-
+                <div className="contact-field">
                   <label htmlFor="contact-subject">
-                    SUBJECT / PROJECT SCOPE
+                    <span>03 // INQUIRY_SCOPE *</span>
+                    <small>REQ</small>
                   </label>
 
                   <input
@@ -329,37 +396,31 @@ export default function Contact() {
                     value={form.subject}
                     onChange={handleChange}
                     placeholder="What would you like to build?"
-                    className={
-                      errors.subject
-                        ? "has-error"
-                        : ""
+                    aria-invalid={Boolean(errors.subject)}
+                    aria-describedby={
+                      errors.subject ? "contact-subject-error" : undefined
                     }
+                    className={errors.subject ? "has-error" : ""}
                   />
 
                   {errors.subject && (
-                    <span className="field-error">
+                    <span
+                      id="contact-subject-error"
+                      className="contact-field-error"
+                      role="alert"
+                    >
                       {errors.subject}
                     </span>
                   )}
-
                 </div>
 
-                {/* ---------------------------------------------
-                    MESSAGE
-                --------------------------------------------- */}
-
-                <div className="form-field">
-
-                  <div className="message-label-row">
-
+                <div className="contact-field">
+                  <div className="contact-message-label">
                     <label htmlFor="contact-message">
-                      MESSAGE / PROJECT SPECIFICATIONS
+                      04 // SPECIFICATIONS_PAYLOAD *
                     </label>
 
-                    <span>
-                      {form.message.length}/2000
-                    </span>
-
+                    <span>{form.message.length}/2000</span>
                   </div>
 
                   <textarea
@@ -368,148 +429,128 @@ export default function Contact() {
                     value={form.message}
                     onChange={handleChange}
                     placeholder="Tell me about your project, requirements, timeline, or anything else that would be useful..."
-                    rows={7}
+                    rows={6}
                     maxLength={2000}
-                    className={
-                      errors.message
-                        ? "has-error"
-                        : ""
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={
+                      errors.message ? "contact-message-error" : undefined
                     }
+                    className={errors.message ? "has-error" : ""}
                   />
 
                   {errors.message && (
-                    <span className="field-error">
+                    <span
+                      id="contact-message-error"
+                      className="contact-field-error"
+                      role="alert"
+                    >
                       {errors.message}
                     </span>
                   )}
-
                 </div>
 
-                {/* ---------------------------------------------
-                    API ERROR
-                --------------------------------------------- */}
+                <div className="contact-privacy">
+                  <span aria-hidden="true">◆</span>
+                  <span>
+                    Your information is only used to respond to your message.
+                  </span>
+                </div>
 
-                {status === "error" && (
-                  <div
-                    className="form-status form-status-error"
-                    role="alert"
+                <div className="contact-submit-row">
+                  <span className="contact-validation">
+                    INPUT_VALIDATION: <strong>ACTIVE</strong>
+                  </span>
+
+                  <button
+                    type="submit"
+                    className="contact-submit"
+                    disabled={status === "loading"}
                   >
-                    <strong>
-                      Message could not be sent.
-                    </strong>
-
-                    <span>
-                      Please check your connection and try again.
-                    </span>
-                  </div>
-                )}
-
-                {/* ---------------------------------------------
-                    SUBMIT
-                --------------------------------------------- */}
-
-                <button
-                  type="submit"
-                  className="contact-submit"
-                  disabled={status === "loading"}
-                >
-
-                  {status === "loading" ? (
-                    <>
-                      <span className="submit-spinner" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <span>→</span>
-                    </>
-                  )}
-
-                </button>
-
+                    {status === "loading" ? (
+                      <>
+                        <span className="contact-spinner" aria-hidden="true" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>SEND MESSAGE</span>
+                        <span aria-hidden="true">→</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </form>
+            </div>
+          </div>
 
-              <p className="contact-form-note">
-                Your information is only used to respond to your
-                message.
-              </p>
-
+          {/* BOTTOM TECHNICAL STRIP */}
+          <div className="contact-bottom psa-item">
+            <div>
+              <span className="contact-bottom-brand">KKR.DEV</span>
             </div>
 
+            <p>{profile?.role || "Developer"} · Building with purpose.</p>
+
+            <span className="contact-bottom-year">// 2026</span>
           </div>
-
-          {/* =================================================
-              FOOTER LINE
-          ================================================= */}
-
-          <div className="contact-bottom">
-
-            <span>
-              KKR.DEV
-            </span>
-
-            <p>
-              Java Full Stack Developer · Building with purpose.
-            </p>
-
-            <span>
-              2026
-            </span>
-
-          </div>
-
         </div>
       </section>
 
-      {/* =====================================================
-          SUCCESS MODAL
-      ===================================================== */}
-
+      {/* SUCCESS MODAL */}
       {showSuccess && (
         <div
-          className="success-modal-backdrop"
+          className="contact-success-backdrop"
           role="presentation"
           onClick={closeSuccessModal}
         >
-
           <div
-            className="success-modal"
+            className="contact-success-modal"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="success-modal-title"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            aria-labelledby="contact-success-title"
+            onClick={(event) => event.stopPropagation()}
           >
-
-            <div className="success-icon">
-              ✓
-            </div>
-
-            <span className="success-label">
-              MESSAGE RECEIVED
-            </span>
-
-            <h3 id="success-modal-title">
-              Message Sent Successfully
-            </h3>
-
-            <p>
-              Thanks for reaching out. Your message has been
-              received. I'll get back to you soon.
-            </p>
+            <div className="contact-corner contact-corner-tl" />
+            <div className="contact-corner contact-corner-tr" />
+            <div className="contact-corner contact-corner-bl" />
+            <div className="contact-corner contact-corner-br" />
 
             <button
               type="button"
+              className="contact-success-close"
               onClick={closeSuccessModal}
-              className="success-done-button"
+              aria-label="Close dialog"
             >
-              Done
+              ×
             </button>
 
-          </div>
+            <div className="contact-success-header">
+              <span>✓ [ DISPATCH_CONFIRMED ] // ACK: 200 OK</span>
+            </div>
 
+            <div className="contact-success-body">
+              <div className="contact-success-icon" aria-hidden="true">
+                ✓
+              </div>
+
+              <span className="contact-success-label">MESSAGE RECEIVED</span>
+
+              <h3 id="contact-success-title">
+                Message Sent Successfully
+              </h3>
+
+              <p>
+                Thanks for reaching out. Your message has been received.
+                I&apos;ll get back to you soon.
+              </p>
+            </div>
+
+            <div className="contact-success-footer">
+              <button type="button" onClick={closeSuccessModal}>
+                DONE
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

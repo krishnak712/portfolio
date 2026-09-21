@@ -1,6 +1,6 @@
 import "./css/Footer.css";
 
-export default function Footer() {
+export default function Footer({ profile }) {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -24,37 +24,51 @@ export default function Footer() {
           </button>
 
           <div className="footer-brand-text">
-            <strong>Krishna Kumar</strong>
-            <span>Java Full Stack Developer</span>
+           <strong>
+            {profile?.name || "Portfolio"}
+           </strong>
+
+           <span>
+            {profile?.role || "Developer"}
+           </span>
           </div>
         </div>
 
         {/* Social links */}
         <div className="footer-links">
+         {profile?.github_url && (
           <a
-            href="https://github.com/krishnak712"
-            target="_blank"
-            rel="noopener noreferrer"
+           href={profile.github_url}
+           target="_blank"
+           rel="noopener noreferrer"
           >
-            GitHub ↗
+           GitHub ↗
           </a>
+         )}
 
+         {profile?.linkedin_url && (
           <a
-            href="https://linkedin.com/in/krishna-kumar712"
-            target="_blank"
-            rel="noopener noreferrer"
+           href={profile.linkedin_url}
+           target="_blank"
+           rel="noopener noreferrer"
           >
-            LinkedIn ↗
+           LinkedIn ↗
           </a>
+         )}
 
-          <a href="mailto:pandiraman131@gmail.com">
+         {profile?.email && (
+          <a href={`mailto:${profile.email}`}>
             Email ↗
           </a>
+         )}
         </div>
 
         {/* Copyright */}
         <div className="footer-copy">
-          <span>© 2026 Krishna Kumar</span>
+          <span>
+           © {new Date().getFullYear()}{" "}
+           {profile?.name || "Portfolio"}
+          </span>
 
           <button
             type="button"

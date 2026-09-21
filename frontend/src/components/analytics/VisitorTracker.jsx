@@ -128,45 +128,38 @@ export default function VisitorTracker() {
    */
   useEffect(() => {
     const handleBeforeUnload = () => {
-      if (
-        !currentPageVisitIdRef.current ||
-        !pageStartTimeRef.current
-      ) {
-        return;
-      }
+  if (
+    !currentPageVisitIdRef.current ||
+    !pageStartTimeRef.current
+  ) {
+    return;
+  }
 
-      const durationSeconds =
-        (Date.now() - pageStartTimeRef.current) / 1000;
+  const durationSeconds =
+    (Date.now() - pageStartTimeRef.current) / 1000;
 
-      /*
-       * Normal fetch may be cancelled during unload,
-       * so use sendBeacon where possible.
-       */
-      const apiBaseUrl =
-        env.apiBaseUrl;
+  const apiBaseUrl = env.apiBaseUrl;
 
-      const url =
-        `${apiBaseUrl}/page-visits/` +
-        currentPageVisitIdRef.current;
+  const url =
+    `${apiBaseUrl}/page-visits/` +
+    currentPageVisitIdRef.current;
 
-      const payload = JSON.stringify({
-        duration_seconds: Math.max(
-          0,
-          Math.round(durationSeconds)
-        ),
-      });
+  const payload = JSON.stringify({
+    duration_seconds: Math.max(
+      0,
+      Math.round(durationSeconds)
+    ),
+  });
 
-      if (navigator.sendBeacon) {
-        const blob = new Blob(
-          [payload],
-          {
-            type: "application/json",
-          }
-        );
-
-        navigator.sendBeacon(url, blob);
-      }
-    };
+  fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: payload,
+    keepalive: true,
+  }).catch(() => {});
+};
 
     window.addEventListener(
       "beforeunload",

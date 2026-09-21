@@ -1,9 +1,5 @@
 export const env = {
-  apiBaseUrl: (
+  apiBaseUrl:
     import.meta.env.VITE_API_BASE_URL ||
-    "https://portfolio-gyfl.onrender.com/api"
-  ).replace(/\/$/, ""),
-
-  githubUsername:
-    import.meta.env.VITE_GITHUB_USERNAME || "krishak712",
+    "http://127.0.0.1:8000/api",
 };

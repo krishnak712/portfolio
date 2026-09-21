@@ -26,8 +26,6 @@ body {
 }
 
 body {
-  background: #101414;
-  color: #eef4f4;
   font-family:
     Inter,
     ui-sans-serif,
@@ -49,7 +47,6 @@ select {
   font: inherit;
 }
 
-
 /* =========================================================
    LINKS
 ========================================================= */
@@ -63,7 +60,6 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-
 /* =========================================================
    IMAGES
 ========================================================= */
@@ -72,7 +68,6 @@ img {
   display: block;
   max-width: 100%;
 }
-
 
 /* =========================================================
    BUTTONS
@@ -84,7 +79,6 @@ button {
   background: none;
   color: inherit;
 }
-
 
 /* =========================================================
    FORM ELEMENTS
@@ -100,7 +94,6 @@ textarea {
   resize: vertical;
 }
 
-
 /* =========================================================
    TEXT SELECTION
 ========================================================= */
@@ -109,7 +102,6 @@ textarea {
   background: rgba(84, 216, 230, 0.22);
   color: #ffffff;
 }
-
 
 /* =========================================================
    SCROLLBAR
@@ -132,7 +124,6 @@ textarea {
   background: #3a4848;
 }
 
-
 /* =========================================================
    GLOBAL PAGE LOADING
 ========================================================= */
@@ -143,14 +134,17 @@ textarea {
   align-items: center;
   justify-content: center;
 
-  background: #101414;
-  color: #54d8e6;
+  background: var(--portfolio-bg, #101419);
+  color: var(--portfolio-cyan, #54d8e6);
 
-  font-family: "Courier New", monospace;
+  font-family:
+    "JetBrains Mono",
+    "Courier New",
+    monospace;
+
   font-size: 13px;
   letter-spacing: 0.08em;
 }
-
 
 /* =========================================================
    GLOBAL CONTAINER
@@ -161,7 +155,6 @@ textarea {
   margin: 0 auto;
 }
 
-
 /* =========================================================
    SECTION ANCHOR OFFSET
 ========================================================= */
@@ -169,7 +162,6 @@ textarea {
 section[id] {
   scroll-margin-top: 100px;
 }
-
 
 /* =========================================================
    FOCUS ACCESSIBILITY
@@ -179,7 +171,6 @@ section[id] {
   outline: 2px solid #54d8e6;
   outline-offset: 4px;
 }
-
 
 /* =========================================================
    MOBILE
@@ -194,7 +185,6 @@ section[id] {
     scroll-margin-top: 85px;
   }
 }
-
 
 /* =========================================================
    REDUCED MOTION
