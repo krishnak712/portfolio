@@ -1,5 +1,7 @@
 import "./css/Hero.css";
-import Hero3D from "./Hero3D";
+import { lazy, Suspense } from "react";
+
+const Hero3D = lazy(() => import("./Hero3D"));
 
 function Hero({ profile }) {
   if (!profile) {
@@ -182,7 +184,9 @@ function Hero({ profile }) {
               </div>
 
               <div className="hero-3d-layer" aria-hidden="true">
-                <Hero3D />
+                <Suspense fallback={null}>
+                  <Hero3D />
+                </Suspense>
               </div>
             </div>
           </div>
