@@ -26,7 +26,7 @@ function Hero({ profile }) {
     );
   }
 
-  const profileImage = profile.profile_image || "/images/profile.jpeg";
+  const profileImage =  "/images/profilelogo.png";
 
   return (
     <section className="hero" id="home">
