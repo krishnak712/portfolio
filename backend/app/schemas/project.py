@@ -78,9 +78,12 @@ class ProjectBase(BaseModel):
     image_url: str | None = None
 
     featured: bool = False
+    is_visible: bool = True
     status: str = "In Progress"
 
     display_order: int = 0
+
+    
 
 
 class ProjectCreate(ProjectBase):

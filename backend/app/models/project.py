@@ -9,6 +9,7 @@ from sqlalchemy import (
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from app.database import Base
+from sqlalchemy import Boolean
 
 
 class Project(Base):
@@ -85,6 +86,11 @@ class Project(Base):
     display_order = Column(
         Integer,
         default=0
+    )
+    is_visible = Column(
+    Boolean,
+    nullable=False,
+    default=True
     )
 
     created_at = Column(
