@@ -16,6 +16,10 @@ router = APIRouter(
 )
 
 
+# ============================================================
+# GET ALL VISIBLE PROJECTS
+# ============================================================
+
 @router.get(
     "",
     response_model=list[ProjectResponse]
@@ -25,6 +29,9 @@ def get_projects(
 ):
     return (
         db.query(Project)
+        .filter(
+            Project.is_visible.is_(True)
+        )
         .order_by(
             Project.display_order.asc(),
             Project.id.asc()
@@ -32,6 +39,10 @@ def get_projects(
         .all()
     )
 
+
+# ============================================================
+# GET VISIBLE + FEATURED PROJECTS
+# ============================================================
 
 @router.get(
     "/featured",
@@ -42,13 +53,20 @@ def get_featured_projects(
 ):
     return (
         db.query(Project)
-        .filter(Project.featured == True)
+        .filter(
+            Project.featured.is_(True),
+            Project.is_visible.is_(True)
+        )
         .order_by(
             Project.display_order.asc()
         )
         .all()
     )
 
+
+# ============================================================
+# GET ONE VISIBLE PROJECT BY SLUG
+# ============================================================
 
 @router.get(
     "/{slug}",
@@ -61,7 +79,10 @@ def get_project(
 
     project = (
         db.query(Project)
-        .filter(Project.slug == slug)
+        .filter(
+            Project.slug == slug,
+            Project.is_visible.is_(True)
+        )
         .first()
     )
 
@@ -73,6 +94,10 @@ def get_project(
 
     return project
 
+
+# ============================================================
+# CREATE PROJECT
+# ============================================================
 
 @router.post(
     "",
@@ -86,7 +111,9 @@ def create_project(
 
     existing_project = (
         db.query(Project)
-        .filter(Project.slug == project_data.slug)
+        .filter(
+            Project.slug == project_data.slug
+        )
         .first()
     )
 
@@ -107,6 +134,10 @@ def create_project(
     return project
 
 
+# ============================================================
+# UPDATE PROJECT
+# ============================================================
+
 @router.put(
     "/{project_id}",
     response_model=ProjectResponse
@@ -119,7 +150,9 @@ def update_project(
 
     project = (
         db.query(Project)
-        .filter(Project.id == project_id)
+        .filter(
+            Project.id == project_id
+        )
         .first()
     )
 
@@ -132,6 +165,10 @@ def update_project(
     update_data = project_data.model_dump(
         exclude_unset=True
     )
+
+    # --------------------------------------------------------
+    # Check slug uniqueness
+    # --------------------------------------------------------
 
     if "slug" in update_data:
         existing_project = (
@@ -149,6 +186,10 @@ def update_project(
                 detail="Project slug already exists"
             )
 
+    # --------------------------------------------------------
+    # Apply updates
+    # --------------------------------------------------------
+
     for field, value in update_data.items():
         setattr(project, field, value)
 
@@ -157,6 +198,10 @@ def update_project(
 
     return project
 
+
+# ============================================================
+# DELETE PROJECT
+# ============================================================
 
 @router.delete(
     "/{project_id}",
@@ -169,7 +214,9 @@ def delete_project(
 
     project = (
         db.query(Project)
-        .filter(Project.id == project_id)
+        .filter(
+            Project.id == project_id
+        )
         .first()
     )
 
